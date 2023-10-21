@@ -1,26 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_template/data/session/session_call_back.dart';
-import 'package:flutter_web_template/data/session/session_manager.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_web_template/l10n/generated/l10n.dart';
+import 'package:flutter_web_template/presentation/pages/home/home_page.dart';
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({super.key});
-
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> with SessionCallback {
-  @override
-  void initState() {
-    super.initState();
-
-    /// Example
-    SessionManager.addAvailableListener(
-      'notification when logout',
-      key: 'key',
-      listener: this,
-    );
-  }
 
   // This widget is the root of your application.
   @override
@@ -31,26 +15,15 @@ class _AppState extends State<App> with SessionCallback {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Scaffold(
-        body: Center(
-          child: FilledButton(
-            onPressed: () {
-              SessionManager.clear();
-            },
-            child: const Text('data'),
-          ),
-        ),
-      ),
+      localizationsDelegates: const [
+        L.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: L.delegate.supportedLocales,
+      locale: const Locale('vi', 'VN'),
+      home: const HomePage(),
     );
-  }
-
-  @override
-  void onListenerRemoved() {
-    // TODO: implement onListenerRemoved
-  }
-
-  @override
-  void onSessionChanged({String? message}) {
-    // TODO: implement onSessionChanged
   }
 }

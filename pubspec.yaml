@@ -11,8 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.2
+
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  intl_utils: ^2.8.5
+
   logger: ^2.0.2+1
   flutter_secure_storage: ^9.0.0
   json_annotation: ^4.8.1
@@ -25,5 +30,15 @@ dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
 
+flutter_intl:
+  enabled: true
+  class_name: L
+  main_locale: vi
+  arb_dir: lib/l10n
+  output_dir: lib/l10n/generated
+
 flutter:
   uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/images/
