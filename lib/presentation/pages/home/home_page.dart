@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_template/data/session/session_call_back.dart';
 import 'package:flutter_web_template/data/session/session_manager.dart';
+import 'package:flutter_web_template/gen/assets.gen.dart';
 import 'package:flutter_web_template/l10n/generated/l10n.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,11 +28,17 @@ class _HomePageState extends State<HomePage> with SessionCallback {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FilledButton(
-          onPressed: () {
-            SessionManager.clear();
-          },
-          child: Text(L.current.hello_world),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Assets.icons.icFlutter.image(width: 100, height: 100),
+            FilledButton(
+              onPressed: () {
+                SessionManager.clear();
+              },
+              child: Text(L.current.hello_world),
+            ),
+          ],
         ),
       ),
     );
