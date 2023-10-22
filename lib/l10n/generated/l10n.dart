@@ -51,10 +51,10 @@ class L {
   }
 
   /// `Xin chào thế giới`
-  String get hello_world {
+  String get helloWorld {
     return Intl.message(
       'Xin chào thế giới',
-      name: 'hello_world',
+      name: 'helloWorld',
       desc: '',
       args: [],
     );

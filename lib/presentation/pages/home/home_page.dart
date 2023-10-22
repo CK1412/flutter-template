@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_template/data/session/session_call_back.dart';
 import 'package:flutter_web_template/data/session/session_manager.dart';
 import 'package:flutter_web_template/gen/assets.gen.dart';
 import 'package:flutter_web_template/l10n/generated/l10n.dart';
+import 'package:flutter_web_template/presentation/pages/home/bloc/home_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,21 +28,9 @@ class _HomePageState extends State<HomePage> with SessionCallback {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Assets.icons.icFlutter.image(width: 100, height: 100),
-            FilledButton(
-              onPressed: () {
-                SessionManager.clear();
-              },
-              child: Text(L.current.hello_world),
-            ),
-          ],
-        ),
-      ),
+    return BlocProvider(
+      create: (context) => HomeBloc()..add(InitialData()),
+      child: const _Page(),
     );
   }
 
@@ -52,5 +42,39 @@ class _HomePageState extends State<HomePage> with SessionCallback {
   @override
   void onSessionChanged({String? message}) {
     // TODO: implement onSessionChanged
+  }
+}
+
+class _Page extends StatelessWidget {
+  const _Page();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Assets.icons.icFlutter.image(width: 100, height: 100),
+            FilledButton(
+              onPressed: () {
+                SessionManager.clear();
+              },
+              child: Text(L.current.helloWorld),
+            ),
+            BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                return FilledButton(
+                  onPressed: () {
+                    context.read<HomeBloc>().add(CountIncreased());
+                  },
+                  child: Text('Count: ${state.count}'),
+                );
+              },
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
