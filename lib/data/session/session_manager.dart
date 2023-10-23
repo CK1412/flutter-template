@@ -22,6 +22,8 @@ class SessionManager {
   static UserLoginModel? _userLoginInfo;
 
   static UserLoginModel? get userLoginInfo => _userLoginInfo;
+  static String? get accessToken => _userLoginInfo?.token;
+  static bool get isLoggedIn => accessToken != null;
 
   static Future<void> init() async {
     _prefs = const FlutterSecureStorage(

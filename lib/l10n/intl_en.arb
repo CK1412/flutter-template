@@ -1,4 +1,6 @@
 {
   "@@locale" : "en",
-  "helloWorld":"Hello world"
+  "helloWorld":"Hello world",
+  "anErrorHasOccurred":"An error has occurred",
+  "login": "Login"
 }

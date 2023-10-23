@@ -59,6 +59,26 @@ class L {
       args: [],
     );
   }
+
+  /// `Đã có lỗi xảy ra`
+  String get anErrorHasOccurred {
+    return Intl.message(
+      'Đã có lỗi xảy ra',
+      name: 'anErrorHasOccurred',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng nhập`
+  String get login {
+    return Intl.message(
+      'Đăng nhập',
+      name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

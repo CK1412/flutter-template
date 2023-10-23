@@ -1,4 +1,6 @@
 {
   "@@locale" : "vi",
-  "helloWorld":"Xin chào thế giới"
+  "helloWorld":"Xin chào thế giới",
+  "anErrorHasOccurred":"Đã có lỗi xảy ra",
+  "login": "Đăng nhập"
 }

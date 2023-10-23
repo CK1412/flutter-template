@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_web_template/app/dependencies.dart';
+import 'package:flutter_web_template/app/navigation/app_navigator.dart';
+import 'package:flutter_web_template/app/navigation/app_routes.dart';
 import 'package:flutter_web_template/data/session/session_call_back.dart';
 import 'package:flutter_web_template/data/session/session_manager.dart';
-import 'package:flutter_web_template/gen/assets.gen.dart';
 import 'package:flutter_web_template/l10n/generated/l10n.dart';
 import 'package:flutter_web_template/presentation/pages/home/bloc/home_bloc.dart';
 
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> with SessionCallback {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeBloc()..add(InitialData()),
+      create: (context) => getIt<HomeBloc>()..add(InitialData()),
       child: const _Page(),
     );
   }
@@ -55,7 +57,7 @@ class _Page extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Assets.icons.icFlutter.image(width: 100, height: 100),
+            // Assets.icons.icFlutter.image(width: 100, height: 100),
             FilledButton(
               onPressed: () {
                 SessionManager.clear();
@@ -71,7 +73,16 @@ class _Page extends StatelessWidget {
                   child: Text('Count: ${state.count}'),
                 );
               },
-            )
+            ),
+            FilledButton(
+              onPressed: () async {
+                AppNavigator.goNamed(
+                  AppRoutes.details.name,
+                  queryParameters: {'id': '4'},
+                );
+              },
+              child: const Text('Go details'),
+            ),
           ],
         ),
       ),
