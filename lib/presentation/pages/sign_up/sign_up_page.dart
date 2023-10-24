@@ -5,8 +5,8 @@ import 'package:flutter_web_template/app/navigation/app_navigator.dart';
 import 'package:flutter_web_template/app/navigation/app_routes.dart';
 import 'package:flutter_web_template/l10n/generated/l10n.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +16,17 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FilledButton(
-              child: Text(L.current.login),
+              child: Text(L.current.signUp),
               onPressed: () {
-                context.read<AuthBloc>().add(const AppLoggedIn());
+                context.read<AuthBloc>().add(const AppSignedUp());
               },
             ),
             TextButton.icon(
               onPressed: () {
-                AppNavigator.goNamed(AppRoutes.signUp.name);
+                AppNavigator.goNamed(AppRoutes.login.name);
               },
               icon: const Icon(Icons.arrow_back_ios),
-              label: Text(L.current.signUp),
+              label: Text(L.current.login),
             ),
           ],
         ),

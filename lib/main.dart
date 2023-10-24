@@ -14,10 +14,9 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     usePathUrlStrategy();
-
     Bloc.observer = AppBlocObserver();
-    configureDependencies();
     await SessionManager.init();
+    configureDependencies();
 
     runApp(const App());
   }

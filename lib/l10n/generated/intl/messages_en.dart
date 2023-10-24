@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "anErrorHasOccurred":
             MessageLookupByLibrary.simpleMessage("An error has occurred"),
         "helloWorld": MessageLookupByLibrary.simpleMessage("Hello world"),
-        "login": MessageLookupByLibrary.simpleMessage("Login")
+        "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
+        "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign up")
       };
 }

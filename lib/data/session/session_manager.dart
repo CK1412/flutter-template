@@ -22,7 +22,14 @@ class SessionManager {
   static UserLoginModel? _userLoginInfo;
 
   static UserLoginModel? get userLoginInfo => _userLoginInfo;
+
+  static set userLoginInfo(UserLoginModel? value) {
+    _userLoginInfo = value;
+    _saveCurrentUserLoginInfo();
+  }
+
   static String? get accessToken => _userLoginInfo?.token;
+
   static bool get isLoggedIn => accessToken != null;
 
   static Future<void> init() async {
@@ -108,15 +115,6 @@ class SessionManager {
     }
   }
 
-  static Future<void> _deleteCurrentUserLoginInfo() async {
-    try {
-      await _prefs.delete(key: _keyUserLoginModel);
-      _userLoginInfo = null;
-    } catch (e) {
-      logger.e('_deleteCurrentUserLoginInfo() run failed.', error: e);
-    }
-  }
-
   /// Register an [AvailableListener] which is called session changed.
   static void addAvailableListener(
     String? message, {
@@ -132,5 +130,23 @@ class SessionManager {
     _availableListeners[key]?.onListenerRemoved();
     _availableListeners.remove(key);
     logger.i('removeAvailableListener: remove listener ${message ?? ''}');
+  }
+
+  static Future<void> _saveCurrentUserLoginInfo() async {
+    try {
+      final String dataString = jsonEncode(_userLoginInfo);
+      await _prefs.write(key: _keyUserLoginModel, value: dataString);
+    } catch (e) {
+      logger.e('_saveCurrentUserLoginInfo() run failed.', error: e);
+    }
+  }
+
+  static Future<void> _deleteCurrentUserLoginInfo() async {
+    try {
+      await _prefs.delete(key: _keyUserLoginModel);
+      _userLoginInfo = null;
+    } catch (e) {
+      logger.e('_deleteCurrentUserLoginInfo() run failed.', error: e);
+    }
   }
 }

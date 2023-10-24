@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "anErrorHasOccurred":
             MessageLookupByLibrary.simpleMessage("Đã có lỗi xảy ra"),
         "helloWorld": MessageLookupByLibrary.simpleMessage("Xin chào thế giới"),
-        "login": MessageLookupByLibrary.simpleMessage("Đăng nhập")
+        "logOut": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
+        "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký")
       };
 }

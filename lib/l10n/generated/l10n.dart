@@ -79,6 +79,26 @@ class L {
       args: [],
     );
   }
+
+  /// `Đăng ký`
+  String get signUp {
+    return Intl.message(
+      'Đăng ký',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng xuất`
+  String get logOut {
+    return Intl.message(
+      'Đăng xuất',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

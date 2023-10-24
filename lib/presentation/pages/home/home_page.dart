@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_web_template/app/bloc/auth/auth_bloc.dart';
 import 'package:flutter_web_template/app/dependencies.dart';
 import 'package:flutter_web_template/app/navigation/app_navigator.dart';
 import 'package:flutter_web_template/app/navigation/app_routes.dart';
 import 'package:flutter_web_template/data/session/session_call_back.dart';
-import 'package:flutter_web_template/data/session/session_manager.dart';
 import 'package:flutter_web_template/l10n/generated/l10n.dart';
 import 'package:flutter_web_template/presentation/pages/home/bloc/home_bloc.dart';
 
@@ -57,12 +57,17 @@ class _Page extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                return Text('UserName: ${state.userInfo!.userName}');
+              },
+            ),
             // Assets.icons.icFlutter.image(width: 100, height: 100),
             FilledButton(
               onPressed: () {
-                SessionManager.clear();
+                context.read<AuthBloc>().add(const AppLogoutRequested());
               },
-              child: Text(L.current.helloWorld),
+              child: Text(L.current.logOut),
             ),
             BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {

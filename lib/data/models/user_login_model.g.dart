@@ -8,6 +8,14 @@ part of 'user_login_model.dart';
 
 UserLoginModel _$UserLoginModelFromJson(Map<String, dynamic> json) =>
     UserLoginModel(
-      json['userId'] as int,
-      json['token'] as String,
+      userId: json['userId'] as int,
+      token: json['token'] as String,
+      userName: json['userName'] as String,
     );
+
+Map<String, dynamic> _$UserLoginModelToJson(UserLoginModel instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+      'token': instance.token,
+      'userName': instance.userName,
+    };

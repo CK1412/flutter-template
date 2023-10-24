@@ -1,4 +1,4 @@
-import 'package:flutter_web_template/app/bloc/app_bloc.dart';
+import 'package:flutter_web_template/app/bloc/auth/auth_bloc.dart';
 import 'package:flutter_web_template/app/navigation/app_router.dart';
 import 'package:flutter_web_template/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -19,6 +19,6 @@ void _configureRepositories() {}
 
 void _configureBlocs() {
   getIt
-    ..registerFactory(AppBloc.new)
+    ..registerSingleton(AuthBloc())
     ..registerFactory(HomeBloc.new);
 }

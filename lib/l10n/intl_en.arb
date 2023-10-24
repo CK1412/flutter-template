@@ -2,5 +2,7 @@
   "@@locale" : "en",
   "helloWorld":"Hello world",
   "anErrorHasOccurred":"An error has occurred",
-  "login": "Login"
+  "login": "Login",
+  "signUp": "Sign up",
+  "logOut": "Log out"
 }
