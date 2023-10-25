@@ -1,0 +1,8 @@
+{
+  "@@locale" : "vi",
+  "helloWorld":"Xin chào thế giới",
+  "anErrorHasOccurred":"Đã có lỗi xảy ra",
+  "login": "Đăng nhập",
+  "signUp": "Đăng ký",
+  "logOut": "Đăng xuất"
+}
