@@ -13,7 +13,7 @@ import 'package:go_router/go_router.dart';
 /// The use of the [extra] object is not recommended for use in targeting Flutter web apps.
 ///
 /// [withCurrentPathParams],
-/// * When uses for navigating new route and current path have parameters (e.g. path: '/home/:tab'),
+/// * When uses for navigating new route and current path have pathParameters (e.g. path: '/home/:tab'),
 ///  must set withCurrentPathParams = true.
 /// * Otherwise, when navigating the same route,  set withCurrentPathParams = false.
 ///
@@ -29,7 +29,7 @@ class AppNavigator {
       GoRouter.of(context).routeInformationProvider.value.location;
 
   static void pushRoute(
-    AppRoutes route, {
+    AppRoute route, {
     Object? extra,
     Map<String, String> pathParameters = const <String, String>{},
     Map<String, dynamic> queryParameters = const <String, dynamic>{},
@@ -64,7 +64,7 @@ class AppNavigator {
   }
 
   static void goRoute(
-    AppRoutes route, {
+    AppRoute route, {
     Map<String, String> pathParameters = const <String, String>{},
     Map<String, dynamic> queryParameters = const <String, dynamic>{},
     Object? extra,

@@ -1,4 +1,4 @@
-enum AppRoutes {
+enum AppRoute {
   root(name: 'root', path: '/'),
   home(name: 'home', path: '/home/:tab'),
   login(name: 'login', path: '/accounts/login'),
@@ -7,26 +7,26 @@ enum AppRoutes {
 
   /// Represents the route name
   ///
-  /// Example: `AppRoutes.home.name`
+  /// Example: `AppRoute.home.name`
   /// Returns: 'home'
   final String name;
 
   /// Represents the route path
   ///
-  /// Example: `AppRoutes.home.path`
+  /// Example: `AppRoute.home.path`
   /// Returns: '/home'
   final String path;
 
-  const AppRoutes({required this.name, required this.path});
+  const AppRoute({required this.name, required this.path});
 
   @override
   String toString() => name;
 }
 
-extension AppRoutesEx on AppRoutes {
+extension AppRouteEx on AppRoute {
   String get initPath {
     return switch (this) {
-      AppRoutes.home => '/home/0',
+      AppRoute.home => '/home/0',
       _ => '/',
     };
   }
