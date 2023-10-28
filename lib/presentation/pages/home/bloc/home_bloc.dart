@@ -12,6 +12,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState()) {
     on<InitialData>(_onInitialData);
     on<CountIncreased>(_onCountIncreased, transformer: droppable());
+    on<TabIndexChanged>(_onTabIndexChanged);
   }
 
   FutureOr<void> _onInitialData(
@@ -19,6 +20,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     // init data state
+    emit(state.copyWith(tabIndex: event.tabIndex));
   }
 
   FutureOr<void> _onCountIncreased(
@@ -27,5 +29,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) async {
     await Future.delayed(const Duration(seconds: 1));
     emit(state.copyWith(count: state.count + 1));
+  }
+
+  FutureOr<void> _onTabIndexChanged(
+    TabIndexChanged event,
+    Emitter<HomeState> emit,
+  ) {
+    emit(state.copyWith(tabIndex: event.value));
   }
 }

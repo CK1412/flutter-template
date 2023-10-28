@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_template/app/bloc/auth/auth_bloc.dart';
 import 'package:flutter_web_template/app/navigation/app_routes.dart';
+import 'package:flutter_web_template/app/navigation/route_params.dart';
 import 'package:flutter_web_template/presentation/common_widgets/error_page.dart';
 import 'package:flutter_web_template/presentation/pages/details/details_page.dart';
 import 'package:flutter_web_template/presentation/pages/home/home_page.dart';
 import 'package:flutter_web_template/presentation/pages/login/login_page.dart';
 import 'package:flutter_web_template/presentation/pages/sign_up/sign_up_page.dart';
-import 'package:flutter_web_template/shared/observers/app_navigator_observer.dart';
 import 'package:go_router/go_router.dart';
 
 import '../dependencies.dart';
@@ -21,21 +21,35 @@ class AppRouter {
 
   final GoRouter _router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    observers: [
-      AppNavigatorObserver(),
-    ],
+    // observers: [
+    //   AppNavigatorObserver(),
+    // ],
+    debugLogDiagnostics: true,
     errorBuilder: (context, state) => const ErrorPage(),
     routes: [
       GoRoute(
-        name: AppRoutes.root.name,
-        path: AppRoutes.root.path,
-        builder: (context, state) => const HomePage(),
+        name: AppRoute.root.name,
+        path: AppRoute.root.path,
+        redirect: (context, state) => AppRoute.home.initPath,
+      ),
+      GoRoute(
+        name: AppRoute.home.name,
+        path: AppRoute.home.path,
+        pageBuilder: (context, state) {
+          final tabIndexValue = state.pathParameters[RouteParamsKey.tab];
+          final tabIndex = int.tryParse(tabIndexValue.toString()) ?? 0;
+          return NoTransitionPage(
+            name: state.name,
+            key: state.pageKey,
+            child: HomePage(tabIndex: tabIndex),
+          );
+        },
         routes: [
           GoRoute(
-            name: AppRoutes.details.name,
-            path: AppRoutes.details.path,
+            name: AppRoute.details.name,
+            path: AppRoute.details.path,
             pageBuilder: (context, state) {
-              String? id = state.uri.queryParameters['id'];
+              String? id = state.uri.queryParameters[RouteParamsKey.id];
               return NoTransitionPage(
                 child: DetailsPage(id: id ?? ''),
                 name: state.name,
@@ -45,8 +59,8 @@ class AppRouter {
         ],
       ),
       GoRoute(
-        name: AppRoutes.login.name,
-        path: AppRoutes.login.path,
+        name: AppRoute.login.name,
+        path: AppRoute.login.path,
         pageBuilder: (context, state) {
           return NoTransitionPage(
             child: const LoginPage(),
@@ -55,8 +69,8 @@ class AppRouter {
         },
       ),
       GoRoute(
-        name: AppRoutes.signUp.name,
-        path: AppRoutes.signUp.path,
+        name: AppRoute.signUp.name,
+        path: AppRoute.signUp.path,
         pageBuilder: (context, state) {
           return NoTransitionPage(
             child: const SignUpPage(),
@@ -70,16 +84,16 @@ class AppRouter {
       final bool isAuthenticated =
           context.read<AuthBloc>().state.isAuthenticated;
 
-      final bool isSigningUp = state.matchedLocation == AppRoutes.signUp.path;
-      final bool isLoggingIn = state.matchedLocation == AppRoutes.login.path;
+      final bool isSigningUp = state.matchedLocation == AppRoute.signUp.path;
+      final bool isLoggingIn = state.matchedLocation == AppRoute.login.path;
 
       final bool isAuthenticating = isSigningUp || isLoggingIn;
 
       if (!isAuthenticated) {
-        return isAuthenticating ? null : AppRoutes.login.path;
+        return isAuthenticating ? null : AppRoute.login.path;
       }
 
-      if (isAuthenticating) return AppRoutes.root.path;
+      if (isAuthenticating) return AppRoute.root.path;
 
       return null;
     },
