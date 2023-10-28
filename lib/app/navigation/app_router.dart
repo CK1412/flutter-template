@@ -9,7 +9,6 @@ import 'package:flutter_web_template/presentation/pages/details/details_page.dar
 import 'package:flutter_web_template/presentation/pages/home/home_page.dart';
 import 'package:flutter_web_template/presentation/pages/login/login_page.dart';
 import 'package:flutter_web_template/presentation/pages/sign_up/sign_up_page.dart';
-import 'package:flutter_web_template/shared/observers/app_navigator_observer.dart';
 import 'package:go_router/go_router.dart';
 
 import '../dependencies.dart';
@@ -21,15 +20,29 @@ class AppRouter {
 
   final GoRouter _router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    observers: [
-      AppNavigatorObserver(),
-    ],
+    // observers: [
+    //   AppNavigatorObserver(),
+    // ],
+    debugLogDiagnostics: true,
     errorBuilder: (context, state) => const ErrorPage(),
     routes: [
       GoRoute(
         name: AppRoutes.root.name,
         path: AppRoutes.root.path,
-        builder: (context, state) => const HomePage(),
+        redirect: (context, state) => AppRoutes.home.initPath,
+      ),
+      GoRoute(
+        name: AppRoutes.home.name,
+        path: AppRoutes.home.path,
+        pageBuilder: (context, state) {
+          final tabIndexValue = state.pathParameters['tab'];
+          final tabIndex = int.tryParse(tabIndexValue.toString()) ?? 0;
+          return NoTransitionPage(
+            name: state.name,
+            key: state.pageKey,
+            child: HomePage(tabIndex: tabIndex),
+          );
+        },
         routes: [
           GoRoute(
             name: AppRoutes.details.name,

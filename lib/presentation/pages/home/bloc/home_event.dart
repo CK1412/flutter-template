@@ -5,9 +5,17 @@ abstract class HomeEvent {
 }
 
 class InitialData extends HomeEvent {
-  InitialData();
+  final int? tabIndex;
+
+  InitialData({this.tabIndex});
 }
 
 class CountIncreased extends HomeEvent {
   CountIncreased();
+}
+
+class TabIndexChanged extends HomeEvent {
+  final int value;
+
+  TabIndexChanged(this.value);
 }

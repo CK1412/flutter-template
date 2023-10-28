@@ -23,7 +23,7 @@ class SignUpPage extends StatelessWidget {
             ),
             TextButton.icon(
               onPressed: () {
-                AppNavigator.goNamed(AppRoutes.login.name);
+                AppNavigator.goRoute(AppRoutes.login);
               },
               icon: const Icon(Icons.arrow_back_ios),
               label: Text(L.current.login),

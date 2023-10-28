@@ -1,6 +1,6 @@
 enum AppRoutes {
   root(name: 'root', path: '/'),
-  home(name: 'home', path: '/home'),
+  home(name: 'home', path: '/home/:tab'),
   login(name: 'login', path: '/accounts/login'),
   signUp(name: 'signUp', path: '/accounts/signup'),
   details(name: 'details', path: 'details');
@@ -21,4 +21,13 @@ enum AppRoutes {
 
   @override
   String toString() => name;
+}
+
+extension AppRoutesEx on AppRoutes {
+  String get initPath {
+    return switch (this) {
+      AppRoutes.home => '/home/0',
+      _ => '/',
+    };
+  }
 }
