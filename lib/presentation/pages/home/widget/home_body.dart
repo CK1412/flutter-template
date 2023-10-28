@@ -85,7 +85,6 @@ class _HomeBodyState extends State<HomeBody> with TickerProviderStateMixin {
             },
           ),
         ),
-        // body: ,
         body: TabBarView(
           controller: _tabController,
           children: _tabs.map((e) => e.tabView).toList(),
