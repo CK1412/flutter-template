@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_template/app/dependencies.dart';
 import 'package:flutter_web_template/app/navigation/app_router.dart';
 import 'package:flutter_web_template/app/navigation/app_routes.dart';
-import 'package:flutter_web_template/shared/utils/uri_util.dart';
+import 'package:flutter_web_template/shared/utils/uri_utils.dart';
 import 'package:go_router/go_router.dart';
 
 /// There are three ways to pass params: pathParameters, queryParameters, extra.
@@ -41,7 +41,7 @@ class AppNavigator {
       routerNeglect: routerNeglect,
       callback: () {
         if (withCurrentPathParams) {
-          final uri = UriUtil.createUri(
+          final uri = UriUtils.createUri(
             path: '$currentPath/${route.path}',
             pathParameters: pathParameters,
             queryParameters: queryParameters,
@@ -76,7 +76,7 @@ class AppNavigator {
       routerNeglect: routerNeglect,
       callback: () {
         if (withCurrentPathParams) {
-          final uri = UriUtil.createUri(
+          final uri = UriUtils.createUri(
             path: '$currentPath/${route.path}',
             pathParameters: pathParameters,
             queryParameters: queryParameters,

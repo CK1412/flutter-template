@@ -1,6 +1,13 @@
-class UriUtil {
-  UriUtil._();
+/// Utility functions for working with uri.
+class UriUtils {
+  UriUtils._();
 
+  /// For example:
+  ///
+  /// ```dart
+  /// String path = replacePathParameters('/home/:tab', {'tab' : '1'});
+  /// ```
+  /// The value for `path` would be `/home/1`.
   static String replacePathParameters(
     String path,
     Map<String, String> pathParameters,
