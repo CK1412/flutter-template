@@ -2,16 +2,17 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_template/data/models/user_login_model.dart';
 import 'package:flutter_web_template/data/session/session_manager.dart';
+import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
+import 'package:flutter_web_template/domain/repositories/auth_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc()
+  AuthBloc(this._authRepository)
       : super(SessionManager.isLoggedIn
-            ? AuthState.authenticated(SessionManager.userLoginInfo!)
+            ? AuthState.authenticated(SessionManager.userInfo!)
             : const AuthState.unauthenticated()) {
     on<_UserLoginChanged>(_onUserChanged);
     on<AppLogoutRequested>(_onAppLogoutRequested);
@@ -19,11 +20,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AppSignedUp>(_onAppSignedUp);
   }
 
+  final AuthRepository _authRepository;
+
   FutureOr<void> _onUserChanged(
     _UserLoginChanged event,
     Emitter<AuthState> emit,
   ) {
-    SessionManager.userLoginInfo = event.user;
     emit(
       state.copyWith(
         authStatus: event.user != null
@@ -38,31 +40,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AppLogoutRequested event,
     Emitter<AuthState> emit,
   ) async {
-    SessionManager.clear(message: "User log out");
+    await _authRepository.logOut();
     add(const _UserLoginChanged(null));
   }
 
   FutureOr<void> _onAppLoggedIn(
     AppLoggedIn event,
     Emitter<AuthState> emit,
-  ) {
-    final userInfo = UserLoginModel(
-      userId: 1,
-      token: 'token1',
-      userName: 'user login',
-    );
-    add(_UserLoginChanged(userInfo));
+  ) async {
+    final userInfo =
+        await _authRepository.loginWithPassword('Canh Tran', 'canh@1234');
+    if (userInfo != null) {
+      add(_UserLoginChanged(userInfo));
+    }
   }
 
   FutureOr<void> _onAppSignedUp(
     AppSignedUp event,
     Emitter<AuthState> emit,
-  ) {
-    final userInfo = UserLoginModel(
-      userId: 1,
-      token: 'token1',
-      userName: 'user sign up',
-    );
+  ) async {
+    final userInfo = await _authRepository.signUp('Canh Tran', 'canh@1234');
     add(_UserLoginChanged(userInfo));
   }
 }

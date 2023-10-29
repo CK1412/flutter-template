@@ -12,9 +12,9 @@ final class AuthState extends Equatable {
   });
 
   final AuthStatus authStatus;
-  final UserLoginModel? userInfo;
+  final UserInfoEntity? userInfo;
 
-  const AuthState.authenticated(UserLoginModel userLoginInfo)
+  const AuthState.authenticated(UserInfoEntity userLoginInfo)
       : this(
           authStatus: AuthStatus.authenticated,
           userInfo: userLoginInfo,
@@ -30,7 +30,7 @@ final class AuthState extends Equatable {
 
   AuthState copyWith({
     AuthStatus? authStatus,
-    UserLoginModel? userInfo,
+    UserInfoEntity? userInfo,
   }) {
     return AuthState(
       authStatus: authStatus ?? this.authStatus,

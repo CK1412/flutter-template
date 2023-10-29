@@ -15,8 +15,9 @@ void main() async {
 
     usePathUrlStrategy();
     Bloc.observer = AppBlocObserver();
-    await SessionManager.init();
     configureDependencies();
+
+    await SessionManager.init();
 
     runApp(const App());
   }
