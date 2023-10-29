@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_web_template/data/models/user_login_model.dart';
 import 'package:flutter_web_template/data/session/session_call_back.dart';
+import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
 import 'package:flutter_web_template/shared/extensions/string_extension.dart';
 import 'package:flutter_web_template/shared/logger/logger.dart';
 
 const String _keyLanguageCode = 'key_language_code';
-const String _keyUserLoginModel = 'key_user_login_model';
+const String _keyUserInfo = 'key_user_info';
 
 /// Use instance of SessionManager to store user data used in the [application].
 class SessionManager {
@@ -19,16 +19,16 @@ class SessionManager {
   static final Map<String, SessionCallback> _availableListeners = {};
 
   static late String? _languageCode;
-  static UserLoginModel? _userLoginInfo;
+  static UserInfoEntity? _userInfo;
 
-  static UserLoginModel? get userLoginInfo => _userLoginInfo;
+  static UserInfoEntity? get userInfo => _userInfo;
 
-  static set userLoginInfo(UserLoginModel? value) {
-    _userLoginInfo = value;
-    _saveCurrentUserLoginInfo();
+  static set userInfo(UserInfoEntity? value) {
+    _userInfo = value;
+    _saveCurrentUserInfo();
   }
 
-  static String? get accessToken => _userLoginInfo?.token;
+  static String? get accessToken => _userInfo?.token;
 
   static bool get isLoggedIn => accessToken != null;
 
@@ -44,17 +44,17 @@ class SessionManager {
   }
 
   static Future<bool> _restoreLastSession() async {
-    final String? userLoginDataString = await _prefs.read(
-      key: _keyUserLoginModel,
+    final String? userInfoDataString = await _prefs.read(
+      key: _keyUserInfo,
     );
 
-    if (userLoginDataString.isNotNullAndNotEmpty) {
+    if (userInfoDataString.isNotNullAndNotEmpty) {
       try {
-        final UserLoginModel lastUserLogin = UserLoginModel.fromJson(
-          jsonDecode(userLoginDataString!),
+        final UserInfoEntity lastUserInfo = UserInfoEntity.fromJson(
+          jsonDecode(userInfoDataString!),
         );
 
-        _userLoginInfo = lastUserLogin;
+        _userInfo = lastUserInfo;
         return true;
       } catch (e) {
         return false;
@@ -79,7 +79,7 @@ class SessionManager {
     }
     try {
       _isClearing = true;
-      await _deleteCurrentUserLoginInfo();
+      await _deleteCurrentUserInfo();
 
       await Future.forEach(_availableListeners.values, (element) async {
         element.onSessionChanged(message: displayMessage);
@@ -132,21 +132,21 @@ class SessionManager {
     logger.i('removeAvailableListener: remove listener ${message ?? ''}');
   }
 
-  static Future<void> _saveCurrentUserLoginInfo() async {
+  static Future<void> _saveCurrentUserInfo() async {
     try {
-      final String dataString = jsonEncode(_userLoginInfo);
-      await _prefs.write(key: _keyUserLoginModel, value: dataString);
+      final String dataString = jsonEncode(_userInfo);
+      await _prefs.write(key: _keyUserInfo, value: dataString);
     } catch (e) {
-      logger.e('_saveCurrentUserLoginInfo() run failed.', error: e);
+      logger.e('_saveCurrentUserInfo() run failed.', error: e);
     }
   }
 
-  static Future<void> _deleteCurrentUserLoginInfo() async {
+  static Future<void> _deleteCurrentUserInfo() async {
     try {
-      await _prefs.delete(key: _keyUserLoginModel);
-      _userLoginInfo = null;
+      await _prefs.delete(key: _keyUserInfo);
+      _userInfo = null;
     } catch (e) {
-      logger.e('_deleteCurrentUserLoginInfo() run failed.', error: e);
+      logger.e('_deleteCurrentUserInfo() run failed.', error: e);
     }
   }
 }

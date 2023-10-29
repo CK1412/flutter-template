@@ -5,7 +5,7 @@ sealed class AuthEvent {
 }
 
 final class _UserLoginChanged extends AuthEvent {
-  final UserLoginModel? user;
+  final UserInfoEntity? user;
 
   const _UserLoginChanged(this.user);
 }
