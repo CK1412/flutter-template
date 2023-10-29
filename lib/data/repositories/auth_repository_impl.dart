@@ -16,7 +16,7 @@ class AuthRepositoryImpl extends AuthRepository {
       final response = await _remoteDataSource.signUp(userName, password);
 
       if (response != null) {
-        final userInfo = _mapper.toUserLogin(response);
+        final userInfo = _mapper.toUserInfo(response);
         SessionManager.userInfo = userInfo;
         return userInfo;
       }
@@ -37,7 +37,7 @@ class AuthRepositoryImpl extends AuthRepository {
           await _remoteDataSource.loginWithPassword(userName, password);
 
       if (response != null) {
-        final userInfo = _mapper.toUserLogin(response);
+        final userInfo = _mapper.toUserInfo(response);
         SessionManager.userInfo = userInfo;
         return userInfo;
       }

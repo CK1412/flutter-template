@@ -3,7 +3,7 @@ import 'package:flutter_web_template/data/models/auth/user_info_data_model.dart'
 import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
 
 class AuthMapper {
-  UserInfoEntity toUserLogin(UserInfoDataModel dataModel) {
+  UserInfoEntity toUserInfo(UserInfoDataModel dataModel) {
     try {
       return UserInfoEntity(
         userId: dataModel.userId,
