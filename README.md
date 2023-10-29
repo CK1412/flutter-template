@@ -1,16 +1,47 @@
 # flutter_web_template
 
-Flutter template project for android, ios and web.
+## Project description
 
-## Getting Started
+Flutter template project for android, ios and web. You can generate a new repository by clicking
+"**Use this template**" above.
 
-This project is a starting point for a Flutter application.
+## Setup and Installation
 
-A few resources to get you started if this is your first Flutter project:
+### Bootstrap the project
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+echo "Bootstrap the project"
+clear 
+flutter clean 
+flutter pub get 
+dart run build_runner build --delete-conflicting-outputs 
+dart run intl_utils:generate
+echo "Bootstrap finished"
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Gen code
+
+Watches the files system for edits and does rebuilds as necessary.
+
+```bash
+dart run build_runner watch
+```
+
+## Troubleshooting
+
+### Clear git local cached
+
+When you think your git is messed up, you can use this command to do everything up-to-date.
+
+```bash
+git rm -r --cached . 
+git add . 
+git commit -m 'git cache cleared'
+```
+
+> Note: Only use when the project has no changes waiting to be committed.
+
+### Markdown bash/shell scripts run in reverse order on Windows
+
+- How to
+  fix: https://youtrack.jetbrains.com/issue/IDEA-294997/Markdown-shell-scripts-run-in-reverse-order
