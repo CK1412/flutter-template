@@ -23,9 +23,7 @@ void main() async {
   }
 
   // Run app with catch error
-  runZonedGuarded(() {
-    startApp();
-  }, (error, stack) {
+  await runZonedGuarded(startApp, (error, stack) {
     logger.e('ERROR APP', error: error, stackTrace: stack);
   });
 }

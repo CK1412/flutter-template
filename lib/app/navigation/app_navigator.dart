@@ -25,7 +25,7 @@ class AppNavigator {
   static BuildContext get context =>
       getIt<AppRouter>().rootNavigatorKey.currentContext!;
 
-  static get currentPath =>
+  static String? get currentPath =>
       GoRouter.of(context).routeInformationProvider.value.location;
 
   static void pushRoute(
@@ -106,8 +106,8 @@ class AppNavigator {
 /// [routerNeglect] = true, turn off history tracking in the browser for this navigation.
 void _handleNavigation(
   BuildContext context, {
-  bool routerNeglect = false,
   required VoidCallback callback,
+  bool routerNeglect = false,
 }) {
   if (routerNeglect) {
     Router.neglect(context, () {

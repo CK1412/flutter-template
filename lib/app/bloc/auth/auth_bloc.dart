@@ -11,9 +11,11 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(this._authRepository)
-      : super(SessionManager.isLoggedIn
-            ? AuthState.authenticated(SessionManager.userInfo!)
-            : const AuthState.unauthenticated()) {
+      : super(
+          SessionManager.isLoggedIn
+              ? AuthState.authenticated(SessionManager.userInfo!)
+              : const AuthState.unauthenticated(),
+        ) {
     on<_UserLoginChanged>(_onUserChanged);
     on<AppLogoutRequested>(_onAppLogoutRequested);
     on<AppLoggedIn>(_onAppLoggedIn);

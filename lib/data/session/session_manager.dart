@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -25,7 +26,7 @@ class SessionManager {
 
   static set userInfo(UserInfoEntity? value) {
     _userInfo = value;
-    _saveCurrentUserInfo();
+    unawaited(_saveCurrentUserInfo());
   }
 
   static String? get accessToken => _userInfo?.token;
@@ -96,7 +97,7 @@ class SessionManager {
   static set languageCode(String value) {
     _languageCode = value;
 
-    _saveCurrentLanguageCode();
+    unawaited(_saveCurrentLanguageCode());
   }
 
   static Future<void> _saveCurrentLanguageCode() async {

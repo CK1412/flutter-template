@@ -12,10 +12,11 @@ class UriUtils {
     String path,
     Map<String, String> pathParameters,
   ) {
+    String newPath = path;
     pathParameters.forEach((param, value) {
-      path = path.replaceAll(':$param', value);
+      newPath = newPath.replaceAll(':$param', value);
     });
-    return path;
+    return newPath;
   }
 
   static Uri createUri({

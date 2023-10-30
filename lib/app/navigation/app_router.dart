@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_template/app/bloc/auth/auth_bloc.dart';
+import 'package:flutter_web_template/app/dependencies.dart';
 import 'package:flutter_web_template/app/navigation/app_routes.dart';
 import 'package:flutter_web_template/app/navigation/route_params.dart';
 import 'package:flutter_web_template/presentation/common_widgets/error_page.dart';
@@ -11,8 +12,6 @@ import 'package:flutter_web_template/presentation/pages/home/home_page.dart';
 import 'package:flutter_web_template/presentation/pages/login/login_page.dart';
 import 'package:flutter_web_template/presentation/pages/sign_up/sign_up_page.dart';
 import 'package:go_router/go_router.dart';
-
-import '../dependencies.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -49,7 +48,7 @@ class AppRouter {
             name: AppRoute.details.name,
             path: AppRoute.details.path,
             pageBuilder: (context, state) {
-              String? id = state.uri.queryParameters[RouteParamsKey.id];
+              final String? id = state.uri.queryParameters[RouteParamsKey.id];
               return NoTransitionPage(
                 child: DetailsPage(id: id ?? ''),
                 name: state.name,
@@ -93,7 +92,9 @@ class AppRouter {
         return isAuthenticating ? null : AppRoute.login.path;
       }
 
-      if (isAuthenticating) return AppRoute.root.path;
+      if (isAuthenticating) {
+        return AppRoute.root.path;
+      }
 
       return null;
     },

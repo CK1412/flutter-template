@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_web_template/data/data_sources/remote_data_source.dart';
 import 'package:flutter_web_template/data/mappers/auth_mapper.dart';
 import 'package:flutter_web_template/data/session/session_manager.dart';
@@ -52,8 +54,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<bool> logOut() async {
     try {
       final response = await _remoteDataSource.logOut();
-      if (response == true) {
-        SessionManager.clear(message: "User log out");
+      if (response) {
+        unawaited(SessionManager.clear(message: "User log out"));
         return true;
       }
     } catch (e) {

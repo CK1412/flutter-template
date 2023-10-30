@@ -40,12 +40,8 @@ class _HomePageState extends State<HomePage> with SessionCallback {
   }
 
   @override
-  void onListenerRemoved() {
-    // TODO: implement onListenerRemoved
-  }
+  void onListenerRemoved() {}
 
   @override
-  void onSessionChanged({String? message}) {
-    // TODO: implement onSessionChanged
-  }
+  void onSessionChanged({String? message}) {}
 }
