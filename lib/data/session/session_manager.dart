@@ -5,6 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
 import 'package:flutter_web_template/shared/extensions/string_extension.dart';
 import 'package:flutter_web_template/shared/logger/logger.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 const String _keyLanguageCode = 'key_language_code';
 const String _keyUserInfo = 'key_user_info';
@@ -77,11 +78,17 @@ class SessionManager {
     try {
       _isClearing = true;
       await _deleteCurrentUserInfo();
+
+      if (displayMessage != null) {
+        unawaited(
+          Fluttertoast.showToast(msg: displayMessage, timeInSecForIosWeb: 2),
+        );
+      }
     } catch (e) {
       logger.e('Clearing session data failed.', error: e);
-    } finally {
-      _isClearing = false;
     }
+
+    _isClearing = false;
   }
 
   static String get languageCode => _languageCode ?? 'vi';

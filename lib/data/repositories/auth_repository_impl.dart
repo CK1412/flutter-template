@@ -5,6 +5,7 @@ import 'package:flutter_web_template/data/mappers/auth_mapper.dart';
 import 'package:flutter_web_template/data/session/session_manager.dart';
 import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
 import 'package:flutter_web_template/domain/repositories/auth_repository.dart';
+import 'package:flutter_web_template/l10n/generated/l10n.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl(this._remoteDataSource, this._mapper);
@@ -55,7 +56,12 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       final response = await _remoteDataSource.logOut();
       if (response) {
-        unawaited(SessionManager.clear(message: "User log out"));
+        unawaited(
+          SessionManager.clear(
+            message: "User log out",
+            displayMessage: L.current.youHaveSuccessfullyLoggedOut,
+          ),
+        );
         return true;
       }
     } catch (e) {

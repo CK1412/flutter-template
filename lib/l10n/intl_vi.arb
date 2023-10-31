@@ -4,5 +4,6 @@
   "anErrorHasOccurred":"Đã có lỗi xảy ra",
   "login": "Đăng nhập",
   "signUp": "Đăng ký",
-  "logOut": "Đăng xuất"
+  "logOut": "Đăng xuất",
+  "youHaveSuccessfullyLoggedOut":"Bạn đã đăng xuất thành công!"
 }
