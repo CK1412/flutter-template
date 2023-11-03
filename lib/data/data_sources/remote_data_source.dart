@@ -1,5 +1,7 @@
 import 'package:flutter_web_template/data/models/auth/user_info_data_model.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton()
 class RemoteDataSource {
   Future<UserInfoDataModel?> signUp(
     String userName,

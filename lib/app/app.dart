@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_template/app/bloc/auth/auth_bloc.dart';
-import 'package:flutter_web_template/app/dependencies.dart';
+import 'package:flutter_web_template/app/injector/injector.dart';
 import 'package:flutter_web_template/app/navigation/app_router.dart';
 import 'package:flutter_web_template/l10n/generated/l10n.dart';
 

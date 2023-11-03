@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_template/app/bloc/auth/auth_bloc.dart';
-import 'package:flutter_web_template/app/dependencies.dart';
+import 'package:flutter_web_template/app/injector/injector.dart';
 import 'package:flutter_web_template/app/navigation/app_routes.dart';
 import 'package:flutter_web_template/app/navigation/route_params.dart';
 import 'package:flutter_web_template/presentation/common_widgets/error_page.dart';
@@ -12,7 +12,9 @@ import 'package:flutter_web_template/presentation/pages/home/home_page.dart';
 import 'package:flutter_web_template/presentation/pages/login/login_page.dart';
 import 'package:flutter_web_template/presentation/pages/sign_up/sign_up_page.dart';
 import 'package:go_router/go_router.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton()
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 

@@ -6,7 +6,9 @@ import 'package:flutter_web_template/data/session/session_manager.dart';
 import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
 import 'package:flutter_web_template/domain/repositories/auth_repository.dart';
 import 'package:flutter_web_template/l10n/generated/l10n.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl(this._remoteDataSource, this._mapper);
 

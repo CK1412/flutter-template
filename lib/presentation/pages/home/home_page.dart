@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_template/app/dependencies.dart';
+import 'package:flutter_web_template/app/injector/injector.dart';
 import 'package:flutter_web_template/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:flutter_web_template/presentation/pages/home/widget/home_body.dart';
 

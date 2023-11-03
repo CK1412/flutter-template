@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_template/app/dependencies.dart';
+import 'package:flutter_web_template/app/injector/injector.dart';
 import 'package:flutter_web_template/app/navigation/app_router.dart';
 import 'package:flutter_web_template/app/navigation/app_routes.dart';
 import 'package:flutter_web_template/shared/utils/uri_utils.dart';
