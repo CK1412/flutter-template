@@ -1,5 +1,6 @@
-import 'package:flutter_web_template/data/models/auth/user_info_data_model.dart';
 import 'package:injectable/injectable.dart';
+
+import '../models/auth/user_info_data_model.dart';
 
 @LazySingleton()
 class RemoteDataSource {

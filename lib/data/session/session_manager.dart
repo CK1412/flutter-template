@@ -2,10 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
-import 'package:flutter_web_template/shared/extensions/string_extension.dart';
-import 'package:flutter_web_template/shared/logger/logger.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../domain/entities/auth/user_info_entity.dart';
+import '../../shared/extensions/string_extension.dart';
+import '../../shared/logger/logger.dart';
 
 const String _keyLanguageCode = 'key_language_code';
 const String _keyUserInfo = 'key_user_info';

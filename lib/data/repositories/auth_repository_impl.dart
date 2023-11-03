@@ -1,12 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter_web_template/data/data_sources/remote_data_source.dart';
-import 'package:flutter_web_template/data/mappers/auth_mapper.dart';
-import 'package:flutter_web_template/data/session/session_manager.dart';
-import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
-import 'package:flutter_web_template/domain/repositories/auth_repository.dart';
-import 'package:flutter_web_template/l10n/generated/l10n.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/entities/auth/user_info_entity.dart';
+import '../../domain/repositories/auth_repository.dart';
+import '../../l10n/generated/l10n.dart';
+import '../data_sources/remote_data_source.dart';
+import '../mappers/auth_mapper.dart';
+import '../session/session_manager.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {

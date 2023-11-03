@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_template/app/injector/injector.dart';
-import 'package:flutter_web_template/app/navigation/app_router.dart';
-import 'package:flutter_web_template/app/navigation/app_routes.dart';
-import 'package:flutter_web_template/shared/utils/uri_utils.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../shared/utils/uri_utils.dart';
+import '../injector/injector.dart';
+import 'app_router.dart';
+import 'app_routes.dart';
 
 /// There are three ways to pass params: pathParameters, queryParameters, extra.
 /// How to use: https://stackoverflow.com/a/74813803.

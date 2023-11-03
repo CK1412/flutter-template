@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_template/app/navigation/app_navigator.dart';
+
+import '../../../app/navigation/app_navigator.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key, required this.id});

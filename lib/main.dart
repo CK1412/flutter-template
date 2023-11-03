@@ -3,11 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:flutter_web_template/app/app.dart';
-import 'package:flutter_web_template/app/injector/injector.dart';
-import 'package:flutter_web_template/data/session/session_manager.dart';
-import 'package:flutter_web_template/shared/logger/logger.dart';
-import 'package:flutter_web_template/shared/observers/app_bloc_observer.dart';
+
+import 'app/app.dart';
+import 'app/injector/injector.dart';
+import 'data/session/session_manager.dart';
+import 'shared/logger/logger.dart';
+import 'shared/observers/app_bloc_observer.dart';
 
 void main() async {
   Future<void> startApp() async {

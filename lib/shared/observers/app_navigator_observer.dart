@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_template/shared/logger/logger.dart';
+
+import '../logger/logger.dart';
 
 class AppNavigatorObserver extends NavigatorObserver {
   @override

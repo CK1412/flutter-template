@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_template/app/navigation/app_navigator.dart';
-import 'package:flutter_web_template/app/navigation/app_routes.dart';
-import 'package:flutter_web_template/app/navigation/route_params.dart';
-import 'package:flutter_web_template/presentation/pages/home/bloc/home_bloc.dart';
+
+import '../../../../app/navigation/app_navigator.dart';
+import '../../../../app/navigation/app_routes.dart';
+import '../../../../app/navigation/route_params.dart';
+import '../bloc/home_bloc.dart';
 
 class HomeTabViewTwo extends StatefulWidget {
   const HomeTabViewTwo({super.key});

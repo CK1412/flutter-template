@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_template/data/session/session_manager.dart';
-import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
-import 'package:flutter_web_template/domain/repositories/auth_repository.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../data/session/session_manager.dart';
+import '../../../domain/entities/auth/user_info_entity.dart';
+import '../../../domain/repositories/auth_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
