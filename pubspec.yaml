@@ -29,6 +29,7 @@ dependencies:
   bloc_concurrency: ^0.2.2
   equatable: ^2.0.5
   freezed_annotation: ^2.4.1
+  meta: any
 
   logger: ^2.0.2+1
   fluttertoast: ^8.2.2

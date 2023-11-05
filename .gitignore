@@ -48,6 +48,7 @@ app.*.map.json
 *.g.dart
 lib/gen/**
 lib/l10n/generated/**
+lib/app/injector/injector.config.dart
 
 # Dependencies
 **.lock

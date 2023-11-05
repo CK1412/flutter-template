@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
 
 import '../../domain/entities/auth/user_info_entity.dart';
+import '../../shared/exceptions/mapper_exception.dart';
 import '../models/auth/user_info_data_model.dart';
-import 'base/mapper_exception.dart';
 
 @LazySingleton()
 class AuthMapper {
