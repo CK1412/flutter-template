@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../shared/exceptions/app_exception.dart';
-import '../../../../shared/extensions/number_extension.dart';
 import '../base_bloc.dart';
 
 part 'common_event.dart';
@@ -25,9 +24,8 @@ class CommonBloc extends BaseBloc<CommonEvent, CommonState> {
     emit(
       state.copyWith(
         isLoading: event.isLoading,
-        loadingCount: event.isLoading
-            ? state.loadingCount.plus(1)
-            : state.loadingCount.minus(1),
+        loadingCount:
+            event.isLoading ? state.loadingCount + 1 : state.loadingCount - 1,
       ),
     );
   }
