@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../app/injector/injector.dart';
+import '../../common_widgets/base/base_page.dart';
 import 'bloc/home_bloc.dart';
 import 'widget/home_body.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
     required this.tabIndex,
@@ -14,11 +13,20 @@ class HomePage extends StatelessWidget {
   final int tabIndex;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          getIt<HomeBloc>()..add(InitialData(tabIndex: tabIndex)),
-      child: HomeBody(tabIndex: tabIndex),
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends BasePageState<HomePage, HomeBloc> {
+  @override
+  void onInitState() {
+    super.onInitState();
+    bloc.add(InitialData(tabIndex: widget.tabIndex));
+  }
+
+  @override
+  Widget buildPage(BuildContext context) {
+    return HomeBody(
+      tabIndex: widget.tabIndex,
     );
   }
 }

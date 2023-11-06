@@ -1,21 +1,21 @@
 part of 'home_bloc.dart';
 
-abstract class HomeEvent {
+abstract class HomeEvent extends BaseBlocEvent {
   const HomeEvent();
 }
 
 class InitialData extends HomeEvent {
   final int? tabIndex;
 
-  InitialData({this.tabIndex});
+  const InitialData({this.tabIndex});
 }
 
 class CountIncreased extends HomeEvent {
-  CountIncreased();
+  const CountIncreased();
 }
 
 class TabIndexChanged extends HomeEvent {
   final int value;
 
-  TabIndexChanged(this.value);
+  const TabIndexChanged(this.value);
 }

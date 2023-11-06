@@ -44,7 +44,7 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent,
     commonBloc.add(LoadingVisibilityEmitted(isLoading: false));
   }
 
-  void addException(AppException exception) {
+  void catchException(AppException exception) {
     commonBloc.add(ExceptionEmitted(exception));
   }
 }

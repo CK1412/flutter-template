@@ -1,6 +1,6 @@
 part of 'home_bloc.dart';
 
-class HomeState extends Equatable {
+class HomeState extends BaseBlocState {
   final BlocStatus blocStatus;
 
   final int count;

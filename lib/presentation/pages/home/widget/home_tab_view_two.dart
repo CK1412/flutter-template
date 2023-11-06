@@ -25,7 +25,7 @@ class _HomeTabViewTwoState extends State<HomeTabViewTwo>
           builder: (context, state) {
             return FilledButton(
               onPressed: () {
-                context.read<HomeBloc>().add(CountIncreased());
+                context.read<HomeBloc>().add(const CountIncreased());
               },
               child: Text('Count: ${state.count}'),
             );
