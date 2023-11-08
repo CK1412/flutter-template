@@ -53,9 +53,10 @@ abstract class BasePageState<P extends StatefulWidget, B extends BaseBloc>
             return Stack(
               children: [
                 buildPage(ctx),
-                BlocBuilder<CommonBloc, CommonState>(
+                BlocSelector<CommonBloc, CommonState, bool>(
+                  selector: (state) => state.isLoading,
                   builder: (context, state) {
-                    return LoadingVisible(isLoading: state.isLoading);
+                    return LoadingVisible(isLoading: state);
                   },
                 ),
               ],
