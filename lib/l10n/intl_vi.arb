@@ -5,5 +5,6 @@
   "login": "Đăng nhập",
   "signUp": "Đăng ký",
   "logOut": "Đăng xuất",
-  "youHaveSuccessfullyLoggedOut":"Bạn đã đăng xuất thành công!"
+  "youHaveSuccessfullyLoggedOut":"Bạn đã đăng xuất thành công!",
+  "detail": "Chi tiết"
 }

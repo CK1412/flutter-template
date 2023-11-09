@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/utils/view_utils.dart';
 
-class CustomScaffold extends StatelessWidget {
-  const CustomScaffold({
+class CommonScaffold extends StatelessWidget {
+  const CommonScaffold({
     super.key,
     required this.body,
     this.appBar,
