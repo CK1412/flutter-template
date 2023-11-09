@@ -2,10 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_web_template/data/session/session_call_back.dart';
-import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
-import 'package:flutter_web_template/shared/extensions/string_extension.dart';
-import 'package:flutter_web_template/shared/logger/logger.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../domain/entities/auth/user_info_entity.dart';
+import '../../shared/extensions/string_extension.dart';
+import '../../shared/logger/logger.dart';
 
 const String _keyLanguageCode = 'key_language_code';
 const String _keyUserInfo = 'key_user_info';
@@ -15,9 +16,6 @@ class SessionManager {
   SessionManager._();
 
   static late FlutterSecureStorage _prefs;
-
-  /// All callback listeners for this session.
-  static final Map<String, SessionCallback> _availableListeners = {};
 
   static late String? _languageCode;
   static UserInfoEntity? _userInfo;
@@ -82,14 +80,16 @@ class SessionManager {
       _isClearing = true;
       await _deleteCurrentUserInfo();
 
-      await Future.forEach(_availableListeners.values, (element) async {
-        element.onSessionChanged(message: displayMessage);
-      });
+      if (displayMessage != null) {
+        unawaited(
+          Fluttertoast.showToast(msg: displayMessage, timeInSecForIosWeb: 2),
+        );
+      }
     } catch (e) {
       logger.e('Clearing session data failed.', error: e);
-    } finally {
-      _isClearing = false;
     }
+
+    _isClearing = false;
   }
 
   static String get languageCode => _languageCode ?? 'vi';
@@ -114,23 +114,6 @@ class SessionManager {
     } catch (e) {
       logger.e('_restoreCurrentLanguageCode() run failed.', error: e);
     }
-  }
-
-  /// Register an [AvailableListener] which is called session changed.
-  static void addAvailableListener(
-    String? message, {
-    required String key,
-    required SessionCallback listener,
-  }) {
-    _availableListeners[key]?.onListenerRemoved();
-    _availableListeners[key] = listener;
-    logger.i('addAvailableListener: add listener ${message ?? ''}');
-  }
-
-  static void removeAvailableListener(String key, {String? message}) {
-    _availableListeners[key]?.onListenerRemoved();
-    _availableListeners.remove(key);
-    logger.i('removeAvailableListener: remove listener ${message ?? ''}');
   }
 
   static Future<void> _saveCurrentUserInfo() async {

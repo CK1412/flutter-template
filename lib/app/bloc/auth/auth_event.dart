@@ -1,6 +1,6 @@
 part of 'auth_bloc.dart';
 
-sealed class AuthEvent {
+sealed class AuthEvent extends BaseBlocEvent {
   const AuthEvent();
 }
 

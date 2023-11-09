@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_template/app/bloc/auth/auth_bloc.dart';
+
+import '../../../../app/bloc/auth/auth_bloc.dart';
 
 class HomeTabViewOne extends StatefulWidget {
   const HomeTabViewOne({super.key});

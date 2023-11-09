@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_template/app/navigation/app_navigator.dart';
+import 'package:gap/gap.dart';
+
+import '../../../app/navigation/app_navigator.dart';
+import '../../../l10n/generated/l10n.dart';
+import '../../common_widgets/app_bar/common_app_bar.dart';
+import '../../common_widgets/base/common_scaffold.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key, required this.id});
@@ -8,8 +13,11 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return CommonScaffold(
+      appBar: CommonAppBar(
+        title: L.current.detail,
+      ),
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -20,6 +28,13 @@ class DetailsPage extends StatelessWidget {
               },
               child: const Text('Pop page'),
             ),
+            Container(
+              width: double.maxFinite,
+              color: Colors.amberAccent,
+              height: 100,
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+            ),
+            const Gap(1000),
           ],
         ),
       ),

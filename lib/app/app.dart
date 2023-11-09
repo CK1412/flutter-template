@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_web_template/app/bloc/auth/auth_bloc.dart';
-import 'package:flutter_web_template/app/dependencies.dart';
-import 'package:flutter_web_template/app/navigation/app_router.dart';
-import 'package:flutter_web_template/l10n/generated/l10n.dart';
+
+import '../l10n/generated/l10n.dart';
+import '../presentation/common_widgets/scrolling/clamping_scroll_behavior.dart';
+import 'bloc/auth/auth_bloc.dart';
+import 'injector/injector.dart';
+import 'navigation/app_router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -39,6 +41,7 @@ class _MaterialApp extends StatelessWidget {
       supportedLocales: L.delegate.supportedLocales,
       locale: const Locale('vi', 'VN'),
       routerConfig: getIt<AppRouter>().router,
+      scrollBehavior: const ClampingScrollBehavior(),
     );
   }
 }

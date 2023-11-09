@@ -1,15 +1,18 @@
 import 'dart:async';
 
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_template/data/session/session_manager.dart';
-import 'package:flutter_web_template/domain/entities/auth/user_info_entity.dart';
-import 'package:flutter_web_template/domain/repositories/auth_repository.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../data/session/session_manager.dart';
+import '../../../domain/entities/auth/user_info_entity.dart';
+import '../../../domain/repositories/auth_repository.dart';
+import '../base/base_bloc.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
+@LazySingleton()
+class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
   AuthBloc(this._authRepository)
       : super(
           SessionManager.isLoggedIn

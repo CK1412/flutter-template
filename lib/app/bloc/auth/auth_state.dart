@@ -5,7 +5,7 @@ enum AuthStatus {
   unauthenticated,
 }
 
-final class AuthState extends Equatable {
+final class AuthState extends BaseBlocState {
   const AuthState({
     required this.authStatus,
     this.userInfo,

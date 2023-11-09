@@ -1,14 +1,17 @@
 import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_template/domain/bloc/bloc_status.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../../app/bloc/base/base_bloc.dart';
+import '../../../../domain/bloc/bloc_status.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
+@injectable
+class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState()) {
     on<InitialData>(_onInitialData);
     on<CountIncreased>(_onCountIncreased, transformer: droppable());
@@ -34,7 +37,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> _onTabIndexChanged(
     TabIndexChanged event,
     Emitter<HomeState> emit,
-  ) {
+  ) async {
     emit(state.copyWith(tabIndex: event.value));
   }
 }

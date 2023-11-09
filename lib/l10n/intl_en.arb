@@ -4,5 +4,7 @@
   "anErrorHasOccurred":"An error has occurred",
   "login": "Login",
   "signUp": "Sign up",
-  "logOut": "Log out"
+  "logOut": "Log out",
+  "youHaveSuccessfullyLoggedOut":"You have successfully logged out!",
+  "detail": "Detail"
 }

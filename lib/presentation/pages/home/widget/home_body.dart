@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_template/app/navigation/app_navigator.dart';
-import 'package:flutter_web_template/app/navigation/app_routes.dart';
-import 'package:flutter_web_template/app/navigation/route_params.dart';
-import 'package:flutter_web_template/presentation/pages/home/bloc/home_bloc.dart';
-import 'package:flutter_web_template/presentation/pages/home/widget/home_tab_view_one.dart';
-import 'package:flutter_web_template/presentation/pages/home/widget/home_tab_view_three.dart';
-import 'package:flutter_web_template/presentation/pages/home/widget/home_tab_view_two.dart';
+
+import '../../../../app/navigation/app_navigator.dart';
+import '../../../../app/navigation/app_routes.dart';
+import '../../../../app/navigation/route_params.dart';
+import '../../../common_widgets/base/common_scaffold.dart';
+import '../bloc/home_bloc.dart';
+import 'home_tab_view_one.dart';
+import 'home_tab_view_three.dart';
+import 'home_tab_view_two.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({
@@ -71,7 +73,7 @@ class _HomeBodyState extends State<HomeBody> with TickerProviderStateMixin {
       listenWhen: (previous, current) {
         return previous.tabIndex != current.tabIndex;
       },
-      child: Scaffold(
+      child: CommonScaffold(
         appBar: AppBar(
           bottom: TabBar(
             controller: _tabController,

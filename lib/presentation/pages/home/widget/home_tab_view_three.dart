@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_template/app/bloc/auth/auth_bloc.dart';
-import 'package:flutter_web_template/l10n/generated/l10n.dart';
+
+import '../../../../app/bloc/auth/auth_bloc.dart';
+import '../../../../l10n/generated/l10n.dart';
 
 class HomeTabViewThree extends StatefulWidget {
   const HomeTabViewThree({super.key});
