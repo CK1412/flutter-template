@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../../shared/exceptions/app_exception.dart';
+import '../../../shared/exceptions/app_exception_wrapper.dart';
 
 mixin BasePageMixin {
   Widget buildPage(BuildContext context);
 
-  void handleException(AppException exception) {
-    final String? errorMsg = exception.message;
+  void handleException(AppExceptionWrapper appExceptionWrapper) {
+    final String? errorMsg = appExceptionWrapper.appException.message;
     if (errorMsg != null) {
-      Fluttertoast.showToast(msg: errorMsg);
+      showMessage(errorMsg);
     }
+  }
+
+  void showMessage(String message) {
+    Fluttertoast.showToast(msg: message);
   }
 }

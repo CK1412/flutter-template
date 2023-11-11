@@ -1,11 +1,6 @@
-import 'package:equatable/equatable.dart';
-
-class AppException extends Equatable implements Exception {
+class AppException implements Exception {
   final String? message;
-  final int timestamp;
+  final String? messageCode;
 
-  AppException(this.message) : timestamp = DateTime.now().millisecond;
-
-  @override
-  List<Object?> get props => [message, timestamp];
+  const AppException({this.message, this.messageCode});
 }

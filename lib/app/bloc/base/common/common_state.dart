@@ -3,26 +3,35 @@ part of 'common_bloc.dart';
 class CommonState extends BaseBlocState {
   final bool isLoading;
   final int loadingCount;
-  final AppException? exception;
+  final AppExceptionWrapper? appExceptionWrapper;
+  final BlocMessage? blocMessage;
 
   const CommonState({
     this.isLoading = false,
     this.loadingCount = 0,
-    this.exception,
+    this.appExceptionWrapper,
+    this.blocMessage,
   });
 
   @override
-  List<Object?> get props => [isLoading, loadingCount, exception];
+  List<Object?> get props => [
+        isLoading,
+        loadingCount,
+        appExceptionWrapper,
+        blocMessage,
+      ];
 
   CommonState copyWith({
     bool? isLoading,
     int? loadingCount,
-    AppException? exception,
+    AppExceptionWrapper? appExceptionWrapper,
+    BlocMessage? blocMessage,
   }) {
     return CommonState(
       isLoading: isLoading ?? this.isLoading,
       loadingCount: loadingCount ?? this.loadingCount,
-      exception: exception ?? this.exception,
+      appExceptionWrapper: appExceptionWrapper ?? this.appExceptionWrapper,
+      blocMessage: blocMessage ?? this.blocMessage,
     );
   }
 }

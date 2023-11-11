@@ -6,5 +6,6 @@
   "signUp": "Sign up",
   "logOut": "Log out",
   "youHaveSuccessfullyLoggedOut":"You have successfully logged out!",
-  "detail": "Detail"
+  "detail": "Detail",
+  "errorCommonExceptionMessage": "An unknown error. Please try again later."
 }

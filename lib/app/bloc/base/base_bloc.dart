@@ -1,9 +1,15 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../shared/exceptions/app_exception.dart';
+import '../../../shared/exceptions/app_exception_wrapper.dart';
+import '../../../shared/extensions/number_extension.dart';
 import '../../../shared/logger/logger.dart';
+import '../../../shared/utils/future_utils.dart';
+import 'common/bloc_message.dart';
 import 'common/common_bloc.dart';
 
 part 'base_bloc_event.dart';
@@ -44,7 +50,87 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent,
     commonBloc.add(LoadingVisibilityEmitted(isLoading: false));
   }
 
-  void catchException(AppException exception) {
-    commonBloc.add(ExceptionEmitted(exception));
+  void catchException(AppExceptionWrapper appExceptionWrapper) {
+    commonBloc.add(ExceptionEmitted(appExceptionWrapper));
+  }
+
+  void showMessage(String message) {
+    commonBloc.add(BlocMessageEmitted(BlocMessage(message)));
+  }
+
+  Future<void> handleBlocTask<T>({
+    required FutureOr<T?> action,
+    required Function(T data) onSuccess,
+    bool automaticallyHandleLoading = true,
+    bool automaticallyHandleError = true,
+    bool automaticallyHandleRetry = true,
+    int? maxRetries,
+    String? overrideErrorMessage,
+    ExceptionDisplayStyle? errorDisplayStyle,
+    FutureOr<void> Function()? whenComplete,
+    Function(AppException appException)? onError,
+    FutureOr<void> Function()? onRetry,
+    FutureOr<void> Function()? whenDataNull,
+  }) async {
+    assert(maxRetries == null || maxRetries > 0, 'maxRetries must be positive');
+    if (automaticallyHandleLoading) {
+      showLoading();
+    }
+
+    await handleRequest(
+      request: action,
+      onSuccess: (data) {
+        if (automaticallyHandleLoading) {
+          hideLoading();
+        }
+      },
+      whenDataNull: () {
+        if (automaticallyHandleLoading) {
+          hideLoading();
+        }
+        whenDataNull?.call();
+      },
+      onError: (appException) {
+        if (automaticallyHandleLoading) {
+          hideLoading();
+        }
+
+        if (onError != null) {
+          onError.call(appException);
+        } else {
+          if (automaticallyHandleError) {
+            catchException(
+              AppExceptionWrapper(
+                appException,
+                overrideMessage: overrideErrorMessage,
+                displayStyle: errorDisplayStyle,
+                onRetry: onRetry ??
+                    ((automaticallyHandleRetry && maxRetries != 1)
+                        ? () {
+                            handleBlocTask<T>(
+                              action: action,
+                              automaticallyHandleLoading:
+                                  automaticallyHandleLoading,
+                              automaticallyHandleError:
+                                  automaticallyHandleError,
+                              automaticallyHandleRetry:
+                                  automaticallyHandleRetry,
+                              onError: onError,
+                              whenComplete: whenComplete,
+                              maxRetries: maxRetries?.minus(1),
+                              onSuccess: onSuccess,
+                              onRetry: onRetry,
+                              errorDisplayStyle: errorDisplayStyle,
+                              overrideErrorMessage: overrideErrorMessage,
+                            );
+                          }
+                        : null),
+              ),
+            );
+          }
+        }
+      },
+      whenComplete: whenComplete,
+    );
   }
 }

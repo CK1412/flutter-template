@@ -10,7 +10,13 @@ class LoadingVisibilityEmitted extends CommonEvent {
 }
 
 class ExceptionEmitted extends CommonEvent {
-  final AppException exception;
+  final AppExceptionWrapper appExceptionWrapper;
 
-  ExceptionEmitted(this.exception);
+  ExceptionEmitted(this.appExceptionWrapper);
+}
+
+class BlocMessageEmitted extends CommonEvent {
+  final BlocMessage blocMessage;
+
+  BlocMessageEmitted(this.blocMessage);
 }
