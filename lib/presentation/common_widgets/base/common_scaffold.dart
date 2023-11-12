@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
+import '../../../shared/utils/platform_utils.dart';
 import '../../../shared/utils/view_utils.dart';
 
 class CommonScaffold extends StatelessWidget {
@@ -37,7 +36,7 @@ class CommonScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: Platform.isIOS ? null : onWillPop,
+      onWillPop: PlatformUtils.isIOSDevice ? null : onWillPop,
       child: SafeArea(
         child: tapOutsideToHideKeyboard
             ? GestureDetector(
