@@ -6,5 +6,6 @@
   "signUp": "Đăng ký",
   "logOut": "Đăng xuất",
   "youHaveSuccessfullyLoggedOut":"Bạn đã đăng xuất thành công!",
-  "detail": "Chi tiết"
+  "detail": "Chi tiết",
+  "errorCommonExceptionMessage": "Lỗi không xác định. Vui lòng thử lại sau."
 }

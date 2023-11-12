@@ -40,11 +40,25 @@ abstract class BasePageState<P extends StatefulWidget, B extends BaseBloc>
         listeners: [
           BlocListener<CommonBloc, CommonState>(
             listener: (context, state) {
-              handleException(state.exception!);
+              handleException(state.appExceptionWrapper!);
             },
             listenWhen: (previous, current) {
-              return previous.exception != current.exception &&
-                  current.exception != null;
+              return previous.appExceptionWrapper !=
+                      current.appExceptionWrapper &&
+                  current.appExceptionWrapper != null;
+            },
+          ),
+          BlocListener<CommonBloc, CommonState>(
+            listener: (context, state) {
+              final message = state.blocMessage?.message;
+
+              if (message != null) {
+                showMessage(message);
+              }
+            },
+            listenWhen: (previous, current) {
+              return previous.blocMessage != current.blocMessage &&
+                  current.blocMessage != null;
             },
           ),
         ],
