@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../gen/fonts.gen.dart';
 import 'app_font_sizes.dart';

@@ -23,12 +23,13 @@ enum AppFontSizes {
 }
 
 extension AppFontSizesExtension on AppFontSizes {
+  /// [screenWidthOfDesign] The width of the screen on design (e.g. Figma, AdobeXD, ...)
   double getRelativeFontSize() {
     final FlutterView view =
         WidgetsBinding.instance.platformDispatcher.views.first;
-    const double screenWidthOfDesign =
-        360; // The width of the screen on design (e.g. Figma, AdobeXD, ...)
     final double viewWidth = MediaQueryData.fromView(view).size.width;
+    // TODO(developer): update `screenWidthOfDesign` according to your design.
+    const double screenWidthOfDesign = 360;
     final double scaleFactor = viewWidth / screenWidthOfDesign;
     return value * (scaleFactor >= 1 ? 1 : scaleFactor);
   }

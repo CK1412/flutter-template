@@ -1,4 +1,4 @@
-/// The [AppInsets], which use for padding, margin
+/// The [AppInsets], which use for padding, margin.
 class AppInsets {
   AppInsets._();
 
@@ -2002,5 +2002,5 @@ class AppInsets {
 
   static const double inset999 = 999;
 
-  static const inset1000 = 1000;
+  static const double inset1000 = 1000;
 }
