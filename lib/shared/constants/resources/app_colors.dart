@@ -151,11 +151,9 @@ extension AppColorsExtension on BuildContext {
   }
 
   AppColors _colorsFromBrightness(Brightness brightness) {
-    switch (brightness) {
-      case Brightness.light:
-        return AppColors.light;
-      case Brightness.dark:
-        return AppColors.light;
-    }
+    return switch (brightness) {
+      Brightness.light => AppColors.light,
+      Brightness.dark => AppColors.dark,
+    };
   }
 }
