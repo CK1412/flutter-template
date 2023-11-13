@@ -102,6 +102,16 @@ class AppNavigator {
   static void pop<T extends Object?>([T? result]) {
     _router.pop<T>(result);
   }
+
+  static bool canPop() {
+    return _router.canPop();
+  }
+
+  static void popIfPossible<T extends Object?>([T? result]) {
+    if (canPop()) {
+      pop<T>(result);
+    }
+  }
 }
 
 /// [routerNeglect] = true, turn off history tracking in the browser for this navigation.
