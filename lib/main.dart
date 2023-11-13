@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
-import 'app/app.dart';
+import 'app.dart';
 import 'app/injector/injector.dart';
 import 'data/session/session_manager.dart';
 import 'shared/logger/logger.dart';
