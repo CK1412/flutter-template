@@ -6,11 +6,16 @@ import 'app_font_sizes.dart';
 class AppTextStyles {
   AppTextStyles._();
 
+  static const int commonPercentOfFontSizeFigma = 120;
+
   /// Roboto - w300 - fontSize10
   static final TextStyle robotoLight10 = TextStyle(
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w300,
     fontSize: AppFontSizes.fontSize10.getRelativeFontSize(),
+    height: AppFontSizes.fontSize10.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w300 - fontSize12
@@ -18,6 +23,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w300,
     fontSize: AppFontSizes.fontSize12.getRelativeFontSize(),
+    height: AppFontSizes.fontSize12.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w300 - fontSize14
@@ -25,6 +33,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w300,
     fontSize: AppFontSizes.fontSize14.getRelativeFontSize(),
+    height: AppFontSizes.fontSize14.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w300 - fontSize16
@@ -32,6 +43,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w300,
     fontSize: AppFontSizes.fontSize16.getRelativeFontSize(),
+    height: AppFontSizes.fontSize16.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w400 - fontSize10
@@ -39,6 +53,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w400,
     fontSize: AppFontSizes.fontSize10.getRelativeFontSize(),
+    height: AppFontSizes.fontSize10.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w400 - fontSize12
@@ -46,6 +63,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w400,
     fontSize: AppFontSizes.fontSize12.getRelativeFontSize(),
+    height: AppFontSizes.fontSize12.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w400 - fontSize14
@@ -53,6 +73,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w400,
     fontSize: AppFontSizes.fontSize14.getRelativeFontSize(),
+    height: AppFontSizes.fontSize14.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w400 - fontSize16
@@ -60,6 +83,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w400,
     fontSize: AppFontSizes.fontSize16.getRelativeFontSize(),
+    height: AppFontSizes.fontSize16.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w400 - fontSize24
@@ -67,6 +93,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w400,
     fontSize: AppFontSizes.fontSize24.getRelativeFontSize(),
+    height: AppFontSizes.fontSize24.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w500 - fontSize14
@@ -74,6 +103,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w500,
     fontSize: AppFontSizes.fontSize14.getRelativeFontSize(),
+    height: AppFontSizes.fontSize14.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w500 - fontSize16
@@ -81,6 +113,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w500,
     fontSize: AppFontSizes.fontSize16.getRelativeFontSize(),
+    height: AppFontSizes.fontSize16.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w500 - fontSize18
@@ -88,6 +123,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w500,
     fontSize: AppFontSizes.fontSize18.getRelativeFontSize(),
+    height: AppFontSizes.fontSize18.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w500 - fontSize24
@@ -95,6 +133,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w500,
     fontSize: AppFontSizes.fontSize24.getRelativeFontSize(),
+    height: AppFontSizes.fontSize24.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w600 - fontSize14
@@ -102,6 +143,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w600,
     fontSize: AppFontSizes.fontSize14.getRelativeFontSize(),
+    height: AppFontSizes.fontSize14.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w600 - fontSize16
@@ -109,6 +153,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w600,
     fontSize: AppFontSizes.fontSize16.getRelativeFontSize(),
+    height: AppFontSizes.fontSize16.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w600 - fontSize18
@@ -116,6 +163,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w600,
     fontSize: AppFontSizes.fontSize18.getRelativeFontSize(),
+    height: AppFontSizes.fontSize18.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w600 - fontSize24
@@ -123,6 +173,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w600,
     fontSize: AppFontSizes.fontSize24.getRelativeFontSize(),
+    height: AppFontSizes.fontSize24.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w700 - fontSize14
@@ -130,6 +183,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w700,
     fontSize: AppFontSizes.fontSize14.getRelativeFontSize(),
+    height: AppFontSizes.fontSize14.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w700 - fontSize16
@@ -137,6 +193,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w700,
     fontSize: AppFontSizes.fontSize16.getRelativeFontSize(),
+    height: AppFontSizes.fontSize16.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w700 - fontSize18
@@ -144,6 +203,9 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w700,
     fontSize: AppFontSizes.fontSize18.getRelativeFontSize(),
+    height: AppFontSizes.fontSize18.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 
   /// Roboto - w700 - fontSize24
@@ -151,5 +213,8 @@ class AppTextStyles {
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w700,
     fontSize: AppFontSizes.fontSize24.getRelativeFontSize(),
+    height: AppFontSizes.fontSize24.getHeightFromFigma(
+      percentOfFontSize: commonPercentOfFontSizeFigma,
+    ),
   );
 }
