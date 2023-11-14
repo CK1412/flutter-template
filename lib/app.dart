@@ -7,7 +7,7 @@ import 'app/injector/injector.dart';
 import 'app/navigation/app_router.dart';
 import 'l10n/generated/l10n.dart';
 import 'presentation/common_widgets/scrolling/clamping_scroll_behavior.dart';
-import 'shared/constants/resources/app_themes.dart';
+import 'shared/resources/resources.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
