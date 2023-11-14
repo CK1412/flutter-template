@@ -23,8 +23,11 @@ class AppNavigator {
 
   static GoRouter get _router => getIt<AppRouter>().router;
 
-  static BuildContext get context =>
+  static BuildContext get rootContext =>
       getIt<AppRouter>().rootNavigatorKey.currentContext!;
+
+  static BuildContext get context =>
+      getIt<AppRouter>().rootNavigatorKey.currentState?.context ?? rootContext;
 
   static String? get currentPath =>
       GoRouter.of(context).routeInformationProvider.value.location;

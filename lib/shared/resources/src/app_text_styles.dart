@@ -27,6 +27,13 @@ class AppTextStyles {
     fontSize: AppFontSizes.fontSize14.getRelativeFontSize(),
   );
 
+  /// Roboto - w300 - fontSize16
+  static final TextStyle robotoLight16 = TextStyle(
+    fontFamily: FontFamily.roboto,
+    fontWeight: FontWeight.w300,
+    fontSize: AppFontSizes.fontSize16.getRelativeFontSize(),
+  );
+
   /// Roboto - w400 - fontSize10
   static final TextStyle robotoRegular10 = TextStyle(
     fontFamily: FontFamily.roboto,
@@ -87,6 +94,34 @@ class AppTextStyles {
   static final TextStyle robotoMedium24 = TextStyle(
     fontFamily: FontFamily.roboto,
     fontWeight: FontWeight.w500,
+    fontSize: AppFontSizes.fontSize24.getRelativeFontSize(),
+  );
+
+  /// Roboto - w600 - fontSize14
+  static final TextStyle robotoSemiBold14 = TextStyle(
+    fontFamily: FontFamily.roboto,
+    fontWeight: FontWeight.w600,
+    fontSize: AppFontSizes.fontSize14.getRelativeFontSize(),
+  );
+
+  /// Roboto - w600 - fontSize16
+  static final TextStyle robotoSemiBold16 = TextStyle(
+    fontFamily: FontFamily.roboto,
+    fontWeight: FontWeight.w600,
+    fontSize: AppFontSizes.fontSize16.getRelativeFontSize(),
+  );
+
+  /// Roboto - w600 - fontSize18
+  static final TextStyle robotoSemiBold18 = TextStyle(
+    fontFamily: FontFamily.roboto,
+    fontWeight: FontWeight.w600,
+    fontSize: AppFontSizes.fontSize18.getRelativeFontSize(),
+  );
+
+  /// Roboto - w600 - fontSize24
+  static final TextStyle robotoSemiBold24 = TextStyle(
+    fontFamily: FontFamily.roboto,
+    fontWeight: FontWeight.w600,
     fontSize: AppFontSizes.fontSize24.getRelativeFontSize(),
   );
 
