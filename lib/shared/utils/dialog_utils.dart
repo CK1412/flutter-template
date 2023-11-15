@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app/navigation/app_navigator.dart';
 import '../../presentation/common_widgets/dialog/custom_dialog.dart';
 import '../../presentation/common_widgets/dialog/error_dialog.dart';
+import '../../presentation/common_widgets/dialog/info_dialog.dart';
 
 class DialogUtils {
   DialogUtils._();
@@ -74,6 +75,39 @@ class DialogUtils {
                 },
           onCloseButtonTap: () {
             onCloseButtonTap?.call();
+            Navigator.pop(context);
+          },
+        );
+      },
+    );
+    dialogNumberShown--;
+  }
+
+  static Future<void> showInfoDialog({
+    String? title,
+    Widget? content,
+    String? message,
+    String? buttonTitle,
+    VoidCallback? onButtonTap,
+  }) async {
+    final BuildContext currentContext = AppNavigator.context;
+
+    if (dialogNumberShown > 0) {
+      dialogNumberShown--;
+      AppNavigator.popIfPossible();
+    }
+
+    dialogNumberShown++;
+    await showDialog(
+      context: currentContext,
+      builder: (context) {
+        return InfoDialog(
+          title: title,
+          content: content,
+          message: message,
+          buttonTitle: buttonTitle,
+          onButtonTap: () {
+            onButtonTap?.call();
             Navigator.pop(context);
           },
         );

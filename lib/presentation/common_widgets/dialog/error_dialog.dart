@@ -29,6 +29,7 @@ class ErrorDialog extends StatelessWidget {
           style: AppTextStyles.robotoLight16.copyWith(
             color: context.colors.onBackground,
           ),
+          textAlign: TextAlign.center,
         ),
         positiveButtonText: L.current.retry,
         onPositiveButtonTap: onRetryButtonTap!,
@@ -43,6 +44,7 @@ class ErrorDialog extends StatelessWidget {
           style: AppTextStyles.robotoLight16.copyWith(
             color: context.colors.onBackground,
           ),
+          textAlign: TextAlign.center,
         ),
         positiveButtonText: L.current.close,
         onPositiveButtonTap: onCloseButtonTap,

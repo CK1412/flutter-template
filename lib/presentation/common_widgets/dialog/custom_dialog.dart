@@ -20,7 +20,7 @@ class CustomDialog extends StatelessWidget {
   });
 
   final String? title;
-  final Widget content;
+  final Widget? content;
 
   final String positiveButtonText;
   final VoidCallback onPositiveButtonTap;
@@ -55,9 +55,12 @@ class CustomDialog extends StatelessWidget {
                       style: AppTextStyles.robotoMedium16.copyWith(
                         color: context.colors.onBackground,
                       ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   if (isNotEmpty(title)) const Gap(AppDimens.spacing8),
-                  content,
+                  if (content != null) content!,
                 ],
               ),
             ),

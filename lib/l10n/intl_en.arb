@@ -9,5 +9,6 @@
   "detail": "Detail",
   "errorCommonExceptionMessage": "An unknown error. Please try again later.",
   "retry": "Retry",
-  "close": "Close"
+  "close": "Close",
+  "ok": "OK"
 }
