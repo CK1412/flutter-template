@@ -7,5 +7,10 @@
   "logOut": "Log out",
   "youHaveSuccessfullyLoggedOut":"You have successfully logged out!",
   "detail": "Detail",
-  "errorCommonExceptionMessage": "An unknown error. Please try again later."
+  "errorCommonExceptionMessage": "An unknown error. Please try again later.",
+  "retry": "Retry",
+  "close": "Close",
+  "ok": "OK",
+  "confirmation": "Confirmation",
+  "cancel": "Cancel"
 }

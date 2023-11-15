@@ -1,6 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+
+import '../../../shared/utils/platform_utils.dart';
 
 class LoadingVisible extends StatelessWidget {
   const LoadingVisible({super.key, required this.isLoading});
@@ -12,7 +12,7 @@ class LoadingVisible extends StatelessWidget {
     return Visibility(
       visible: isLoading,
       child: WillPopScope(
-        onWillPop: Platform.isIOS && !isLoading
+        onWillPop: PlatformUtils.isIOSDevice && !isLoading
             ? null
             : () => Future.value(!isLoading),
         child: Container(

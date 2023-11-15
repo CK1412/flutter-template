@@ -7,5 +7,10 @@
   "logOut": "Đăng xuất",
   "youHaveSuccessfullyLoggedOut":"Bạn đã đăng xuất thành công!",
   "detail": "Chi tiết",
-  "errorCommonExceptionMessage": "Lỗi không xác định. Vui lòng thử lại sau."
+  "errorCommonExceptionMessage": "Lỗi không xác định. Vui lòng thử lại sau.",
+  "retry": "Thử lại",
+  "close": "Đóng",
+  "ok": "OK",
+  "confirmation": "Xác nhận",
+  "cancel": "Huỷ"
 }

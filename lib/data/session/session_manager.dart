@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:quiver/strings.dart';
 
 import '../../domain/entities/auth/user_info_entity.dart';
-import '../../shared/extensions/string_extension.dart';
 import '../../shared/logger/logger.dart';
 
 const String _keyLanguageCode = 'key_language_code';
@@ -47,7 +47,7 @@ class SessionManager {
       key: _keyUserInfo,
     );
 
-    if (userInfoDataString.isNotNullAndNotEmpty) {
+    if (isNotEmpty(userInfoDataString)) {
       try {
         final UserInfoEntity lastUserInfo = UserInfoEntity.fromJson(
           jsonDecode(userInfoDataString!),

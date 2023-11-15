@@ -53,7 +53,7 @@ abstract class BasePageState<P extends StatefulWidget, B extends BaseBloc>
               final message = state.blocMessage?.message;
 
               if (message != null) {
-                showMessage(message);
+                showToast(message);
               }
             },
             listenWhen: (previous, current) {

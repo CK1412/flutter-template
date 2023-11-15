@@ -19,6 +19,10 @@ class AppExceptionWrapper {
     this.onRetry,
   }) : commonExceptionMessage =
             commonExceptionMessage ?? L.current.errorCommonExceptionMessage;
+
+  String get errorMessageDisplayed {
+    return overrideMessage ?? appException.message ?? commonExceptionMessage;
+  }
 }
 
 enum ExceptionDisplayStyle {

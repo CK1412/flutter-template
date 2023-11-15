@@ -23,8 +23,11 @@ class AppNavigator {
 
   static GoRouter get _router => getIt<AppRouter>().router;
 
-  static BuildContext get context =>
+  static BuildContext get rootContext =>
       getIt<AppRouter>().rootNavigatorKey.currentContext!;
+
+  static BuildContext get context =>
+      getIt<AppRouter>().rootNavigatorKey.currentState?.context ?? rootContext;
 
   static String? get currentPath =>
       GoRouter.of(context).routeInformationProvider.value.location;
@@ -101,6 +104,16 @@ class AppNavigator {
 
   static void pop<T extends Object?>([T? result]) {
     _router.pop<T>(result);
+  }
+
+  static bool canPop() {
+    return _router.canPop();
+  }
+
+  static void popIfPossible<T extends Object?>([T? result]) {
+    if (canPop()) {
+      pop<T>(result);
+    }
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app/navigation/app_navigator.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/resources/resources.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({
@@ -9,7 +10,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.toolbarHeight,
     this.leading,
     this.leadingIcon = AppBarLeadingIcon.back,
-    this.onLeadingTapped,
+    this.onLeadingTap,
     this.backgroundColor,
     this.foregroundColor,
     this.shadowColor,
@@ -21,7 +22,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.titleWidget,
     this.titleType = AppBarTitle.text,
-    this.onTitleTapped,
+    this.onTitleTap,
     this.title,
     this.titleLogo,
     this.titleStyle,
@@ -43,7 +44,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final Widget? leading;
   final AppBarLeadingIcon leadingIcon;
-  final VoidCallback? onLeadingTapped;
+  final VoidCallback? onLeadingTap;
   final double? leadingWidth;
 
   final PreferredSizeWidget? bottom;
@@ -53,7 +54,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? titleWidget;
   final bool? centerTitle;
   final AppBarTitle titleType;
-  final VoidCallback? onTitleTapped;
+  final VoidCallback? onTitleTap;
   final String? title;
   final Widget? titleLogo;
   final TextStyle? titleStyle;
@@ -65,13 +66,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: _buildLeading(),
-      backgroundColor: backgroundColor ?? Colors.white,
-      surfaceTintColor: surfaceTintColor ?? Colors.white,
-      foregroundColor: foregroundColor ?? Colors.black,
+      backgroundColor: backgroundColor ?? context.colors.background,
+      surfaceTintColor: surfaceTintColor ?? context.colors.background,
+      foregroundColor: foregroundColor ?? context.colors.onBackground,
       bottom: bottom,
       elevation: elevation,
       scrolledUnderElevation: scrolledUnderElevation,
-      shadowColor: shadowColor ?? Colors.grey.shade100,
+      shadowColor: shadowColor ?? context.colors.shadow,
       actions: actions,
       centerTitle: centerTitle,
       title: _buildTitle(),
@@ -98,7 +99,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return GestureDetector(
-      onTap: onLeadingTapped ?? () => AppNavigator.pop(),
+      onTap: onLeadingTap ?? () => AppNavigator.pop(),
       child: icon,
     );
   }
@@ -112,13 +113,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       AppBarTitle.text => Text(
           title ?? '',
           style: titleStyle ??
-              TextStyle(
-                color: foregroundColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              AppTextStyles.robotoRegular16.copyWith(color: foregroundColor),
         ),
-      AppBarTitle.logo => titleLogo ?? Assets.icons.icFlutter.image(height: 24),
+      AppBarTitle.logo =>
+        titleLogo ?? Assets.icons.icFlutter.image(height: AppDimens.spacing24),
       AppBarTitle.none => null,
     };
 
@@ -127,7 +125,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return GestureDetector(
-      onTap: onTitleTapped,
+      onTap: onTitleTap,
       behavior: HitTestBehavior.opaque,
       child: appBarTitle,
     );

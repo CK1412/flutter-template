@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 
 import '../../../app/navigation/app_navigator.dart';
 import '../../../l10n/generated/l10n.dart';
+import '../../../shared/resources/resources.dart';
 import '../../common_widgets/app_bar/common_app_bar.dart';
 import '../../common_widgets/base/common_scaffold.dart';
 
@@ -31,10 +32,10 @@ class DetailsPage extends StatelessWidget {
             Container(
               width: double.maxFinite,
               color: Colors.amberAccent,
-              height: 100,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
+              height: AppDimens.spacing100,
+              margin: const EdgeInsets.symmetric(horizontal: AppInsets.inset16),
             ),
-            const Gap(1000),
+            const Gap(AppDimens.spacing1000),
           ],
         ),
       ),
