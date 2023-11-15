@@ -45,6 +45,9 @@ class AppColors {
   final Color scrim;
   final Color shadow;
 
+  // Common
+  final Color red500 = Colors.red.shade500;
+
   AppColors({
     required this.primary,
     required this.onPrimary,
