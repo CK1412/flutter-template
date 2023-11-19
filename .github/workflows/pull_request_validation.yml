@@ -1,0 +1,46 @@
+# This workflow builds, analyses and tests every pull request.
+name: Pull Request Validation
+run-name: A pull request is created by ${{ github.actor }} from ${{ github.head_ref }} branch to merge code to the develop branch.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - develop
+
+env:
+  JAVA_VERSION: '11'
+  FLUTTER_VERSION: '3.10.x'
+  FLUTTER_CHANNEL: 'stable'
+
+jobs:
+  analyze-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Setup java version used in the project
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: ${{env.JAVA_VERSION}}
+          cache: gradle
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          channel: ${{env.FLUTTER_CHANNEL}}
+          cache: true
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Generate code
+        run: dart run build_runner build --delete-conflicting-outputs
+      - name: Generate boilerplate code for localization
+        run: dart run intl_utils:generate
+      - name: Analyze project source
+        run: flutter analyze
+#      - name: Run tests
+#        run: flutter test
+
