@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'dart:math';
 
-import '../logger/logger.dart';
+import '../exceptions/error_handler.dart';
 
 /// [FileUtils] support mobile platform
 class FileUtils {
   FileUtils._();
+
+  static final ErrorHandler _errorHandler = ErrorHandler();
 
   static double convertBytesToAnotherUnit(int bytes, FileSizeUnit unit) {
     return switch (unit) {
@@ -27,7 +29,7 @@ class FileUtils {
       try {
         sizeInBytes += file.lengthSync();
       } catch (e) {
-        logger.e('getFilesSize error: $e');
+        _errorHandler.logError('getFilesSize', error: e);
       }
     }
     return convertBytesToAnotherUnit(sizeInBytes, unit);
