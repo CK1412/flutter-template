@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../injection/injector.dart';
 import '../../shared/utils/uri_utils.dart';
-import '../injector/injector.dart';
 import 'app_router.dart';
 import 'app_routes.dart';
 

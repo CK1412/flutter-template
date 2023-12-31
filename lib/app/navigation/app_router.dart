@@ -5,13 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../injection/injector.dart';
 import '../../presentation/common_widgets/error_page.dart';
 import '../../presentation/pages/details/details_page.dart';
 import '../../presentation/pages/home/home_page.dart';
 import '../../presentation/pages/login/login_page.dart';
 import '../../presentation/pages/sign_up/sign_up_page.dart';
 import '../bloc/auth/auth_bloc.dart';
-import '../injector/injector.dart';
 import 'app_routes.dart';
 import 'route_params.dart';
 

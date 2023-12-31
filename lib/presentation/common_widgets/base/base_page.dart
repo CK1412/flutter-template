@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/bloc/base/base_bloc.dart';
 import '../../../app/bloc/base/common/common_bloc.dart';
-import '../../../app/injector/injector.dart';
+import '../../../injection/injector.dart';
 import '../../../shared/logger/logger.dart';
 import 'base_page_mixin.dart';
 import 'loading_visible.dart';
