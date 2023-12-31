@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../app/bloc/base/base_bloc.dart';
-import '../../../../domain/bloc/bloc_status.dart';
+import '../../../../app/bloc/base/bloc_status.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';

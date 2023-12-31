@@ -9,7 +9,7 @@ import '../../../shared/exceptions/app_exception_wrapper.dart';
 import '../../../shared/extensions/number_extension.dart';
 import '../../../shared/logger/logger.dart';
 import '../../../shared/utils/future_utils.dart';
-import 'common/bloc_message.dart';
+import 'bloc_message.dart';
 import 'common/common_bloc.dart';
 
 part 'base_bloc_event.dart';
