@@ -52,3 +52,5 @@ lib/injection/injector.config.dart
 
 # Dependencies
 **.lock
+
+.fvm/

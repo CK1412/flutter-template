@@ -1,4 +1,4 @@
-# flutter_web_template
+# flutter_template
 
 ## Project description
 
