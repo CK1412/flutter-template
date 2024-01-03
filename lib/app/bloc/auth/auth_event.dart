@@ -4,10 +4,10 @@ sealed class AuthEvent extends BaseBlocEvent {
   const AuthEvent();
 }
 
-final class _UserLoginChanged extends AuthEvent {
-  final UserInfoEntity? user;
+final class _AuthInfoChanged extends AuthEvent {
+  final AuthInfoEntity? authInfo;
 
-  const _UserLoginChanged(this.user);
+  const _AuthInfoChanged(this.authInfo);
 }
 
 final class AppLogoutRequested extends AuthEvent {

@@ -2,28 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'app/bloc/app_bloc.dart';
 import 'app/bloc/auth/auth_bloc.dart';
 import 'app/navigation/app_router.dart';
 import 'injection/injector.dart';
 import 'l10n/generated/l10n.dart';
+import 'presentation/common_widgets/base/base_page.dart';
 import 'presentation/common_widgets/scrolling/clamping_scroll_behavior.dart';
 import 'shared/resources/resources.dart';
 
+// This widget is the root of your application.
 class App extends StatelessWidget {
   const App({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<AuthBloc>(),
-      child: const _MaterialApp(),
-    );
-  }
-}
-
-class _MaterialApp extends StatelessWidget {
-  const _MaterialApp();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +31,28 @@ class _MaterialApp extends StatelessWidget {
       locale: const Locale('vi', 'VN'),
       routerConfig: getIt<AppRouter>().router,
       scrollBehavior: const ClampingScrollBehavior(),
+      builder: (context, child) {
+        return _ProvidersCreator(child: child);
+      },
+    );
+  }
+}
+
+class _ProvidersCreator extends StatefulWidget {
+  const _ProvidersCreator({required this.child});
+
+  final Widget? child;
+
+  @override
+  State<_ProvidersCreator> createState() => _ProvidersCreatorState();
+}
+
+class _ProvidersCreatorState extends BasePageState<_ProvidersCreator, AppBloc> {
+  @override
+  Widget buildPage(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<AuthBloc>()..commonBloc = commonBloc,
+      child: widget.child,
     );
   }
 }

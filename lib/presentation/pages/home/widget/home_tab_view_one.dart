@@ -20,7 +20,8 @@ class _HomeTabViewOneState extends State<HomeTabViewOne>
       children: [
         BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            return Text('UserName: ${state.userInfo!.userName}');
+            // return Text('UserName: ${state.userInfo!.userName}');
+            return Text('UserName" ${state.authInfo?.token}');
           },
         ),
         // Assets.icons.icFlutter.image(width: 100, height: 100),

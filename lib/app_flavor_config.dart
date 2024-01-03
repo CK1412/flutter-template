@@ -19,14 +19,14 @@ class AppFlavorConfig {
   factory AppFlavorConfig.staging() {
     return AppFlavorConfig(
       appFlavorType: AppFlavorType.staging,
-      apiConfig: ApiConfig('https://reqres.in/'),
+      apiConfig: ApiConfig('https://reqres.in'),
     );
   }
 
   factory AppFlavorConfig.production() {
     return AppFlavorConfig(
       appFlavorType: AppFlavorType.production,
-      apiConfig: ApiConfig('https://reqres.in/'),
+      apiConfig: ApiConfig('https://reqres.in'),
     );
   }
 }

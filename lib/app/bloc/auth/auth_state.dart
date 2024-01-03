@@ -8,16 +8,16 @@ enum AuthStatus {
 final class AuthState extends BaseBlocState {
   const AuthState({
     required this.authStatus,
-    this.userInfo,
+    this.authInfo,
   });
 
   final AuthStatus authStatus;
-  final UserInfoEntity? userInfo;
+  final AuthInfoEntity? authInfo;
 
-  const AuthState.authenticated(UserInfoEntity userLoginInfo)
+  const AuthState.authenticated(AuthInfoEntity authInfo)
       : this(
           authStatus: AuthStatus.authenticated,
-          userInfo: userLoginInfo,
+          authInfo: authInfo,
         );
 
   const AuthState.unauthenticated()
@@ -26,15 +26,15 @@ final class AuthState extends BaseBlocState {
   bool get isAuthenticated => authStatus == AuthStatus.authenticated;
 
   @override
-  List<Object?> get props => [authStatus, userInfo];
+  List<Object?> get props => [authStatus, authInfo];
 
   AuthState copyWith({
     AuthStatus? authStatus,
-    UserInfoEntity? userInfo,
+    AuthInfoEntity? authInfo,
   }) {
     return AuthState(
       authStatus: authStatus ?? this.authStatus,
-      userInfo: userInfo ?? this.userInfo,
+      authInfo: authInfo ?? this.authInfo,
     );
   }
 }
