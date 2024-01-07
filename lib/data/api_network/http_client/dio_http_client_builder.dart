@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../interceptor/custom_log_interceptor.dart';
 import '../network_config.dart';
 
 class DioHttpClientBuilder {
@@ -15,6 +16,7 @@ class DioHttpClientBuilder {
       ),
     );
 
+    dio.interceptors.add(CustomLogInterceptor());
     return dio;
   }
 }

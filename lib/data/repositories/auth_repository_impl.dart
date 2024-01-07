@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 import '../../domain/entities/auth/auth_info_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../l10n/generated/l10n.dart';
-import '../mappers/auth_mapper.dart';
 import '../models/api/request/login_request.dart';
 import '../models/api/request/register_request.dart';
 import '../models/api/response/login_response.dart';
@@ -15,8 +14,7 @@ import 'repository_impl.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
-  AuthRepositoryImpl(this._mapper);
-  final AuthMapper _mapper;
+  AuthRepositoryImpl();
 
   @override
   Future<AuthInfoEntity?> login(
@@ -59,8 +57,6 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
     } catch (e) {
       rethrow;
     }
-
-    return false;
   }
 
   @override

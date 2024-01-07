@@ -1,7 +1,13 @@
+import 'dart:core';
+
 class ApiPaths {
   ApiPaths._();
 
-  static const register = '/register';
-  static const login = '/login';
-  static const logout = '/logout';
+  // auth
+  static const String register = '/register';
+  static const String login = '/login';
+  static const String logout = '/logout';
+
+  // user
+  static const String users = '/users';
 }

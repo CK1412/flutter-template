@@ -20,16 +20,10 @@ class SessionManager {
   static late FlutterSecureStorage _prefs;
 
   static late String? _languageCode;
-  // static UserInfoEntity? _userInfo;
   static AuthInfoEntity? _authInfo;
 
-  // static UserInfoEntity? get userInfo => _userInfo;
   static AuthInfoEntity? get authInfo => _authInfo;
 
-  // static set userInfo(UserInfoEntity? value) {
-  //   _userInfo = value;
-  //   unawaited(_saveCurrentUserInfo());
-  // }
   static set authInfo(AuthInfoEntity? value) {
     _authInfo = value;
     unawaited(_saveCurrentAuthInfo());
@@ -38,6 +32,8 @@ class SessionManager {
   static String? get accessToken => _authInfo?.token;
 
   static bool get isLoggedIn => accessToken != null;
+
+  static int? get userId => isLoggedIn ? (_authInfo?.id ?? 2) : null;
 
   static Future<void> init() async {
     _prefs = const FlutterSecureStorage(
@@ -124,14 +120,6 @@ class SessionManager {
     }
   }
 
-  // static Future<void> _saveCurrentUserInfo() async {
-  //   try {
-  //     final String dataString = jsonEncode(_userInfo);
-  //     await _prefs.write(key: _keyUserInfo, value: dataString);
-  //   } catch (e) {
-  //     logger.e('_saveCurrentUserInfo() run failed.', error: e);
-  //   }
-  // }
   static Future<void> _saveCurrentAuthInfo() async {
     try {
       final String dataString = jsonEncode(_authInfo);
@@ -141,14 +129,6 @@ class SessionManager {
     }
   }
 
-  // static Future<void> _deleteCurrentUserInfo() async {
-  //   try {
-  //     await _prefs.delete(key: _keyUserInfo);
-  //     _userInfo = null;
-  //   } catch (e) {
-  //     logger.e('_deleteCurrentUserInfo() run failed.', error: e);
-  //   }
-  // }
   static Future<void> _deleteCurrentAuthInfo() async {
     try {
       await _prefs.delete(key: _keyAuthInfo);

@@ -19,3 +19,7 @@ class TabIndexChanged extends HomeEvent {
 
   const TabIndexChanged(this.value);
 }
+
+class LoggedInUserInformationFetched extends HomeEvent {
+  const LoggedInUserInformationFetched();
+}
