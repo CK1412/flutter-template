@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
-import '../api/api_paths.dart';
+import '../api/rest_api_paths.dart';
 import '../models/api/request/login_request.dart';
 import '../models/api/request/register_request.dart';
 import '../models/api/response/get_single_user_response.dart';
@@ -17,15 +17,15 @@ abstract class RestApiDataSource {
     String baseUrl,
   }) = _RestApiDataSource;
 
-  @POST(ApiPaths.register)
+  @POST(RestApiPaths.register)
   Future<RegisterResponse> register(@Body() RegisterRequest request);
 
-  @POST(ApiPaths.login)
+  @POST(RestApiPaths.login)
   Future<LoginResponse> login(@Body() LoginRequest request);
 
-  @POST(ApiPaths.logout)
+  @POST(RestApiPaths.logout)
   Future<bool> logOut();
 
-  @GET('${ApiPaths.users}/{id}')
+  @GET('${RestApiPaths.users}/{id}')
   Future<GetSingleUserResponse> getSingleUser(@Path('id') int id);
 }

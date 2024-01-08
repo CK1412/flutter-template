@@ -1,13 +1,16 @@
+import 'package:dartx/dartx.dart';
 import 'package:dio/dio.dart';
 
-import '../interceptor/custom_log_interceptor.dart';
+import '../api_client_default_settings.dart';
+import '../interceptor/base_interceptor.dart';
 import '../network_config.dart';
 
 class DioHttpClientBuilder {
   static Dio createDio({
     BaseOptions? options,
+    List<Interceptor> interceptors = const [],
   }) {
-    final dio = Dio(
+    final Dio dio = Dio(
       BaseOptions(
         contentType: options?.contentType ?? NetworkConfig.contentType,
         receiveTimeout: options?.receiveTimeout ?? NetworkConfig.receiveTimeout,
@@ -16,7 +19,14 @@ class DioHttpClientBuilder {
       ),
     );
 
-    dio.interceptors.add(CustomLogInterceptor());
+    final List<Interceptor> sortedInterceptors = [
+      ...ApiClientDefaultSettings.requiredInterceptors(),
+      ...interceptors,
+    ]..sortedByDescending(
+        (element) => element is BaseInterceptor ? element.priority : -1,
+      );
+
+    dio.interceptors.addAll(sortedInterceptors);
     return dio;
   }
 }

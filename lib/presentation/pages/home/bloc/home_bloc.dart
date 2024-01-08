@@ -63,6 +63,9 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
         },
         overrideErrorMessage: L.current.errorCommonExceptionMessage,
         errorDisplayStyle: ExceptionDisplayStyle.dialog,
+        onRetry: () {
+          add(event);
+        },
       );
     }
   }

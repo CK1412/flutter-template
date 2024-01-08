@@ -38,6 +38,7 @@ dependencies:
 
   # Utility
   quiver: ^3.2.1
+  dartx: ^1.2.0
 
   # Prints beautiful logs
   logger: ^2.0.2+1

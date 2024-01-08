@@ -1,7 +1,7 @@
 import 'dart:core';
 
-class ApiPaths {
-  ApiPaths._();
+class RestApiPaths {
+  RestApiPaths._();
 
   // auth
   static const String register = '/register';
