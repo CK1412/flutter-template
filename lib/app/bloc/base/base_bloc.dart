@@ -59,30 +59,32 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent,
   }
 
   Future<void> handleBlocTask<T>({
-    required FutureOr<T?> action,
+    required FutureOr<T?> Function() action,
     required Function(T data) onSuccess,
     bool automaticallyHandleLoading = true,
     bool automaticallyHandleError = true,
     bool automaticallyHandleRetry = true,
     int? maxRetries,
     String? overrideErrorMessage,
-    ExceptionDisplayStyle? errorDisplayStyle,
+    ExceptionDisplayStyle errorDisplayStyle = ExceptionDisplayStyle.toast,
     FutureOr<void> Function()? whenComplete,
     Function(AppException appException)? onError,
     FutureOr<void> Function()? onRetry,
     FutureOr<void> Function()? whenDataNull,
   }) async {
     assert(maxRetries == null || maxRetries > 0, 'maxRetries must be positive');
+
     if (automaticallyHandleLoading) {
       showLoading();
     }
 
-    await handleRequest(
+    await handleRequest<T>(
       request: action,
       onSuccess: (data) {
         if (automaticallyHandleLoading) {
           hideLoading();
         }
+        onSuccess.call(data);
       },
       whenDataNull: () {
         if (automaticallyHandleLoading) {
@@ -106,8 +108,8 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent,
                 displayStyle: errorDisplayStyle,
                 onRetry: onRetry ??
                     ((automaticallyHandleRetry && maxRetries != 1)
-                        ? () {
-                            handleBlocTask<T>(
+                        ? () async {
+                            await handleBlocTask<T>(
                               action: action,
                               automaticallyHandleLoading:
                                   automaticallyHandleLoading,
@@ -122,6 +124,7 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent,
                               onRetry: onRetry,
                               errorDisplayStyle: errorDisplayStyle,
                               overrideErrorMessage: overrideErrorMessage,
+                              whenDataNull: whenDataNull,
                             );
                           }
                         : null),

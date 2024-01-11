@@ -1,9 +1,9 @@
-import '../entities/auth/user_info_entity.dart';
+import '../entities/auth/auth_info_entity.dart';
 
 abstract class AuthRepository {
-  Future<UserInfoEntity?> signUp(String userName, String password);
+  Future<AuthInfoEntity?> register(String email, String password);
 
-  Future<UserInfoEntity?> loginWithPassword(String userName, String password);
+  Future<AuthInfoEntity?> login(String email, String password);
 
   Future<bool> logOut();
 }

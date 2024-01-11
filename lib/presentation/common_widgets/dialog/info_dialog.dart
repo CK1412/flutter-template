@@ -38,7 +38,7 @@ class InfoDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             )
           : content,
-      positiveButtonText: buttonTitle ?? L.current.ok,
+      positiveButtonText: buttonTitle ?? L.current.lbl_ok,
       onPositiveButtonTap: onButtonTap,
       positiveButtonTextStyle: buttonTextStyle,
     );

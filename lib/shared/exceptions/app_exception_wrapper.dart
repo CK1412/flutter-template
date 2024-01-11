@@ -18,7 +18,7 @@ class AppExceptionWrapper {
     this.displayStyle = ExceptionDisplayStyle.toast,
     this.onRetry,
   }) : commonExceptionMessage =
-            commonExceptionMessage ?? L.current.errorCommonExceptionMessage;
+            commonExceptionMessage ?? L.current.lbl_common_exception_message;
 
   String get errorMessageDisplayed {
     return overrideMessage ?? appException.message ?? commonExceptionMessage;

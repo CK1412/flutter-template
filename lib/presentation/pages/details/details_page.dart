@@ -16,7 +16,7 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CommonScaffold(
       appBar: CommonAppBar(
-        title: L.current.detail,
+        title: L.current.lbl_detail,
       ),
       body: SingleChildScrollView(
         child: Column(

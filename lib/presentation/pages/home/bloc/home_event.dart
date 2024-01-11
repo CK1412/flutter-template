@@ -19,3 +19,13 @@ class TabIndexChanged extends HomeEvent {
 
   const TabIndexChanged(this.value);
 }
+
+class LoggedInUserInformationFetched extends HomeEvent {
+  final VoidCallback onSuccessCallback;
+  final int? userId;
+
+  const LoggedInUserInformationFetched({
+    this.userId,
+    required this.onSuccessCallback,
+  });
+}

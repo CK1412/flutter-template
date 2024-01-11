@@ -12,7 +12,7 @@ class ErrorPage extends StatelessWidget {
       backgroundColor: context.colors.background,
       body: Center(
         child: Text(
-          L.current.anErrorHasOccurred,
+          L.current.lbl_an_error_has_occurred,
           style: AppTextStyles.robotoMedium14.copyWith(
             color: context.colors.error,
           ),

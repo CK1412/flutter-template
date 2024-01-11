@@ -2,67 +2,55 @@ import 'dart:async';
 
 import 'package:injectable/injectable.dart';
 
-import '../../domain/entities/auth/user_info_entity.dart';
+import '../../domain/entities/auth/auth_info_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../l10n/generated/l10n.dart';
-import '../data_sources/remote_data_source.dart';
-import '../mappers/auth_mapper.dart';
+import '../models/api/request/login_request.dart';
+import '../models/api/request/register_request.dart';
+import '../models/api/response/login_response.dart';
+import '../models/api/response/register_response.dart';
 import '../session/session_manager.dart';
+import 'repository_impl.dart';
 
 @LazySingleton(as: AuthRepository)
-class AuthRepositoryImpl extends AuthRepository {
-  AuthRepositoryImpl(this._remoteDataSource, this._mapper);
-
-  final RemoteDataSource _remoteDataSource;
-  final AuthMapper _mapper;
+class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
+  AuthRepositoryImpl();
 
   @override
-  Future<UserInfoEntity?> signUp(String userName, String password) async {
-    try {
-      final response = await _remoteDataSource.signUp(userName, password);
-
-      if (response != null) {
-        final userInfo = _mapper.toUserInfo(response);
-        SessionManager.userInfo = userInfo;
-        return userInfo;
-      }
-    } catch (e) {
-      rethrow;
-    }
-
-    return null;
-  }
-
-  @override
-  Future<UserInfoEntity?> loginWithPassword(
-    String userName,
+  Future<AuthInfoEntity?> login(
+    String email,
     String password,
   ) async {
     try {
-      final response =
-          await _remoteDataSource.loginWithPassword(userName, password);
+      final LoginRequest request = LoginRequest(
+        email: email,
+        password: password,
+      );
 
-      if (response != null) {
-        final userInfo = _mapper.toUserInfo(response);
-        SessionManager.userInfo = userInfo;
-        return userInfo;
-      }
+      final LoginResponse response =
+          await nonAuthAppRestApiDataSource().login(request);
+
+      final AuthInfoEntity authInfo = AuthInfoEntity(
+        token: response.token,
+      );
+      _saveAuthInfo(authInfo);
+
+      return authInfo;
     } catch (e) {
       rethrow;
     }
-
-    return null;
   }
 
   @override
   Future<bool> logOut() async {
     try {
-      final response = await _remoteDataSource.logOut();
+      // final response = await restApiDataSource().logOut();
+      const response = true;
       if (response) {
         unawaited(
           SessionManager.clear(
             message: "User log out",
-            displayMessage: L.current.youHaveSuccessfullyLoggedOut,
+            displayMessage: L.current.lbl_you_have_successfully_logged_out,
           ),
         );
         return true;
@@ -70,7 +58,31 @@ class AuthRepositoryImpl extends AuthRepository {
     } catch (e) {
       rethrow;
     }
+  }
 
-    return false;
+  @override
+  Future<AuthInfoEntity?> register(String email, String password) async {
+    try {
+      final RegisterRequest request = RegisterRequest(
+        email: email,
+        password: password,
+      );
+      final RegisterResponse response =
+          await nonAuthAppRestApiDataSource().register(request);
+
+      final AuthInfoEntity authInfo = AuthInfoEntity(
+        id: response.id,
+        token: response.token,
+      );
+      _saveAuthInfo(authInfo);
+
+      return authInfo;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void _saveAuthInfo(AuthInfoEntity authInfo) {
+    SessionManager.authInfo = authInfo;
   }
 }

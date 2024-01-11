@@ -5,11 +5,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:quiver/strings.dart';
 
-import '../../domain/entities/auth/user_info_entity.dart';
+import '../../domain/entities/auth/auth_info_entity.dart';
+import '../../shared/exceptions/error_handler.dart';
 import '../../shared/logger/logger.dart';
 
-const String _keyLanguageCode = 'key_language_code';
-const String _keyUserInfo = 'key_user_info';
+const String _keyLanguageCode = 'language_code';
+const String _keyAuthInfo = 'auth_info';
 
 /// Use instance of SessionManager to store user data used in the [application].
 class SessionManager {
@@ -18,18 +19,22 @@ class SessionManager {
   static late FlutterSecureStorage _prefs;
 
   static late String? _languageCode;
-  static UserInfoEntity? _userInfo;
+  static AuthInfoEntity? _authInfo;
 
-  static UserInfoEntity? get userInfo => _userInfo;
+  static AuthInfoEntity? get authInfo => _authInfo;
 
-  static set userInfo(UserInfoEntity? value) {
-    _userInfo = value;
-    unawaited(_saveCurrentUserInfo());
+  static set authInfo(AuthInfoEntity? value) {
+    _authInfo = value;
+    unawaited(_saveCurrentAuthInfo());
   }
 
-  static String? get accessToken => _userInfo?.token;
+  static String? get accessToken => _authInfo?.token;
+
+  static String? get refreshToken => '';
 
   static bool get isLoggedIn => accessToken != null;
+
+  static int? get userId => isLoggedIn ? (_authInfo?.id ?? 2) : null;
 
   static Future<void> init() async {
     _prefs = const FlutterSecureStorage(
@@ -38,22 +43,22 @@ class SessionManager {
       ),
     );
 
-    await _restoreLastSession();
+    await _restoreAuthInfo();
     await _restoreCurrentLanguageCode();
   }
 
-  static Future<bool> _restoreLastSession() async {
-    final String? userInfoDataString = await _prefs.read(
-      key: _keyUserInfo,
+  static Future<bool> _restoreAuthInfo() async {
+    final String? authInfoDataString = await _prefs.read(
+      key: _keyAuthInfo,
     );
 
-    if (isNotEmpty(userInfoDataString)) {
+    if (isNotEmpty(authInfoDataString)) {
       try {
-        final UserInfoEntity lastUserInfo = UserInfoEntity.fromJson(
-          jsonDecode(userInfoDataString!),
+        final AuthInfoEntity lastAuthInfo = AuthInfoEntity.fromJson(
+          jsonDecode(authInfoDataString!),
         );
 
-        _userInfo = lastUserInfo;
+        _authInfo = lastAuthInfo;
         return true;
       } catch (e) {
         return false;
@@ -78,7 +83,7 @@ class SessionManager {
     }
     try {
       _isClearing = true;
-      await _deleteCurrentUserInfo();
+      await _deleteCurrentAuthInfo();
 
       if (displayMessage != null) {
         unawaited(
@@ -116,21 +121,21 @@ class SessionManager {
     }
   }
 
-  static Future<void> _saveCurrentUserInfo() async {
+  static Future<void> _saveCurrentAuthInfo() async {
     try {
-      final String dataString = jsonEncode(_userInfo);
-      await _prefs.write(key: _keyUserInfo, value: dataString);
+      final String dataString = jsonEncode(_authInfo);
+      await _prefs.write(key: _keyAuthInfo, value: dataString);
     } catch (e) {
-      logger.e('_saveCurrentUserInfo() run failed.', error: e);
+      ErrorHandler().logError('_saveCurrentAuthInfo run failed.', error: e);
     }
   }
 
-  static Future<void> _deleteCurrentUserInfo() async {
+  static Future<void> _deleteCurrentAuthInfo() async {
     try {
-      await _prefs.delete(key: _keyUserInfo);
-      _userInfo = null;
+      await _prefs.delete(key: _keyAuthInfo);
+      _authInfo = null;
     } catch (e) {
-      logger.e('_deleteCurrentUserInfo() run failed.', error: e);
+      ErrorHandler().logError('_deleteCurrentAuthInfo run failed.', error: e);
     }
   }
 }

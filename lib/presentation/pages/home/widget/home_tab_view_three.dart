@@ -21,7 +21,7 @@ class _HomeTabViewThreeState extends State<HomeTabViewThree>
         onPressed: () {
           context.read<AuthBloc>().add(const AppLogoutRequested());
         },
-        child: Text(L.current.logOut),
+        child: Text(L.current.lbl_log_out),
       ),
     );
   }

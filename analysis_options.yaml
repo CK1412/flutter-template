@@ -76,7 +76,6 @@ linter:
     - avoid_void_async
     - await_only_futures
     - camel_case_extensions
-    - cascade_invocations
     - cast_nullable_to_non_nullable
     - combinators_ordering
     - conditional_uri_does_not_exist
@@ -177,7 +176,6 @@ linter:
     - use_named_constants
     - use_raw_strings
     - use_rethrow_when_possible
-    - use_setters_to_change_properties
     - use_string_buffers
     - use_super_parameters
     - use_to_and_as_if_applicable

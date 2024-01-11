@@ -8,8 +8,9 @@ import 'app.dart';
 import 'app_flavor_config.dart';
 import 'data/session/session_manager.dart';
 import 'injection/dependency_manager.dart';
-import 'shared/logger/logger.dart';
+import 'shared/exceptions/error_handler.dart';
 import 'shared/observers/app_bloc_observer.dart';
+import 'shared/useful/network_connectivity.dart';
 
 Future<void> mainCommon(AppFlavorConfig appFlavorConfig) async {
   Future<void> startApp() async {
@@ -20,12 +21,16 @@ Future<void> mainCommon(AppFlavorConfig appFlavorConfig) async {
     DependencyManager.inject(appFlavorConfig);
 
     await SessionManager.init();
+    NetworkConnectivity.instance.init();
 
     runApp(const App());
   }
 
   // Run app with catch error
-  await runZonedGuarded(startApp, (error, stack) {
-    logger.e('ERROR APP', error: error, stackTrace: stack);
-  });
+  await runZonedGuarded(
+    startApp,
+    (error, stack) {
+      ErrorHandler().logError('ERROR APP', error: error, stackTrace: stack);
+    },
+  );
 }
