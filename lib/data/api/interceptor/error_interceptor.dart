@@ -13,28 +13,28 @@ class ErrorInterceptor extends BaseInterceptor {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        return handler.reject(
+        return handler.next(
           DioException(
             requestOptions: err.requestOptions,
             error: ConnectionTimeoutException(),
           ),
         );
       case DioExceptionType.badResponse:
-        return handler.reject(
+        return handler.next(
           DioException(
             requestOptions: err.requestOptions,
             error: BadResponseException(),
           ),
         );
       case DioExceptionType.badCertificate:
-        return handler.reject(
+        return handler.next(
           DioException(
             requestOptions: err.requestOptions,
             error: BadCertificateException(),
           ),
         );
       case DioExceptionType.cancel:
-        return handler.reject(
+        return handler.next(
           DioException(
             requestOptions: err.requestOptions,
             error: CancelledRequestException(),
@@ -42,7 +42,7 @@ class ErrorInterceptor extends BaseInterceptor {
         );
       case DioExceptionType.connectionError:
       case DioExceptionType.unknown:
-        return handler.reject(
+        return handler.next(
           DioException(
             requestOptions: err.requestOptions,
             error: NoInternetException(),

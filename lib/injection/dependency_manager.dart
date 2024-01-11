@@ -4,6 +4,7 @@ import '../data/api/interceptor/access_token_interceptor.dart';
 import '../data/api/interceptor/cache_request_interceptor.dart';
 import '../data/api/interceptor/error_interceptor.dart';
 import '../data/api/interceptor/refresh_token_interceptor.dart';
+import '../data/api/interceptor/retry_on_error_interceptor.dart';
 import '../data/data_sources/auth_app_rest_api_data_source.dart';
 import '../data/data_sources/non_auth_app_rest_api_data_source.dart';
 import 'injector.dart';
@@ -20,6 +21,7 @@ class DependencyManager {
               ErrorInterceptor(),
               AccessTokenInterceptor(),
               RefreshTokenInterceptor(dio),
+              RetryOnErrorInterceptor(dio),
             ],
           ),
           baseUrl: getIt<AppFlavorConfig>().apiConfig.apiUrl,
@@ -31,6 +33,7 @@ class DependencyManager {
             interceptors: (dio) => [
               CacheRequestInterceptor(),
               ErrorInterceptor(),
+              RetryOnErrorInterceptor(dio),
             ],
           ),
           baseUrl: getIt<AppFlavorConfig>().apiConfig.apiUrl,

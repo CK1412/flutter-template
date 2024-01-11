@@ -9,9 +9,8 @@ import '../../domain/entities/auth/auth_info_entity.dart';
 import '../../shared/exceptions/error_handler.dart';
 import '../../shared/logger/logger.dart';
 
-const String _keyLanguageCode = 'key_language_code';
-// const String _keyUserInfo = 'key_user_info';
-const String _keyAuthInfo = 'key_auth_info';
+const String _keyLanguageCode = 'language_code';
+const String _keyAuthInfo = 'auth_info';
 
 /// Use instance of SessionManager to store user data used in the [application].
 class SessionManager {
