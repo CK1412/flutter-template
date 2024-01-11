@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FilledButton(
-              child: Text(L.current.login),
+              child: Text(L.current.lbl_login),
               onPressed: () {
                 context.read<AuthBloc>().add(const AppLoggedIn());
               },
@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
                 AppNavigator.goRoute(AppRoute.signUp);
               },
               icon: const Icon(Icons.arrow_back_ios),
-              label: Text(L.current.signUp),
+              label: Text(L.current.lbl_sign_up),
             ),
           ],
         ),

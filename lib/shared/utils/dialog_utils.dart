@@ -158,7 +158,7 @@ class DialogUtils {
           positiveButtonTextStyle: AppTextStyles.robotoSemiBold16.copyWith(
             color: confirmationButtonTitleColor ?? context.colors.red500,
           ),
-          negativeButtonText: cancelButtonTitle ?? L.current.cancel,
+          negativeButtonText: cancelButtonTitle ?? L.current.lbl_cancel,
           onNegativeButtonTap: () {
             onCancelButtonTap?.call();
             Navigator.pop(context);

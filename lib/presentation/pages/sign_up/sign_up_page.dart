@@ -25,7 +25,7 @@ class _SignUpPageState extends BasePageState<SignUpPage, SignUpBloc> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FilledButton(
-              child: Text(L.current.signUp),
+              child: Text(L.current.lbl_sign_up),
               onPressed: () {
                 context.read<AuthBloc>().add(const AppSignedUp());
               },
@@ -35,7 +35,7 @@ class _SignUpPageState extends BasePageState<SignUpPage, SignUpBloc> {
                 AppNavigator.goRoute(AppRoute.login);
               },
               icon: const Icon(Icons.arrow_back_ios),
-              label: Text(L.current.login),
+              label: Text(L.current.lbl_login),
             ),
           ],
         ),

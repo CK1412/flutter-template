@@ -3,6 +3,8 @@ library;
 
 import 'dart:async';
 
+import 'package:dio/dio.dart';
+
 import '../exceptions/app_exception.dart';
 
 Future<void> handleRequest<T>({
@@ -22,6 +24,13 @@ Future<void> handleRequest<T>({
     }
   } on AppException catch (e) {
     await onError?.call(e);
+  } on DioException catch (e) {
+    final Object? error = e.error;
+    if (error is AppException) {
+      return await onError?.call(error);
+    }
+
+    return await onError?.call(AppException(message: e.toString()));
   } catch (e) {
     await onError?.call(AppException(message: e.toString()));
   } finally {

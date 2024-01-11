@@ -76,7 +76,6 @@ linter:
     - avoid_void_async
     - await_only_futures
     - camel_case_extensions
-    - cascade_invocations
     - cast_nullable_to_non_nullable
     - combinators_ordering
     - conditional_uri_does_not_exist

@@ -27,7 +27,8 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
         password: password,
       );
 
-      final LoginResponse response = await restApiDataSource().login(request);
+      final LoginResponse response =
+          await nonAuthAppRestApiDataSource().login(request);
 
       final AuthInfoEntity authInfo = AuthInfoEntity(
         token: response.token,
@@ -49,7 +50,7 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
         unawaited(
           SessionManager.clear(
             message: "User log out",
-            displayMessage: L.current.youHaveSuccessfullyLoggedOut,
+            displayMessage: L.current.lbl_you_have_successfully_logged_out,
           ),
         );
         return true;
@@ -67,7 +68,7 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
         password: password,
       );
       final RegisterResponse response =
-          await restApiDataSource().register(request);
+          await nonAuthAppRestApiDataSource().register(request);
 
       final AuthInfoEntity authInfo = AuthInfoEntity(
         id: response.id,

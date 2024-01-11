@@ -21,5 +21,11 @@ class TabIndexChanged extends HomeEvent {
 }
 
 class LoggedInUserInformationFetched extends HomeEvent {
-  const LoggedInUserInformationFetched();
+  final VoidCallback onSuccessCallback;
+  final int? userId;
+
+  const LoggedInUserInformationFetched({
+    this.userId,
+    required this.onSuccessCallback,
+  });
 }

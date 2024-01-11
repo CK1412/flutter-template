@@ -23,7 +23,7 @@ class ErrorDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     if (onRetryButtonTap != null) {
       return CustomDialog(
-        title: title ?? L.current.confirmation,
+        title: title ?? L.current.lbl_confirmation,
         content: Text(
           message,
           style: AppTextStyles.robotoLight16.copyWith(
@@ -31,14 +31,14 @@ class ErrorDialog extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        positiveButtonText: L.current.retry,
+        positiveButtonText: L.current.lbl_retry,
         onPositiveButtonTap: onRetryButtonTap!,
-        negativeButtonText: L.current.close,
+        negativeButtonText: L.current.lbl_close,
         onNegativeButtonTap: onCloseButtonTap,
       );
     } else {
       return CustomDialog(
-        title: title ?? L.current.confirmation,
+        title: title ?? L.current.lbl_confirmation,
         content: Text(
           message,
           style: AppTextStyles.robotoLight16.copyWith(
@@ -46,7 +46,7 @@ class ErrorDialog extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        positiveButtonText: L.current.close,
+        positiveButtonText: L.current.lbl_close,
         onPositiveButtonTap: onCloseButtonTap,
       );
     }

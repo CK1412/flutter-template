@@ -8,7 +8,7 @@ import '../network_config.dart';
 class DioHttpClientBuilder {
   static Dio createDio({
     BaseOptions? options,
-    List<Interceptor> interceptors = const [],
+    List<Interceptor> Function(Dio dio)? interceptors,
   }) {
     final Dio dio = Dio(
       BaseOptions(
@@ -21,8 +21,10 @@ class DioHttpClientBuilder {
 
     final List<Interceptor> sortedInterceptors = [
       ...ApiClientDefaultSettings.requiredInterceptors(),
-      ...interceptors,
-    ]..sortedByDescending(
+      ...?interceptors?.call(dio),
+    ]
+      ..distinct()
+      ..sortedByDescending(
         (element) => element is BaseInterceptor ? element.priority : -1,
       );
 

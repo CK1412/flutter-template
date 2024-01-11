@@ -36,7 +36,7 @@ dependencies:
   # UI
   gap: ^3.0.1
 
-  # Utility
+  # Utility for Dart
   quiver: ^3.2.1
   dartx: ^1.2.0
 
@@ -52,6 +52,9 @@ dependencies:
   # Network
   dio: ^5.4.0
   retrofit: ^4.0.3
+
+  # Utility
+  connectivity_plus: ^5.0.2
 
 dev_dependencies:
   flutter_test:

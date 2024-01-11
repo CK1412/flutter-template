@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,6 @@ import '../../../../app/bloc/base/bloc_status.dart';
 import '../../../../data/session/session_manager.dart';
 import '../../../../domain/entities/user/user_entity.dart';
 import '../../../../domain/repositories/user_repository.dart';
-import '../../../../l10n/generated/l10n.dart';
 import '../../../../shared/exceptions/app_exception_wrapper.dart';
 
 part 'home_event.dart';
@@ -53,15 +53,15 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
     LoggedInUserInformationFetched event,
     Emitter<HomeState> emit,
   ) async {
-    final int? loggedInUserId = SessionManager.userId;
+    final int? loggedInUserId = event.userId ?? SessionManager.userId;
 
     if (loggedInUserId != null) {
       await handleBlocTask<UserEntity>(
         action: () => _userRepository.getSingleUser(loggedInUserId),
         onSuccess: (user) {
           emit(state.copyWith(user: user));
+          event.onSuccessCallback.call();
         },
-        overrideErrorMessage: L.current.errorCommonExceptionMessage,
         errorDisplayStyle: ExceptionDisplayStyle.dialog,
         onRetry: () {
           add(event);

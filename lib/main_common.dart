@@ -10,6 +10,7 @@ import 'data/session/session_manager.dart';
 import 'injection/dependency_manager.dart';
 import 'shared/exceptions/error_handler.dart';
 import 'shared/observers/app_bloc_observer.dart';
+import 'shared/useful/network_connectivity.dart';
 
 Future<void> mainCommon(AppFlavorConfig appFlavorConfig) async {
   Future<void> startApp() async {
@@ -20,6 +21,7 @@ Future<void> mainCommon(AppFlavorConfig appFlavorConfig) async {
     DependencyManager.inject(appFlavorConfig);
 
     await SessionManager.init();
+    NetworkConnectivity.instance.init();
 
     runApp(const App());
   }

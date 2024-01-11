@@ -31,6 +31,8 @@ class SessionManager {
 
   static String? get accessToken => _authInfo?.token;
 
+  static String? get refreshToken => '';
+
   static bool get isLoggedIn => accessToken != null;
 
   static int? get userId => isLoggedIn ? (_authInfo?.id ?? 2) : null;

@@ -45,33 +45,49 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
     AppLogoutRequested event,
     Emitter<AuthState> emit,
   ) async {
-    await _authRepository.logOut();
-    add(const _AuthInfoChanged(null));
+    await handleBlocTask<bool>(
+      action: () {
+        return _authRepository.logOut();
+      },
+      onSuccess: (bool success) {
+        if (success) {
+          add(const _AuthInfoChanged(null));
+        }
+      },
+    );
   }
 
   FutureOr<void> _onAppLoggedIn(
     AppLoggedIn event,
     Emitter<AuthState> emit,
   ) async {
-    commonBloc.showLoading();
-    final AuthInfoEntity? authInfo = await _authRepository.login(
-      'eve.holt@reqres.in',
-      'cityslicka',
+    await handleBlocTask<AuthInfoEntity>(
+      action: () {
+        return _authRepository.login(
+          'eve.holt@reqres.in',
+          'cityslicka',
+        );
+      },
+      onSuccess: (AuthInfoEntity authInfo) {
+        add(_AuthInfoChanged(authInfo));
+      },
     );
-    add(_AuthInfoChanged(authInfo));
-    commonBloc.hideLoading();
   }
 
   FutureOr<void> _onAppSignedUp(
     AppSignedUp event,
     Emitter<AuthState> emit,
   ) async {
-    commonBloc.showLoading();
-    final AuthInfoEntity? authInfo = await _authRepository.register(
-      'eve.holt@reqres.in',
-      'pistol',
+    await handleBlocTask<AuthInfoEntity>(
+      action: () {
+        return _authRepository.register(
+          'eve.holt@reqres.in',
+          'pistol',
+        );
+      },
+      onSuccess: (AuthInfoEntity authInfo) {
+        add(_AuthInfoChanged(authInfo));
+      },
     );
-    add(_AuthInfoChanged(authInfo));
-    commonBloc.hideLoading();
   }
 }

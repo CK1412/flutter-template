@@ -8,24 +8,21 @@ import '../models/api/response/get_single_user_response.dart';
 import '../models/api/response/login_response.dart';
 import '../models/api/response/register_response.dart';
 
-part 'rest_api_data_source.g.dart';
+part 'non_auth_app_rest_api_data_source.g.dart';
 
 @RestApi()
-abstract class RestApiDataSource {
-  factory RestApiDataSource(
+abstract class NonAuthAppRestApiDataSource {
+  factory NonAuthAppRestApiDataSource(
     Dio dio, {
     String baseUrl,
-  }) = _RestApiDataSource;
+  }) = _NonAuthAppRestApiDataSource;
 
-  @POST(RestApiPaths.register)
+  @POST(NonAuthAppRestApiPaths.register)
   Future<RegisterResponse> register(@Body() RegisterRequest request);
 
-  @POST(RestApiPaths.login)
+  @POST(NonAuthAppRestApiPaths.login)
   Future<LoginResponse> login(@Body() LoginRequest request);
 
-  @POST(RestApiPaths.logout)
-  Future<bool> logOut();
-
-  @GET('${RestApiPaths.users}/{id}')
+  @GET('${NonAuthAppRestApiPaths.users}/{id}')
   Future<GetSingleUserResponse> getSingleUser(@Path('id') int id);
 }
