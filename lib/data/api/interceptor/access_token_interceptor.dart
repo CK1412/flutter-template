@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../session/session_manager.dart';
+import '../../../app/session/session_manager.dart';
 import 'base_interceptor.dart';
 
 class AccessTokenInterceptor extends BaseInterceptor {
