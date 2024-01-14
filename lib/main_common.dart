@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'app.dart';
+import 'app/session/session_manager.dart';
 import 'app_flavor_config.dart';
-import 'data/session/session_manager.dart';
 import 'injection/dependency_manager.dart';
 import 'shared/exceptions/error_handler.dart';
 import 'shared/observers/app_bloc_observer.dart';

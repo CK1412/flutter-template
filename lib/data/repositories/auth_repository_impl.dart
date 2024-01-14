@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:injectable/injectable.dart';
 
+import '../../app/session/session_manager.dart';
 import '../../domain/entities/auth/auth_info_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../l10n/generated/l10n.dart';
@@ -9,7 +10,6 @@ import '../models/api/request/login_request.dart';
 import '../models/api/request/register_request.dart';
 import '../models/api/response/login_response.dart';
 import '../models/api/response/register_response.dart';
-import '../session/session_manager.dart';
 import 'repository_impl.dart';
 
 @LazySingleton(as: AuthRepository)

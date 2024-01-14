@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../data/session/session_manager.dart';
 import '../../../domain/entities/auth/auth_info_entity.dart';
 import '../../../domain/repositories/auth_repository.dart';
+import '../../session/session_manager.dart';
 import '../base/base_bloc.dart';
 
 part 'auth_event.dart';
