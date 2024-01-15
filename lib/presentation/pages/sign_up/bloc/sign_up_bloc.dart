@@ -7,8 +7,6 @@ part 'sign_up_state.dart';
 
 class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
   SignUpBloc() : super(SignUpState()) {
-    on<SignUpEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<SignUpEvent>((event, emit) {});
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/navigation/app_navigator.dart';
 import '../../../../app/navigation/app_routes.dart';
 import '../../../../app/navigation/route_params.dart';
-import '../../../common_widgets/base/common_scaffold.dart';
+import '../../../common_widgets/common_scaffold.dart';
 import '../bloc/home_bloc.dart';
 import 'home_tab_view_one.dart';
 import 'home_tab_view_three.dart';
