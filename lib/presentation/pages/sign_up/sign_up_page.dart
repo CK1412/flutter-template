@@ -6,7 +6,7 @@ import '../../../app/navigation/app_navigator.dart';
 import '../../../app/navigation/app_routes.dart';
 import '../../../l10n/generated/l10n.dart';
 import '../../common_widgets/base/base_page.dart';
-import '../../common_widgets/base/common_scaffold.dart';
+import '../../common_widgets/common_scaffold.dart';
 import 'bloc/sign_up_bloc.dart';
 
 class SignUpPage extends StatefulWidget {
