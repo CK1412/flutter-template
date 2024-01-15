@@ -7,8 +7,6 @@ part 'app_state.dart';
 
 class AppBloc extends BaseBloc<AppEvent, AppState> {
   AppBloc() : super(AppState()) {
-    on<AppEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<AppEvent>((event, emit) {});
   }
 }
