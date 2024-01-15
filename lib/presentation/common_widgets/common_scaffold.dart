@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/resources/resources.dart';
-import '../../../shared/utils/platform_utils.dart';
-import '../../../shared/utils/view_utils.dart';
+import '../../shared/resources/resources.dart';
+import '../../shared/utils/platform_utils.dart';
+import '../../shared/utils/view_utils.dart';
+import 'shimmer/ancestor_shimmer.dart';
 
 class CommonScaffold extends StatelessWidget {
   const CommonScaffold({
@@ -57,7 +58,7 @@ class CommonScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor ?? context.colors.background,
       appBar: appBar,
-      body: body,
+      body: AncestorShimmer(child: body),
       drawer: drawer,
       endDrawer: endDrawer,
       floatingActionButton: floatingActionButton,
