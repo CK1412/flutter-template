@@ -5,6 +5,10 @@
 Flutter template project for android, ios and web. You can generate a new repository by clicking
 "**Use this template**" above.
 
+## Version
+
+- Flutter 3.16.8
+
 ## Setup and Installation
 
 ### Bootstrap the project

@@ -35,6 +35,7 @@ dependencies:
 
   # UI
   gap: ^3.0.1
+  shimmer: ^3.0.0
 
   # Utility for Dart
   quiver: ^3.2.1
