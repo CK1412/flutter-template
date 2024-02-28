@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/navigation/transitions/no_transitions_on_web.dart';
 import 'app_colors.dart';
 
 class AppThemes {
@@ -16,6 +17,7 @@ class AppThemes {
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: AppColors.light.primary,
       ),
+      pageTransitionsTheme: NoTransitionsOnWeb(),
     );
   }
 
@@ -32,6 +34,7 @@ class AppThemes {
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: AppColors.dark.primary,
       ),
+      pageTransitionsTheme: NoTransitionsOnWeb(),
     );
   }
 }
