@@ -1,1 +1,0 @@
-extension StringNullExtension on String? {}
