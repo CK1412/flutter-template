@@ -16,7 +16,7 @@ class UserRepositoryImpl extends RepositoryImpl implements UserRepository {
   Future<UserEntity> getSingleUser(int id) async {
     try {
       final GetSingleUserResponse response =
-          await nonAuthAppRestApiDataSource().getSingleUser(id);
+          await restApiDataSource.getSingleUser(id);
 
       return _userDataMapper.toUser(response.data);
     } catch (e) {

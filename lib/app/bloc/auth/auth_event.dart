@@ -14,10 +14,10 @@ final class AppLogoutRequested extends AuthEvent {
   const AppLogoutRequested();
 }
 
-final class AppLoggedIn extends AuthEvent {
-  const AppLoggedIn();
+final class AppLoggedInRequested extends AuthEvent {
+  const AppLoggedInRequested();
 }
 
-final class AppSignedUp extends AuthEvent {
-  const AppSignedUp();
+final class AppSignedUpRequested extends AuthEvent {
+  const AppSignedUpRequested();
 }

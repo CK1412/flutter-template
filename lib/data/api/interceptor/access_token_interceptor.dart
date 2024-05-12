@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 import '../../../app/session/session_manager.dart';
@@ -15,5 +17,14 @@ class AccessTokenInterceptor extends BaseInterceptor {
     }
 
     super.onRequest(options, handler);
+  }
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    if (err.response?.statusCode == HttpStatus.unauthorized) {
+      SessionManager.clear(message: 'unauthorized');
+    } else {
+      return super.onError(err, handler);
+    }
   }
 }

@@ -2,7 +2,13 @@ import '../../l10n/generated/l10n.dart';
 import 'app_exception.dart';
 
 class RemoteException extends AppException {
-  RemoteException({super.message, super.messageCode});
+  final Map<String, dynamic>? responseData;
+
+  RemoteException({
+    super.message,
+    super.messageCode,
+    this.responseData,
+  });
 }
 
 class NoInternetException extends RemoteException {
@@ -30,6 +36,7 @@ class BadResponseException extends RemoteException {
   BadResponseException({
     String? message,
     super.messageCode,
+    super.responseData,
   }) : super(message: message ?? L.current.error_bad_certificate_exception);
 }
 

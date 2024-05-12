@@ -27,7 +27,7 @@ class _SignUpPageState extends BasePageState<SignUpPage, SignUpBloc> {
             FilledButton(
               child: Text(L.current.lbl_sign_up),
               onPressed: () {
-                context.read<AuthBloc>().add(const AppSignedUp());
+                context.read<AuthBloc>().add(const AppSignedUpRequested());
               },
             ),
             TextButton.icon(

@@ -6,6 +6,7 @@ import '../models/api/user_api_model.dart';
 
 @LazySingleton()
 class UserDataMapper {
+  /// Example code
   UserEntity toUser(UserApiModel model) {
     try {
       return UserEntity(
@@ -15,8 +16,8 @@ class UserDataMapper {
         lastName: model.lastName,
         avatar: model.avatar,
       );
-    } catch (e) {
-      throw MapperException<UserApiModel, UserEntity>(e.toString());
+    } on Exception catch (e) {
+      throw MapperException<UserApiModel, UserEntity>(e);
     }
   }
 }

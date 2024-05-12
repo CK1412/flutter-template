@@ -3,12 +3,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../user_api_model.dart';
 
 part 'get_single_user_response.freezed.dart';
+
 part 'get_single_user_response.g.dart';
 
 @freezed
 class GetSingleUserResponse with _$GetSingleUserResponse {
   const factory GetSingleUserResponse({
-    required UserApiModel data,
+    @JsonKey(name: 'data') required UserApiModel data,
   }) = _GetSingleUserResponse;
 
   const GetSingleUserResponse._();

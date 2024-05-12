@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
             FilledButton(
               child: Text(L.current.lbl_login),
               onPressed: () {
-                context.read<AuthBloc>().add(const AppLoggedIn());
+                context.read<AuthBloc>().add(const AppLoggedInRequested());
               },
             ),
             TextButton.icon(

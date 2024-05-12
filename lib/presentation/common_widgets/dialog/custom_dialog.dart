@@ -105,7 +105,7 @@ class CustomDialog extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

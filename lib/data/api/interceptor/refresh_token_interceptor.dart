@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import '../../../app/session/session_manager.dart';
 import '../../../domain/entities/auth/auth_info_entity.dart';
 import '../../../injection/injector.dart';
-import '../../data_sources/auth_app_rest_api_data_source.dart';
+import '../../data_sources/rest_api_data_source.dart';
 import 'base_interceptor.dart';
 
 class RefreshTokenInterceptor extends BaseInterceptor {
@@ -18,8 +18,8 @@ class RefreshTokenInterceptor extends BaseInterceptor {
   @override
   int get priority => BaseInterceptor.refreshTokenPriority;
 
-  AuthAppRestApiDataSource authAppRestApiDataSource() =>
-      getIt<AuthAppRestApiDataSource>();
+  RestApiDataSource authAppRestApiDataSource() =>
+      getIt<RestApiDataSource>();
 
   bool _isRefreshing = false;
 

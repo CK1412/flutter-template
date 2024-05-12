@@ -21,8 +21,8 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
         ) {
     on<_AuthInfoChanged>(_onAuthInfoChanged);
     on<AppLogoutRequested>(_onAppLogoutRequested);
-    on<AppLoggedIn>(_onAppLoggedIn);
-    on<AppSignedUp>(_onAppSignedUp);
+    on<AppLoggedInRequested>(_onAppLoggedInRequested);
+    on<AppSignedUpRequested>(_onAppSignedUpRequested);
   }
 
   final AuthRepository _authRepository;
@@ -57,8 +57,8 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
     );
   }
 
-  FutureOr<void> _onAppLoggedIn(
-    AppLoggedIn event,
+  FutureOr<void> _onAppLoggedInRequested(
+    AppLoggedInRequested event,
     Emitter<AuthState> emit,
   ) async {
     await handleBlocTask<AuthInfoEntity>(
@@ -74,8 +74,8 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
     );
   }
 
-  FutureOr<void> _onAppSignedUp(
-    AppSignedUp event,
+  FutureOr<void> _onAppSignedUpRequested(
+    AppSignedUpRequested event,
     Emitter<AuthState> emit,
   ) async {
     await handleBlocTask<AuthInfoEntity>(

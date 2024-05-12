@@ -27,8 +27,7 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
         password: password,
       );
 
-      final LoginResponse response =
-          await nonAuthAppRestApiDataSource().login(request);
+      final LoginResponse response = await restApiDataSource.login(request);
 
       final AuthInfoEntity authInfo = AuthInfoEntity(
         token: response.token,
@@ -36,8 +35,8 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
       _saveAuthInfo(authInfo);
 
       return authInfo;
-    } catch (e) {
-      rethrow;
+    } on Exception catch (e) {
+      throw onException(e);
     }
   }
 
@@ -55,8 +54,8 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
         );
         return true;
       }
-    } catch (e) {
-      rethrow;
+    } on Exception catch (e) {
+      throw onException(e);
     }
   }
 
@@ -68,7 +67,7 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
         password: password,
       );
       final RegisterResponse response =
-          await nonAuthAppRestApiDataSource().register(request);
+          await restApiDataSource.register(request);
 
       final AuthInfoEntity authInfo = AuthInfoEntity(
         id: response.id,
@@ -77,8 +76,8 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
       _saveAuthInfo(authInfo);
 
       return authInfo;
-    } catch (e) {
-      rethrow;
+    } on Exception catch (e) {
+      throw onException(e);
     }
   }
 
