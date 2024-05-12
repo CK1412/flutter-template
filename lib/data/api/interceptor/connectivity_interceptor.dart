@@ -10,7 +10,7 @@ class ConnectivityInterceptor extends BaseInterceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    if (NetworkConnectivity.instance.status.isOffline) {
+    if (NetworkConnectivity().networkStatus.isOffline) {
       return handler.reject(
         DioException(
           requestOptions: options,

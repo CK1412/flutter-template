@@ -21,7 +21,7 @@ Future<void> mainCommon(AppFlavorConfig appFlavorConfig) async {
     DependencyManager.inject(appFlavorConfig);
 
     await SessionManager.init();
-    NetworkConnectivity.instance.init();
+    NetworkConnectivity().init();
 
     runApp(const App());
   }

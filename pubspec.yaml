@@ -55,7 +55,7 @@ dependencies:
   retrofit: ^4.0.3
 
   # Utility
-  connectivity_plus: ^5.0.2
+  connectivity_plus: ^6.0.3
 
 dev_dependencies:
   flutter_test:
