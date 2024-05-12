@@ -69,14 +69,14 @@ android {
             dimension "flavor-type"
             applicationIdSuffix ".development"
             versionNameSuffix "-development"
-            resValue "string", "app_name", "[App Name] -Development"
+            resValue "string", "app_name", "Dev - [App Name]"
             signingConfig signingConfigs.debug
         }
         staging {
             dimension "flavor-type"
             applicationIdSuffix ".staging"
             versionNameSuffix "-staging"
-            resValue "string", "app_name", "[App Name] -Staging"
+            resValue "string", "app_name", "Staging - [App Name]"
             signingConfig signingConfigs.debug
         }
         production {
