@@ -30,7 +30,7 @@ class AppNavigator {
       getIt<AppRouter>().rootNavigatorKey.currentState?.context ?? rootContext;
 
   static String? get currentPath =>
-      GoRouter.of(context).routeInformationProvider.value.location;
+      GoRouter.of(context).routeInformationProvider.value.uri.path;
 
   static void pushRoute(
     AppRoute route, {

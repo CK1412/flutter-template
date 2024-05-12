@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../shared/exceptions/app_exception_wrapper.dart';
 import '../../../../shared/extensions/number_extension.dart';
@@ -10,6 +10,7 @@ import '../base_bloc.dart';
 import '../bloc_message.dart';
 
 part 'common_event.dart';
+
 part 'common_state.dart';
 
 @Injectable()

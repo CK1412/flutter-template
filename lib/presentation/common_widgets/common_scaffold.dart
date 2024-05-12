@@ -19,7 +19,7 @@ class CommonScaffold extends StatelessWidget {
     this.extendBodyBehindAppBar = false,
     this.resizeToAvoidBottomInset = false,
     this.tapOutsideToHideKeyboard = true,
-    this.onWillPop,
+    this.onPopInvoked,
   });
 
   final Widget body;
@@ -33,12 +33,12 @@ class CommonScaffold extends StatelessWidget {
   final bool extendBodyBehindAppBar;
   final bool resizeToAvoidBottomInset;
   final bool tapOutsideToHideKeyboard;
-  final WillPopCallback? onWillPop;
+  final PopInvokedCallback? onPopInvoked;
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: PlatformUtils.isIOSDevice ? null : onWillPop,
+    return PopScope(
+      onPopInvoked: PlatformUtils.isIOSDevice ? null : onPopInvoked,
       child: SafeArea(
         child: tapOutsideToHideKeyboard
             ? GestureDetector(

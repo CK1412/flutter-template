@@ -11,10 +11,10 @@ class LoadingVisible extends StatelessWidget {
   Widget build(BuildContext context) {
     return Visibility(
       visible: isLoading,
-      child: WillPopScope(
-        onWillPop: PlatformUtils.isIOSDevice && !isLoading
+      child: PopScope(
+        onPopInvoked: PlatformUtils.isIOSDevice && !isLoading
             ? null
-            : () => Future.value(!isLoading),
+            : (didPop) => Future.value(!isLoading),
         child: Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
