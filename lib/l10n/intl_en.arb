@@ -17,5 +17,7 @@
   "error_connection_timeout_exception": "The connection has timed out, please try again.",
   "error_bad_certificate_exception": "Can not connect to server",
   "error_bad_response_exception": "Server error, please try again.",
-  "error_cancelled_request_exception": "The request has been cancelled."
+  "error_cancelled_request_exception": "The request has been cancelled.",
+  "msg_copied_to_clipboard": "Copied to clipboard.",
+  "msg_failed_to_copy_to_clipboard": "Failed to copy to clipboard."
 }

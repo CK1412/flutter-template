@@ -1,11 +1,11 @@
-/// Utility functions for working with Future
-library;
-
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 
+import '../../l10n/generated/l10n.dart';
 import '../exceptions/app_exception.dart';
+import '../utils/toast_utils.dart';
 
 Future<void> handleRequest<T>({
   required FutureOr<T?> Function() request,
@@ -36,4 +36,20 @@ Future<void> handleRequest<T>({
   } finally {
     await whenComplete?.call();
   }
+}
+
+Future<void> copyTextToClipboard(String text) async {
+  await Clipboard.setData(
+    ClipboardData(text: text),
+  ).then(
+    (value) {
+      ToastUtils.showMessage(
+        L.current.msg_copied_to_clipboard,
+      );
+    },
+  ).catchError((err) {
+    ToastUtils.showMessage(
+      L.current.msg_failed_to_copy_to_clipboard,
+    );
+  });
 }
