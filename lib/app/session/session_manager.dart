@@ -9,7 +9,6 @@ import '../../domain/entities/auth/auth_info_entity.dart';
 import '../../shared/exceptions/error_handler.dart';
 import '../../shared/logger/logger.dart';
 
-const String _keyLanguageCode = 'language_code';
 const String _keyAuthInfo = 'auth_info';
 
 /// Use instance of SessionManager to store user data used in the [application].
@@ -18,7 +17,6 @@ class SessionManager {
 
   static late FlutterSecureStorage _prefs;
 
-  static late String? _languageCode;
   static AuthInfoEntity? _authInfo;
 
   static AuthInfoEntity? get authInfo => _authInfo;
@@ -44,7 +42,6 @@ class SessionManager {
     );
 
     await _restoreAuthInfo();
-    await _restoreCurrentLanguageCode();
   }
 
   static Future<bool> _restoreAuthInfo() async {
@@ -95,30 +92,6 @@ class SessionManager {
     }
 
     _isClearing = false;
-  }
-
-  static String get languageCode => _languageCode ?? 'vi';
-
-  static set languageCode(String value) {
-    _languageCode = value;
-
-    unawaited(_saveCurrentLanguageCode());
-  }
-
-  static Future<void> _saveCurrentLanguageCode() async {
-    try {
-      await _prefs.write(key: _keyLanguageCode, value: _languageCode);
-    } catch (e) {
-      logger.e('_saveCurrentLanguageCode() run failed.', error: e);
-    }
-  }
-
-  static Future<void> _restoreCurrentLanguageCode() async {
-    try {
-      _languageCode = await _prefs.read(key: _keyLanguageCode);
-    } catch (e) {
-      logger.e('_restoreCurrentLanguageCode() run failed.', error: e);
-    }
   }
 
   static Future<void> _saveCurrentAuthInfo() async {
