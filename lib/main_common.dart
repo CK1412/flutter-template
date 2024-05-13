@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'app.dart';
 import 'app/session/session_manager.dart';
@@ -17,11 +19,18 @@ Future<void> mainCommon(AppFlavorConfig appFlavorConfig) async {
     WidgetsFlutterBinding.ensureInitialized();
 
     usePathUrlStrategy();
+    NetworkConnectivity().init();
+
     Bloc.observer = AppBlocObserver();
+    HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: kIsWeb
+          ? HydratedStorage.webStorageDirectory
+          : await getApplicationDocumentsDirectory(),
+    );
+
     DependencyManager.inject(appFlavorConfig);
 
     await SessionManager.init();
-    NetworkConnectivity().init();
 
     runApp(const App());
   }

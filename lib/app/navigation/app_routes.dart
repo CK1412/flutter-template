@@ -3,7 +3,8 @@ enum AppRoute {
   home(name: 'home', path: '/home/:tab'),
   login(name: 'login', path: '/accounts/login'),
   signUp(name: 'signUp', path: '/accounts/signup'),
-  details(name: 'details', path: 'details');
+  details(name: 'details', path: 'details'),
+  settings(name: 'settings', path: '/settings');
 
   /// Represents the route name
   ///

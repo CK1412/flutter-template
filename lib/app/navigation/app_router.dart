@@ -7,10 +7,11 @@ import 'package:injectable/injectable.dart';
 
 import '../../injection/injector.dart';
 import '../../presentation/common_widgets/error_page.dart';
-import '../../presentation/pages/details/details_page.dart';
-import '../../presentation/pages/home/home_page.dart';
-import '../../presentation/pages/login/login_page.dart';
-import '../../presentation/pages/sign_up/sign_up_page.dart';
+import '../../presentation/example_pages/details/details_page.dart';
+import '../../presentation/example_pages/home/home_page.dart';
+import '../../presentation/example_pages/login/login_page.dart';
+import '../../presentation/example_pages/settings/settings_page.dart';
+import '../../presentation/example_pages/sign_up/sign_up_page.dart';
 import '../bloc/auth/auth_bloc.dart';
 import 'app_routes.dart';
 import 'route_params.dart';
@@ -76,6 +77,16 @@ class AppRouter {
         pageBuilder: (context, state) {
           return NoTransitionPage(
             child: const SignUpPage(),
+            name: state.name,
+          );
+        },
+      ),
+      GoRoute(
+        name: AppRoute.settings.name,
+        path: AppRoute.settings.path,
+        pageBuilder: (context, state) {
+          return NoTransitionPage(
+            child: const SettingPage(),
             name: state.name,
           );
         },

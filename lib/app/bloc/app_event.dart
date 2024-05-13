@@ -1,4 +1,10 @@
 part of 'app_bloc.dart';
 
 @immutable
-abstract class AppEvent extends BaseBlocEvent {}
+sealed class AppEvent extends BaseBlocEvent {}
+
+final class LocaleUpdated extends AppEvent {
+  final Locale value;
+
+  LocaleUpdated(this.value);
+}
