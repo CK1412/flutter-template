@@ -6,8 +6,11 @@ class AppState extends BaseBlocState {
   @LocaleJsonConverter()
   final Locale locale;
 
+  final ThemeMode themeMode;
+
   const AppState({
     this.locale = Locales.defaultLocale,
+    this.themeMode = ThemeMode.light,
   });
 
   factory AppState.fromJson(Map<String, Object?> json) =>
@@ -16,13 +19,15 @@ class AppState extends BaseBlocState {
   Map<String, dynamic> toJson() => _$AppStateToJson(this);
 
   @override
-  List<Object> get props => [locale];
+  List<Object> get props => [locale, themeMode];
 
   AppState copyWith({
     Locale? locale,
+    ThemeMode? themeMode,
   }) {
     return AppState(
       locale: locale ?? this.locale,
+      themeMode: themeMode ?? this.themeMode,
     );
   }
 }

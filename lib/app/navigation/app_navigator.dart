@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../injection/injector.dart';
 import '../../shared/utils/uri_utils.dart';
 import 'app_router.dart';
 import 'app_routes.dart';
@@ -21,13 +20,13 @@ import 'app_routes.dart';
 class AppNavigator {
   AppNavigator._();
 
-  static GoRouter get _router => getIt<AppRouter>().router;
+  static GoRouter get _router => AppRouter().router;
 
   static BuildContext get rootContext =>
-      getIt<AppRouter>().rootNavigatorKey.currentContext!;
+      AppRouter().rootNavigatorKey.currentContext!;
 
   static BuildContext get context =>
-      getIt<AppRouter>().rootNavigatorKey.currentState?.context ?? rootContext;
+      AppRouter().rootNavigatorKey.currentState?.context ?? rootContext;
 
   static String? get currentPath =>
       GoRouter.of(context).routeInformationProvider.value.uri.path;

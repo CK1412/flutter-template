@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -21,6 +21,7 @@ class AppBloc extends BaseBloc<AppEvent, AppState>
   AppBloc() : super(const AppState()) {
     hydrate();
     on<LocaleUpdated>(_onLocaleUpdated);
+    on<ThemeModeUpdated>(_onThemeModeUpdated);
   }
 
   @override
@@ -34,5 +35,12 @@ class AppBloc extends BaseBloc<AppEvent, AppState>
     Emitter<AppState> emit,
   ) {
     emit(state.copyWith(locale: event.value));
+  }
+
+  FutureOr<void> _onThemeModeUpdated(
+    ThemeModeUpdated event,
+    Emitter<AppState> emit,
+  ) {
+    emit(state.copyWith(themeMode: event.value));
   }
 }

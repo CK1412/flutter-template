@@ -8,3 +8,9 @@ final class LocaleUpdated extends AppEvent {
 
   LocaleUpdated(this.value);
 }
+
+final class ThemeModeUpdated extends AppEvent {
+  final ThemeMode value;
+
+  ThemeModeUpdated(this.value);
+}

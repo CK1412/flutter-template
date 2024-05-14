@@ -21,5 +21,9 @@
   "msg_copied_to_clipboard": "Đã sao chép vào bộ nhớ tạm.",
   "msg_failed_to_copy_to_clipboard": "Không sao chép được vào bộ nhớ tạm.",
   "lbl_language_settings": "Cài đặt ngôn ngữ",
-  "lbl_settings": "Cài đặt"
+  "lbl_settings": "Cài đặt",
+  "lbl_theme": "Giao diện",
+  "lbl_light_theme_message": "Sáng",
+  "lbl_dark_theme_message": "Tối",
+  "lbl_system_theme_message": "Theo hệ thống"
 }

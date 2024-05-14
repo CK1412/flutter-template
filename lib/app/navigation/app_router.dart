@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:injectable/injectable.dart';
 
 import '../../injection/injector.dart';
 import '../../presentation/common_widgets/error_page.dart';
@@ -16,8 +15,16 @@ import '../bloc/auth/auth_bloc.dart';
 import 'app_routes.dart';
 import 'route_params.dart';
 
-@LazySingleton()
 class AppRouter {
+  AppRouter._();
+
+  static AppRouter? _instance;
+
+  factory AppRouter() {
+    return _instance ??= AppRouter._();
+  }
+
+  @protected
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   GlobalKey get rootNavigatorKey => _rootNavigatorKey;

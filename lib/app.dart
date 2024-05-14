@@ -41,16 +41,19 @@ class AppView extends StatelessWidget {
     return BlocBuilder<AppBloc, AppState>(
       buildWhen: (previous, current) {
         final bool localeChanged = previous.locale != current.locale;
+        final bool themeModeChanged = previous.themeMode != current.themeMode;
 
-        return localeChanged;
+        return localeChanged || themeModeChanged;
       },
       builder: (context, state) {
         final Locale locale = state.locale;
+        final ThemeMode themeMode = state.themeMode;
 
         return MaterialApp.router(
           title: 'Flutter template',
           theme: AppThemes.lightTheme(),
           darkTheme: AppThemes.darkTheme(),
+          themeMode: themeMode,
           localizationsDelegates: const [
             L.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -59,7 +62,7 @@ class AppView extends StatelessWidget {
           ],
           supportedLocales: L.delegate.supportedLocales,
           locale: locale,
-          routerConfig: getIt<AppRouter>().router,
+          routerConfig: AppRouter().router,
           scrollBehavior: const ClampingScrollBehavior(),
         );
       },
