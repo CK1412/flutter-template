@@ -5,7 +5,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'app/bloc/app_bloc.dart';
 import 'app/bloc/auth/auth_bloc.dart';
 import 'app/bloc/base/common/common_bloc.dart';
-import 'app/navigation/app_router.dart';
+import 'app/navigation/app_navigator.dart';
+import 'app/navigation/app_route_config.dart';
+import 'app/navigation/app_route_name.dart';
 import 'injection/injector.dart';
 import 'l10n/generated/l10n.dart';
 import 'presentation/common_widgets/scrolling/clamping_scroll_behavior.dart';
@@ -49,7 +51,7 @@ class AppView extends StatelessWidget {
         final Locale locale = state.locale;
         final ThemeMode themeMode = state.themeMode;
 
-        return MaterialApp.router(
+        return MaterialApp(
           title: 'Flutter template',
           theme: AppThemes.lightTheme(),
           darkTheme: AppThemes.darkTheme(),
@@ -62,7 +64,9 @@ class AppView extends StatelessWidget {
           ],
           supportedLocales: L.delegate.supportedLocales,
           locale: locale,
-          routerConfig: AppRouter().router,
+          routes: AppRouteConfig().routes,
+          initialRoute: AppRouteName.splash,
+          navigatorKey: AppNavigator.rootNavigatorKey,
           scrollBehavior: const ClampingScrollBehavior(),
         );
       },

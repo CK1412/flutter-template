@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/bloc/auth/auth_bloc.dart';
 import '../../../../app/navigation/app_navigator.dart';
-import '../../../../app/navigation/app_routes.dart';
+import '../../../../app/navigation/app_route_name.dart';
 import '../../../../l10n/generated/l10n.dart';
 
 class HomeTabViewThree extends StatefulWidget {
@@ -23,7 +23,7 @@ class _HomeTabViewThreeState extends State<HomeTabViewThree>
       children: [
         FilledButton(
           onPressed: () {
-            AppNavigator.pushRoute(AppRoute.settings);
+            AppNavigator.go(AppRouteName.settings);
           },
           child: Text(L.current.lbl_settings),
         ),

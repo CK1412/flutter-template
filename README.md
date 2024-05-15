@@ -7,7 +7,7 @@ Flutter template project for android, ios and web. You can generate a new reposi
 
 ## Version
 
-- Flutter 3.13.3
+- Flutter 3.19.3
 - Dart 3.3.1
 - Java JDK 11
 
@@ -15,14 +15,22 @@ Flutter template project for android, ios and web. You can generate a new reposi
 
 ### Bootstrap the project
 
+- Run each command below in turn
+
 ```bash
-echo "Bootstrap the project"
-clear 
-flutter clean 
+flutter clean
+```
+
+```bash
 flutter pub get 
+```
+
+```bash
 dart run build_runner build --delete-conflicting-outputs 
+```
+
+```bash
 dart run intl_utils:generate
-echo "Bootstrap finished"
 ```
 
 ## Gen code

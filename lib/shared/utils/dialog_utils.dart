@@ -26,7 +26,7 @@ class DialogUtils {
 
     if (dialogNumberShown > 0) {
       dialogNumberShown--;
-      AppNavigator.popIfPossible();
+      AppNavigator.pop();
     }
 
     dialogNumberShown++;
@@ -59,7 +59,7 @@ class DialogUtils {
 
     if (dialogNumberShown > 0) {
       dialogNumberShown--;
-      AppNavigator.popIfPossible();
+      AppNavigator.pop();
     }
 
     dialogNumberShown++;
@@ -96,7 +96,7 @@ class DialogUtils {
 
     if (dialogNumberShown > 0) {
       dialogNumberShown--;
-      AppNavigator.popIfPossible();
+      AppNavigator.pop();
     }
 
     dialogNumberShown++;
@@ -132,7 +132,7 @@ class DialogUtils {
 
     if (dialogNumberShown > 0) {
       dialogNumberShown--;
-      AppNavigator.popIfPossible();
+      AppNavigator.pop();
     }
 
     dialogNumberShown++;

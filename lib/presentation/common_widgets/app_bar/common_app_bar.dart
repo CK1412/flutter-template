@@ -116,7 +116,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               AppTextStyles.robotoRegular16.copyWith(color: foregroundColor),
         ),
       AppBarTitle.logo =>
-        titleLogo ?? Assets.icons.icFlutter.image(height: AppDimens.spacing24),
+        titleLogo ?? Assets.icons.appLogo.image(height: AppDimens.spacing24),
       AppBarTitle.none => null,
     };
 

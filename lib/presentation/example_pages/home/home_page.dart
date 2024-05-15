@@ -7,7 +7,7 @@ import 'widget/home_body.dart';
 class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
-    required this.tabIndex,
+    this.tabIndex = 0,
   });
 
   final int tabIndex;

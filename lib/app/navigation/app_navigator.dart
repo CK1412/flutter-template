@@ -1,132 +1,95 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../shared/utils/uri_utils.dart';
-import 'app_router.dart';
-import 'app_routes.dart';
+/// [AppNavigatorStackAction] is action enum for navigation stack
+enum AppNavigatorStackAction {
+  // keep all the stacks
+  keep,
+  // replace the top stack
+  replace,
+  // remove all stacks
+  removeAll,
+}
 
-/// There are three ways to pass params: pathParameters, queryParameters, extra.
-/// How to use: https://stackoverflow.com/a/74813803.
-///
-/// # Explain the arguments
-///
-/// The use of the [extra] object is not recommended for use in targeting Flutter web apps.
-///
-/// [withCurrentPathParams],
-/// * When uses for navigating new route and current path have pathParameters (e.g. path: '/home/:tab'),
-///  must set withCurrentPathParams = true.
-/// * Otherwise, when navigating the same route,  set withCurrentPathParams = false.
-///
+/// [AppNavigator] is a navigation class used to navigate to page screens.
 class AppNavigator {
   AppNavigator._();
 
-  static GoRouter get _router => AppRouter().router;
+  static final GlobalKey<NavigatorState> rootNavigatorKey =
+      GlobalKey<NavigatorState>();
 
-  static BuildContext get rootContext =>
-      AppRouter().rootNavigatorKey.currentContext!;
+  static BuildContext get context => rootNavigatorKey.currentContext!;
 
-  static BuildContext get context =>
-      AppRouter().rootNavigatorKey.currentState?.context ?? rootContext;
+  static NavigatorState? get navigatorState => rootNavigatorKey.currentState;
 
-  static String? get currentPath =>
-      GoRouter.of(context).routeInformationProvider.value.uri.path;
-
-  static void pushRoute(
-    AppRoute route, {
-    Object? extra,
-    Map<String, String> pathParameters = const <String, String>{},
-    Map<String, dynamic> queryParameters = const <String, dynamic>{},
-    bool routerNeglect = false,
-    bool withCurrentPathParams = false,
-  }) {
-    _handleNavigation(
-      context,
-      routerNeglect: routerNeglect,
-      callback: () {
-        if (withCurrentPathParams) {
-          final uri = UriUtils.createUri(
-            path: '$currentPath/${route.path}',
-            pathParameters: pathParameters,
-            queryParameters: queryParameters,
-          );
-
-          _router.push(
-            uri.toString(),
-            extra: extra,
-          );
-        } else {
-          _router.pushNamed(
-            route.name,
-            extra: extra,
-            pathParameters: pathParameters,
-            queryParameters: queryParameters,
-          );
-        }
-      },
-    );
-  }
-
-  static void goRoute(
-    AppRoute route, {
-    Map<String, String> pathParameters = const <String, String>{},
-    Map<String, dynamic> queryParameters = const <String, dynamic>{},
-    Object? extra,
-    bool routerNeglect = false,
-    bool withCurrentPathParams = false,
-  }) {
-    _handleNavigation(
-      context,
-      routerNeglect: routerNeglect,
-      callback: () {
-        if (withCurrentPathParams) {
-          final uri = UriUtils.createUri(
-            path: '$currentPath/${route.path}',
-            pathParameters: pathParameters,
-            queryParameters: queryParameters,
-          );
-
-          _router.go(
-            uri.toString(),
-            extra: extra,
-          );
-        } else {
-          _router.goNamed(
-            route.name,
-            queryParameters: queryParameters,
-            pathParameters: pathParameters,
-            extra: extra,
-          );
-        }
-      },
-    );
-  }
-
-  static void pop<T extends Object?>([T? result]) {
-    _router.pop<T>(result);
+  static Future<dynamic> go(
+    String routeName, {
+    Object? arguments,
+    AppNavigatorStackAction action = AppNavigatorStackAction.keep,
+  }) async {
+    switch (action) {
+      case AppNavigatorStackAction.removeAll:
+        return await navigatorState?.pushNamedAndRemoveUntil(
+          routeName,
+          (route) => false,
+          arguments: arguments,
+        );
+      case AppNavigatorStackAction.keep:
+        return await navigatorState?.pushNamed(
+          routeName,
+          arguments: arguments,
+        );
+      case AppNavigatorStackAction.replace:
+        return await navigatorState?.pushReplacementNamed(
+          routeName,
+          arguments: arguments,
+        );
+    }
   }
 
   static bool canPop() {
-    return _router.canPop();
+    return navigatorState?.canPop() ?? false;
   }
 
-  static void popIfPossible<T extends Object?>([T? result]) {
+  static void pop({Object? arguments}) {
     if (canPop()) {
-      pop<T>(result);
+      return navigatorState?.pop(arguments);
     }
   }
-}
 
-/// [routerNeglect] = true, turn off history tracking in the browser for this navigation.
-void _handleNavigation(
-  BuildContext context, {
-  required VoidCallback callback,
-  bool routerNeglect = false,
-}) {
-  if (routerNeglect) {
-    Router.neglect(context, () {
-      callback.call();
+  static void popUntil({required String routeName}) {
+    if (navigatorState == null) {
+      return;
+    }
+
+    final bool isCurrent = _isNewRouteSameAsCurrent(routeName, navigatorState!);
+
+    if (!isCurrent) {
+      navigatorState?.popUntil((route) => route.settings.name == routeName);
+    }
+  }
+
+  static bool _isNewRouteSameAsCurrent(
+    String routeName,
+    NavigatorState currentState,
+  ) {
+    bool isCurrent = false;
+
+    currentState.popUntil((route) {
+      if (route.settings.name == routeName) {
+        isCurrent = true;
+      }
+      return true;
     });
-  } else {
-    callback.call();
+
+    return isCurrent;
+  }
+
+  /// Check if the route is the current route
+  static bool isCurrentRoute(String routeName) {
+    if (navigatorState == null) {
+      return false;
+    }
+
+    return _isNewRouteSameAsCurrent(routeName, navigatorState!);
   }
 }

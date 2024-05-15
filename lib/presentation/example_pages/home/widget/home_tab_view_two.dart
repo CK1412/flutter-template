@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/navigation/app_navigator.dart';
-import '../../../../app/navigation/app_routes.dart';
-import '../../../../app/navigation/route_params.dart';
+import '../../../../app/navigation/app_route_name.dart';
 import '../../../../shared/resources/resources.dart';
 import '../bloc/home_bloc.dart';
 
@@ -35,10 +34,9 @@ class _HomeTabViewTwoState extends State<HomeTabViewTwo>
         const SizedBox(height: AppDimens.spacing20),
         FilledButton(
           onPressed: () {
-            AppNavigator.goRoute(
-              AppRoute.details,
-              queryParameters: {RouteParamsKey.id: '4'},
-              withCurrentPathParams: true,
+            AppNavigator.go(
+              AppRouteName.details,
+              arguments: '4',
             );
           },
           child: const Text('Go details'),
