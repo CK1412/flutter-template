@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../app/bloc/base/base_bloc.dart';
-import '../../../../app/bloc/base/bloc_status.dart';
+import '../../../../app/bloc/bloc_status.dart';
 import '../../../../app/session/session_manager.dart';
 import '../../../../domain/entities/user/user_entity.dart';
 import '../../../../domain/repositories/user_repository.dart';

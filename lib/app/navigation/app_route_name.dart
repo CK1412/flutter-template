@@ -1,9 +1,7 @@
-import 'dart:core';
-
 class AppRouteName {
   AppRouteName._();
 
-  static const String splash = '/';
+  static const String splash = '/splash';
 
   // For example page
   static const String home = '/home';

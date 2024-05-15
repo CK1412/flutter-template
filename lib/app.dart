@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'app/bloc/app_bloc.dart';
+import 'app/bloc/app/app_bloc.dart';
 import 'app/bloc/auth/auth_bloc.dart';
-import 'app/bloc/base/common/common_bloc.dart';
+import 'app/bloc/common/common_bloc.dart';
 import 'app/navigation/app_navigator.dart';
 import 'app/navigation/app_route_config.dart';
 import 'app/navigation/app_route_name.dart';
 import 'injection/injector.dart';
 import 'l10n/generated/l10n.dart';
 import 'presentation/common_widgets/scrolling/clamping_scroll_behavior.dart';
+import 'shared/observers/app_navigator_observer.dart';
 import 'shared/resources/resources.dart';
 
 // This widget is the root of your application.
@@ -64,10 +65,15 @@ class AppView extends StatelessWidget {
           ],
           supportedLocales: L.delegate.supportedLocales,
           locale: locale,
-          routes: AppRouteConfig().routes,
-          initialRoute: AppRouteName.splash,
-          navigatorKey: AppNavigator.rootNavigatorKey,
           scrollBehavior: const ClampingScrollBehavior(),
+          navigatorKey: AppNavigator.rootNavigatorKey,
+          onGenerateRoute: AppRouteConfig().onGenerateRoute,
+          initialRoute: AppRouteName.splash,
+          onUnknownRoute: AppRouteConfig().onUnknownRoute,
+          navigatorObservers: [
+            routeObserver,
+            AppNavigatorObserver(),
+          ],
         );
       },
     );

@@ -31,7 +31,6 @@ class _SplashPageState extends State<SplashPage> {
     // Handle logic to navigate
     AppNavigator.go(
       AppRouteName.home,
-      arguments: 0,
       action: AppNavigatorStackAction.removeAll,
     );
   }
@@ -42,8 +41,8 @@ class _SplashPageState extends State<SplashPage> {
       backgroundColor: context.colors.primary,
       body: Center(
         child: Assets.images.splashLogo.image(
-          width: AppDimens.spacing200,
-          height: AppDimens.spacing200,
+          width: AppDimens.spacing100,
+          height: AppDimens.spacing100,
           fit: BoxFit.contain,
         ),
       ),

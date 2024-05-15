@@ -5,9 +5,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../shared/constants/locales.dart';
-import '../../shared/converters/locale_json_converter.dart';
-import 'base/base_bloc.dart';
+import '../../../shared/constants/locales.dart';
+import '../../../shared/converters/locale_json_converter.dart';
+import '../base/base_bloc.dart';
 
 part 'app_event.dart';
 

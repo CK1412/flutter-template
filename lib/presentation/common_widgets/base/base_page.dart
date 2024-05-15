@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/bloc/base/base_bloc.dart';
-import '../../../app/bloc/base/common/common_bloc.dart';
+import '../../../app/bloc/common/common_bloc.dart';
 import '../../../injection/injector.dart';
 import '../../../shared/logger/logger.dart';
 import 'base_page_mixin.dart';
@@ -10,8 +10,8 @@ import 'loading_visible.dart';
 
 abstract class BasePageState<P extends StatefulWidget, B extends BaseBloc>
     extends State<P> with BasePageMixin {
-  late final CommonBloc commonBloc = getIt<CommonBloc>();
-  late final B bloc = getIt<B>()..commonBloc = commonBloc;
+  final CommonBloc commonBloc = getIt<CommonBloc>();
+  final B bloc = getIt<B>();
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ abstract class BasePageState<P extends StatefulWidget, B extends BaseBloc>
           create: (context) => commonBloc,
         ),
         BlocProvider(
-          create: (context) => bloc,
+          create: (context) => bloc..commonBloc = commonBloc,
         ),
       ],
       child: MultiBlocListener(

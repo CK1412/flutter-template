@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../l10n/generated/l10n.dart';
+import '../../../common_widgets/app_bar/common_app_bar.dart';
 import '../../../common_widgets/common_scaffold.dart';
 import '../bloc/home_bloc.dart';
 import 'home_tab_view_one.dart';
@@ -20,28 +22,13 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> with TickerProviderStateMixin {
-  final List<({Tab tabBar, Widget tabView})> _tabs = [
-    (
-      tabBar: const Tab(text: 'Tab 1'),
-      tabView: const HomeTabViewOne(),
-    ),
-    (
-      tabBar: const Tab(text: 'Tab 2'),
-      tabView: const HomeTabViewTwo(),
-    ),
-    (
-      tabBar: const Tab(text: 'Tab 3'),
-      tabView: const HomeTabViewThree(),
-    ),
-  ];
-
   late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
-      length: _tabs.length,
+      length: HomeTab.values.length,
       vsync: this,
       initialIndex: widget.tabIndex,
     );
@@ -51,6 +38,7 @@ class _HomeBodyState extends State<HomeBody> with TickerProviderStateMixin {
   void didUpdateWidget(covariant HomeBody oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.tabIndex != widget.tabIndex) {
+      _tabController.index = widget.tabIndex;
       context.read<HomeBloc>().add(TabIndexChanged(widget.tabIndex));
     }
   }
@@ -71,10 +59,12 @@ class _HomeBodyState extends State<HomeBody> with TickerProviderStateMixin {
         return previous.tabIndex != current.tabIndex;
       },
       child: CommonScaffold(
-        appBar: AppBar(
+        appBar: CommonAppBar(
+          leadingIcon: AppBarLeadingIcon.none,
+          title: L.current.lbl_confirmation,
           bottom: TabBar(
             controller: _tabController,
-            tabs: _tabs.map((e) => e.tabBar).toList(),
+            tabs: HomeTab.values.map((e) => Text(e.name)).toList(),
             onTap: (int index) {
               context.read<HomeBloc>().add(TabIndexChanged(index));
             },
@@ -82,9 +72,22 @@ class _HomeBodyState extends State<HomeBody> with TickerProviderStateMixin {
         ),
         body: TabBarView(
           controller: _tabController,
-          children: _tabs.map((e) => e.tabView).toList(),
+
+          /// because children of TabBarView above use `const` keyword,
+          /// therefore, [children] will not updated when AppBloc builder called.
+          children: const [
+            HomeTabViewOne(),
+            HomeTabViewTwo(),
+            HomeTabViewThree(),
+          ],
         ),
       ),
     );
   }
+}
+
+enum HomeTab {
+  tab1,
+  tab2,
+  tab3,
 }

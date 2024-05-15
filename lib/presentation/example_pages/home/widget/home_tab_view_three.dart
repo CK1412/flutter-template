@@ -6,18 +6,11 @@ import '../../../../app/navigation/app_navigator.dart';
 import '../../../../app/navigation/app_route_name.dart';
 import '../../../../l10n/generated/l10n.dart';
 
-class HomeTabViewThree extends StatefulWidget {
+class HomeTabViewThree extends StatelessWidget {
   const HomeTabViewThree({super.key});
 
   @override
-  State<HomeTabViewThree> createState() => _HomeTabViewThreeState();
-}
-
-class _HomeTabViewThreeState extends State<HomeTabViewThree>
-    with AutomaticKeepAliveClientMixin {
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -30,13 +23,15 @@ class _HomeTabViewThreeState extends State<HomeTabViewThree>
         FilledButton(
           onPressed: () {
             context.read<AuthBloc>().add(const AppLogoutRequested());
+            AppNavigator.go(
+              AppRouteName.home,
+              arguments: 0,
+              action: AppNavigatorStackAction.removeAll,
+            );
           },
           child: Text(L.current.lbl_log_out),
         ),
       ],
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

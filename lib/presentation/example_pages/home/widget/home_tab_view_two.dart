@@ -6,18 +6,11 @@ import '../../../../app/navigation/app_route_name.dart';
 import '../../../../shared/resources/resources.dart';
 import '../bloc/home_bloc.dart';
 
-class HomeTabViewTwo extends StatefulWidget {
+class HomeTabViewTwo extends StatelessWidget {
   const HomeTabViewTwo({super.key});
 
   @override
-  State<HomeTabViewTwo> createState() => _HomeTabViewTwoState();
-}
-
-class _HomeTabViewTwoState extends State<HomeTabViewTwo>
-    with AutomaticKeepAliveClientMixin {
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -44,7 +37,4 @@ class _HomeTabViewTwoState extends State<HomeTabViewTwo>
       ],
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

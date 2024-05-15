@@ -1,4 +1,3 @@
-import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 
 import '../../presentation/common_widgets/error_page.dart';
@@ -9,11 +8,6 @@ import '../../presentation/example_pages/settings/settings_page.dart';
 import '../../presentation/pages/splash/splash_page.dart';
 import 'app_route_name.dart';
 
-typedef WidgetBuilderWithArgs = Widget Function(
-  BuildContext context,
-  Object? args,
-);
-
 class AppRouteConfig {
   AppRouteConfig._();
 
@@ -23,32 +17,43 @@ class AppRouteConfig {
     return _instance ??= AppRouteConfig._();
   }
 
-  Map<String, WidgetBuilder> get routes => _config.mapValues(
-        (p0) => (BuildContext context) {
-          try {
-            final args = ModalRoute.of(context)?.settings.arguments;
-            return p0.value.call(context, args);
-          } catch (e) {
-            return const ErrorPage();
-          }
-        },
-      );
+  Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case AppRouteName.splash:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => const SplashPage(),
+        );
+      case AppRouteName.home:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) =>
+              HomePage(tabIndex: (settings.arguments ?? 0) as int),
+        );
+      case AppRouteName.auth:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => const AuthPage(),
+        );
+      case AppRouteName.details:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => DetailsPage(id: settings.arguments! as String),
+        );
+      case AppRouteName.settings:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => const SettingPage(),
+        );
+      default:
+        return null;
+    }
+  }
 
-  final Map<String, WidgetBuilderWithArgs> _config = {
-    AppRouteName.splash: (context, args) {
-      return const SplashPage();
-    },
-    AppRouteName.home: (context, args) {
-      return HomePage(tabIndex: (args ?? 0) as int);
-    },
-    AppRouteName.auth: (context, args) {
-      return const AuthPage();
-    },
-    AppRouteName.details: (context, args) {
-      return DetailsPage(id: args! as String);
-    },
-    AppRouteName.settings: (context, args) {
-      return const SettingPage();
-    },
-  };
+  Route<dynamic>? onUnknownRoute(RouteSettings settings) {
+    return MaterialPageRoute(
+      settings: settings,
+      builder: (context) => const ErrorPage(),
+    );
+  }
 }

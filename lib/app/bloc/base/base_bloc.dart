@@ -9,8 +9,8 @@ import '../../../shared/exceptions/app_exception_wrapper.dart';
 import '../../../shared/extensions/number_extension.dart';
 import '../../../shared/logger/logger.dart';
 import '../../../shared/useful/helpers.dart';
-import 'bloc_message.dart';
-import 'common/common_bloc.dart';
+import '../bloc_message.dart';
+import '../common/common_bloc.dart';
 
 part 'base_bloc_event.dart';
 

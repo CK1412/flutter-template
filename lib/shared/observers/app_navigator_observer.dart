@@ -49,3 +49,6 @@ class AppNavigatorObserver extends NavigatorObserver {
 extension RouteEx on Route<dynamic> {
   String get str => '(${settings.name}, ${settings.arguments})';
 }
+
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();

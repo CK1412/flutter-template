@@ -8,14 +8,9 @@ import '../../../../shared/utils/dialog_utils.dart';
 import '../../../common_widgets/divider/common_horizontal_divider.dart';
 import '../bloc/home_bloc.dart';
 
-class HomeTabViewOne extends StatefulWidget {
+class HomeTabViewOne extends StatelessWidget {
   const HomeTabViewOne({super.key});
 
-  @override
-  State<HomeTabViewOne> createState() => _HomeTabViewOneState();
-}
-
-class _HomeTabViewOneState extends State<HomeTabViewOne> {
   @override
   Widget build(BuildContext context) {
     return Padding(

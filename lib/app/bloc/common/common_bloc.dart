@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../shared/exceptions/app_exception_wrapper.dart';
 import '../../../../shared/extensions/number_extension.dart';
-import '../base_bloc.dart';
+import '../base/base_bloc.dart';
 import '../bloc_message.dart';
 
 part 'common_event.dart';

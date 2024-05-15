@@ -3,19 +3,19 @@ import 'dart:ui';
 class Locales {
   Locales._();
 
-  static const Locale defaultLocale = viVN;
+  static const Locale defaultLocale = vi;
 
-  static const viVN = Locale('vi', 'VN');
+  static const vi = Locale('vi');
 
-  static const enUS = Locale('en', 'US');
+  static const en = Locale('en');
 
-  static const jaJP = Locale('ja', 'JP');
+  static const ja = Locale('ja');
 
   static String languageName(String languageCode) {
     final data = {
-      viVN.languageCode: 'Tiếng Việt',
-      enUS.languageCode: 'English',
-      jaJP.languageCode: '日本語',
+      vi.languageCode: 'Tiếng Việt',
+      en.languageCode: 'English',
+      ja.languageCode: '日本語',
     };
 
     return data[languageCode] ?? '';
