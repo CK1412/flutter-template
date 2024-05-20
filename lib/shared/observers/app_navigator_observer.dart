@@ -46,7 +46,7 @@ class AppNavigatorObserver extends NavigatorObserver {
   }
 }
 
-extension RouteEx on Route<dynamic> {
+extension on Route<dynamic> {
   String get str => '(${settings.name}, ${settings.arguments})';
 }
 

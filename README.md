@@ -45,8 +45,12 @@ dart run build_runner watch
 ---
 title: Diagram of dependencies between layers
 ---
-graph BT;
-    data --> domain --> app --> presentation;
+graph BT
+;
+    data --> domain --> presentation;
+    presentation --> app;
+    domain --> app;
+    data --> app;
 ```
 
 ## Troubleshooting

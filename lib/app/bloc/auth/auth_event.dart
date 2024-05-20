@@ -4,20 +4,20 @@ sealed class AuthEvent extends BaseBlocEvent {
   const AuthEvent();
 }
 
-final class _AuthInfoChanged extends AuthEvent {
-  final AuthInfoEntity? authInfo;
-
-  const _AuthInfoChanged(this.authInfo);
-}
-
 final class AppLogoutRequested extends AuthEvent {
-  const AppLogoutRequested();
+  final VoidCallback? onSuccessCallback;
+
+  const AppLogoutRequested({this.onSuccessCallback});
 }
 
 final class AppLoggedInRequested extends AuthEvent {
-  const AppLoggedInRequested();
+  final VoidCallback? onSuccessCallback;
+
+  const AppLoggedInRequested({this.onSuccessCallback});
 }
 
 final class AppSignedUpRequested extends AuthEvent {
-  const AppSignedUpRequested();
+  final VoidCallback? onSuccessCallback;
+
+  const AppSignedUpRequested({this.onSuccessCallback});
 }

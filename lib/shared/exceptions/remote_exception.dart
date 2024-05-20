@@ -46,3 +46,17 @@ class CancelledRequestException extends RemoteException {
     super.messageCode,
   }) : super(message: message ?? L.current.error_cancelled_request_exception);
 }
+
+class ServerException extends RemoteException {
+  ServerException({
+    String? message,
+    super.messageCode,
+  }) : super(message: message ?? L.current.error_server_exception);
+}
+
+class UnauthorizedException extends RemoteException {
+  UnauthorizedException({
+    String? message,
+    super.messageCode,
+  }) : super(message: message ?? L.current.error_unauthorized_exception);
+}

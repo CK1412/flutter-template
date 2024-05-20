@@ -7,8 +7,8 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'app.dart';
-import 'app/session/session_manager.dart';
 import 'app_flavor_config.dart';
+import 'data/session/session_manager.dart';
 import 'injection/dependency_manager.dart';
 import 'shared/exceptions/error_handler.dart';
 import 'shared/observers/app_bloc_observer.dart';
@@ -28,9 +28,9 @@ Future<void> mainCommon(AppFlavorConfig appFlavorConfig) async {
           : await getApplicationDocumentsDirectory(),
     );
 
-    DependencyManager.inject(appFlavorConfig);
+    await DependencyManager.inject(appFlavorConfig);
 
-    await SessionManager.init();
+    await SessionManager.instance.init();
 
     runApp(const App());
   }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../gen/assets.gen.dart';
-import '../../../../shared/resources/resources.dart';
 import '../../../app/navigation/app_navigator.dart';
 import '../../../app/navigation/app_route_name.dart';
+import '../../../app/resources/resources.dart';
+import '../../../data/session/session_manager.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -28,11 +29,17 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void appBootstrap() {
-    // Handle logic to navigate
-    AppNavigator.go(
-      AppRouteName.home,
-      action: AppNavigatorStackAction.removeAll,
-    );
+    if (SessionManager.instance.isLoggedIn) {
+      AppNavigator.go(
+        AppRouteName.home,
+        action: AppNavigatorStackAction.removeAll,
+      );
+    } else {
+      AppNavigator.go(
+        AppRouteName.auth,
+        action: AppNavigatorStackAction.removeAll,
+      );
+    }
   }
 
   @override
@@ -41,8 +48,8 @@ class _SplashPageState extends State<SplashPage> {
       backgroundColor: context.colors.primary,
       body: Center(
         child: Assets.images.splashLogo.image(
-          width: AppDimens.spacing100,
-          height: AppDimens.spacing100,
+          width: 100,
+          height: 100,
           fit: BoxFit.contain,
         ),
       ),

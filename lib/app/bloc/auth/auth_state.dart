@@ -1,40 +1,31 @@
 part of 'auth_bloc.dart';
 
-enum AuthStatus {
-  authenticated,
-  unauthenticated,
-}
-
 final class AuthState extends BaseBlocState {
   const AuthState({
     required this.authStatus,
-    this.authInfo,
   });
 
   final AuthStatus authStatus;
-  final AuthInfoEntity? authInfo;
 
-  const AuthState.authenticated(AuthInfoEntity authInfo)
-      : this(
-          authStatus: AuthStatus.authenticated,
-          authInfo: authInfo,
-        );
+  const AuthState.authenticated() : authStatus = AuthStatus.authenticated;
 
-  const AuthState.unauthenticated()
-      : this(authStatus: AuthStatus.unauthenticated);
+  const AuthState.unauthenticated() : authStatus = AuthStatus.unauthenticated;
 
   bool get isAuthenticated => authStatus == AuthStatus.authenticated;
 
   @override
-  List<Object?> get props => [authStatus, authInfo];
+  List<Object?> get props => [authStatus];
 
   AuthState copyWith({
     AuthStatus? authStatus,
-    AuthInfoEntity? authInfo,
   }) {
     return AuthState(
       authStatus: authStatus ?? this.authStatus,
-      authInfo: authInfo ?? this.authInfo,
     );
   }
+}
+
+enum AuthStatus {
+  authenticated,
+  unauthenticated,
 }

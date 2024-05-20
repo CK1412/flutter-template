@@ -5,11 +5,11 @@ import '../data/api/interceptor/cache_request_interceptor.dart';
 import '../data/api/interceptor/error_interceptor.dart';
 import '../data/api/interceptor/refresh_token_interceptor.dart';
 import '../data/api/interceptor/retry_on_error_interceptor.dart';
-import '../data/data_sources/rest_api_data_source.dart';
+import '../data/data_sources/remote/rest_api_data_source.dart';
 import 'injector.dart';
 
 class DependencyManager {
-  static void inject(AppFlavorConfig appFlavorConfig) {
+  static Future<void> inject(AppFlavorConfig appFlavorConfig) async {
     getIt
       ..registerLazySingleton<AppFlavorConfig>(() => appFlavorConfig)
       ..registerLazySingleton<RestApiDataSource>(
@@ -27,6 +27,6 @@ class DependencyManager {
         ),
       );
 
-    configureDependencies();
+    await configureDependencies();
   }
 }

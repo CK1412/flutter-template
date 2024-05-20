@@ -8,25 +8,36 @@ import 'app/bloc/common/common_bloc.dart';
 import 'app/navigation/app_navigator.dart';
 import 'app/navigation/app_route_config.dart';
 import 'app/navigation/app_route_name.dart';
+import 'app/resources/resources.dart';
 import 'injection/injector.dart';
 import 'l10n/generated/l10n.dart';
-import 'presentation/common_widgets/scrolling/clamping_scroll_behavior.dart';
+import 'presentation/widgets/base/base_common_listener.dart';
+import 'presentation/widgets/base/scrolling/clamping_scroll_behavior.dart';
 import 'shared/observers/app_navigator_observer.dart';
-import 'shared/resources/resources.dart';
 
 // This widget is the root of your application.
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final CommonBloc _commonBloc = getIt<CommonBloc>();
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<AppBloc>()..commonBloc = CommonBloc(),
+          create: (context) => _commonBloc,
         ),
         BlocProvider(
-          create: (context) => getIt<AuthBloc>()..commonBloc = CommonBloc(),
+          create: (context) => getIt<AppBloc>()..commonBloc = _commonBloc,
+        ),
+        BlocProvider(
+          create: (context) => getIt<AuthBloc>()..commonBloc = _commonBloc,
         ),
       ],
       child: const AppView(),
@@ -35,9 +46,7 @@ class App extends StatelessWidget {
 }
 
 class AppView extends StatelessWidget {
-  const AppView({
-    super.key,
-  });
+  const AppView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +83,11 @@ class AppView extends StatelessWidget {
             routeObserver,
             AppNavigatorObserver(),
           ],
+          builder: (context, child) {
+            return BaseCommonListener(
+              builder: (ctx) => child!,
+            );
+          },
         );
       },
     );
