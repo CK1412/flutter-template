@@ -1,11 +1,11 @@
 {
-  "@@locale" : "vi",
-  "lbl_hello_world":"Xin chào thế giới",
-  "lbl_an_error_has_occurred":"Đã có lỗi xảy ra",
+  "@@locale": "vi",
+  "lbl_hello_world": "Xin chào thế giới",
+  "lbl_an_error_has_occurred": "Đã có lỗi xảy ra",
   "lbl_login": "Đăng nhập",
   "lbl_sign_up": "Đăng ký",
   "lbl_log_out": "Đăng xuất",
-  "lbl_you_have_successfully_logged_out":"Bạn đã đăng xuất thành công!",
+  "lbl_you_have_successfully_logged_out": "Bạn đã đăng xuất thành công!",
   "lbl_detail": "Chi tiết",
   "lbl_common_exception_message": "Lỗi không xác định. Vui lòng thử lại sau.",
   "lbl_retry": "Thử lại",
@@ -17,5 +17,15 @@
   "error_connection_timeout_exception": "Kết nối đã hết thời gian chờ, vui lòng thử lại.",
   "error_bad_certificate_exception": "Không thể kết nối đến máy chủ",
   "error_bad_response_exception": "Lỗi máy chủ, vui lòng thử lại.",
-  "error_cancelled_request_exception": "Yêu cầu đã bị hủy bỏ."
+  "error_cancelled_request_exception": "Yêu cầu đã bị hủy bỏ.",
+  "error_server_exception": "Máy chủ không phản hồi",
+  "error_unauthorized_exception": "Phiên đăng nhập đã hết hạn",
+  "msg_copied_to_clipboard": "Đã sao chép vào bộ nhớ tạm.",
+  "msg_failed_to_copy_to_clipboard": "Không sao chép được vào bộ nhớ tạm.",
+  "lbl_language_settings": "Cài đặt ngôn ngữ",
+  "lbl_settings": "Cài đặt",
+  "lbl_theme": "Giao diện",
+  "lbl_light_theme_message": "Sáng",
+  "lbl_dark_theme_message": "Tối",
+  "lbl_system_theme_message": "Theo hệ thống"
 }

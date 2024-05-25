@@ -9,32 +9,45 @@ class ErrorInterceptor extends BaseInterceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
+    final int? statusCode = err.response?.statusCode;
+
+    if (statusCode != null && isServerError(statusCode)) {
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: ServerException(messageCode: statusCode.toString()),
+        ),
+      );
+    }
+
     switch (err.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        return handler.next(
+        return handler.reject(
           DioException(
             requestOptions: err.requestOptions,
             error: ConnectionTimeoutException(),
           ),
         );
       case DioExceptionType.badResponse:
-        return handler.next(
+        return handler.reject(
           DioException(
             requestOptions: err.requestOptions,
-            error: BadResponseException(),
+            error: BadResponseException(
+              responseData: err.response?.data,
+            ),
           ),
         );
       case DioExceptionType.badCertificate:
-        return handler.next(
+        return handler.reject(
           DioException(
             requestOptions: err.requestOptions,
             error: BadCertificateException(),
           ),
         );
       case DioExceptionType.cancel:
-        return handler.next(
+        return handler.reject(
           DioException(
             requestOptions: err.requestOptions,
             error: CancelledRequestException(),
@@ -42,12 +55,16 @@ class ErrorInterceptor extends BaseInterceptor {
         );
       case DioExceptionType.connectionError:
       case DioExceptionType.unknown:
-        return handler.next(
+        return handler.reject(
           DioException(
             requestOptions: err.requestOptions,
             error: NoInternetException(),
           ),
         );
     }
+  }
+
+  bool isServerError(int statusCode) {
+    return statusCode.toString()[0] == '5';
   }
 }

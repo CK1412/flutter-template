@@ -1,12 +1,14 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'app.dart';
-import 'app/session/session_manager.dart';
 import 'app_flavor_config.dart';
+import 'data/session/session_manager.dart';
 import 'injection/dependency_manager.dart';
 import 'shared/exceptions/error_handler.dart';
 import 'shared/observers/app_bloc_observer.dart';
@@ -17,11 +19,18 @@ Future<void> mainCommon(AppFlavorConfig appFlavorConfig) async {
     WidgetsFlutterBinding.ensureInitialized();
 
     usePathUrlStrategy();
-    Bloc.observer = AppBlocObserver();
-    DependencyManager.inject(appFlavorConfig);
+    NetworkConnectivity().init();
 
-    await SessionManager.init();
-    NetworkConnectivity.instance.init();
+    Bloc.observer = AppBlocObserver();
+    HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: kIsWeb
+          ? HydratedStorage.webStorageDirectory
+          : await getApplicationDocumentsDirectory(),
+    );
+
+    await DependencyManager.inject(appFlavorConfig);
+
+    await SessionManager.instance.init();
 
     runApp(const App());
   }

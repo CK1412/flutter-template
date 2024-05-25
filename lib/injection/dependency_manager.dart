@@ -5,16 +5,15 @@ import '../data/api/interceptor/cache_request_interceptor.dart';
 import '../data/api/interceptor/error_interceptor.dart';
 import '../data/api/interceptor/refresh_token_interceptor.dart';
 import '../data/api/interceptor/retry_on_error_interceptor.dart';
-import '../data/data_sources/auth_app_rest_api_data_source.dart';
-import '../data/data_sources/non_auth_app_rest_api_data_source.dart';
+import '../data/data_sources/remote/rest_api_data_source.dart';
 import 'injector.dart';
 
 class DependencyManager {
-  static void inject(AppFlavorConfig appFlavorConfig) {
+  static Future<void> inject(AppFlavorConfig appFlavorConfig) async {
     getIt
       ..registerLazySingleton<AppFlavorConfig>(() => appFlavorConfig)
-      ..registerLazySingleton<AuthAppRestApiDataSource>(
-        () => AuthAppRestApiDataSource(
+      ..registerLazySingleton<RestApiDataSource>(
+        () => RestApiDataSource(
           DioHttpClientBuilder.createDio(
             interceptors: (dio) => [
               CacheRequestInterceptor(),
@@ -26,20 +25,8 @@ class DependencyManager {
           ),
           baseUrl: getIt<AppFlavorConfig>().apiConfig.apiUrl,
         ),
-      )
-      ..registerLazySingleton<NonAuthAppRestApiDataSource>(
-        () => NonAuthAppRestApiDataSource(
-          DioHttpClientBuilder.createDio(
-            interceptors: (dio) => [
-              CacheRequestInterceptor(),
-              ErrorInterceptor(),
-              RetryOnErrorInterceptor(dio),
-            ],
-          ),
-          baseUrl: getIt<AppFlavorConfig>().apiConfig.apiUrl,
-        ),
       );
 
-    configureDependencies();
+    await configureDependencies();
   }
 }

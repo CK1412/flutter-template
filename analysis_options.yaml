@@ -87,7 +87,6 @@ linter:
     - eol_at_end_of_file
     - exhaustive_cases
     - file_names
-    - flutter_style_todos
     - implementation_imports
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings

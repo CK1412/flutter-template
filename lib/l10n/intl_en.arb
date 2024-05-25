@@ -1,11 +1,11 @@
 {
-  "@@locale" : "en",
-  "lbl_hello_world":"Hello world",
-  "lbl_an_error_has_occurred":"An error has occurred",
+  "@@locale": "en",
+  "lbl_hello_world": "Hello world",
+  "lbl_an_error_has_occurred": "An error has occurred",
   "lbl_login": "Login",
   "lbl_sign_up": "Sign up",
   "lbl_log_out": "Log out",
-  "lbl_you_have_successfully_logged_out":"You have successfully logged out!",
+  "lbl_you_have_successfully_logged_out": "You have successfully logged out!",
   "lbl_detail": "Detail",
   "lbl_common_exception_message": "An unknown error. Please try again later.",
   "lbl_retry": "Retry",
@@ -17,5 +17,15 @@
   "error_connection_timeout_exception": "The connection has timed out, please try again.",
   "error_bad_certificate_exception": "Can not connect to server",
   "error_bad_response_exception": "Server error, please try again.",
-  "error_cancelled_request_exception": "The request has been cancelled."
+  "error_cancelled_request_exception": "The request has been cancelled.",
+  "error_server_exception": "The server is not responding",
+  "error_unauthorized_exception": "Login session has expired",
+  "msg_copied_to_clipboard": "Copied to clipboard.",
+  "msg_failed_to_copy_to_clipboard": "Failed to copy to clipboard.",
+  "lbl_language_settings": "Language settings",
+  "lbl_settings": "Settings",
+  "lbl_theme": "Theme",
+  "lbl_light_theme_message": "Light",
+  "lbl_dark_theme_message": "Dark",
+  "lbl_system_theme_message": "System"
 }

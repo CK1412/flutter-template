@@ -7,20 +7,30 @@ Flutter template project for android, ios and web. You can generate a new reposi
 
 ## Version
 
-- Flutter 3.16.8
+- Flutter 3.19.3
+- Dart 3.3.1
+- Java JDK 11
 
 ## Setup and Installation
 
 ### Bootstrap the project
 
+- Run each command below in turn
+
 ```bash
-echo "Bootstrap the project"
-clear 
-flutter clean 
+flutter clean
+```
+
+```bash
 flutter pub get 
+```
+
+```bash
 dart run build_runner build --delete-conflicting-outputs 
+```
+
+```bash
 dart run intl_utils:generate
-echo "Bootstrap finished"
 ```
 
 ## Gen code
@@ -35,8 +45,12 @@ dart run build_runner watch
 ---
 title: Diagram of dependencies between layers
 ---
-graph BT;
-    data --> domain --> app --> presentation;
+graph BT
+;
+    data --> domain --> presentation;
+    presentation --> app;
+    domain --> app;
+    data --> app;
 ```
 
 ## Troubleshooting

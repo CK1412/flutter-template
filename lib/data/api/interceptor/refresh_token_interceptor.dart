@@ -4,10 +4,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../../../app/session/session_manager.dart';
-import '../../../domain/entities/auth/auth_info_entity.dart';
-import '../../../injection/injector.dart';
-import '../../data_sources/auth_app_rest_api_data_source.dart';
+import '../../session/session_manager.dart';
 import 'base_interceptor.dart';
 
 class RefreshTokenInterceptor extends BaseInterceptor {
@@ -17,9 +14,6 @@ class RefreshTokenInterceptor extends BaseInterceptor {
 
   @override
   int get priority => BaseInterceptor.refreshTokenPriority;
-
-  AuthAppRestApiDataSource authAppRestApiDataSource() =>
-      getIt<AuthAppRestApiDataSource>();
 
   bool _isRefreshing = false;
 
@@ -82,8 +76,7 @@ class RefreshTokenInterceptor extends BaseInterceptor {
   }
 
   Future<void> _onRefreshTokenSuccess(String newAccessToken) async {
-    final AuthInfoEntity? currentAuthInfo = SessionManager.authInfo;
-    SessionManager.authInfo = currentAuthInfo?.copyWith(token: newAccessToken);
+    unawaited(SessionManager.instance.saveAccessToken(newAccessToken));
 
     await Future.wait(
       _queue.map(

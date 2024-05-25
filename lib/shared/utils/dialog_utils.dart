@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../app/navigation/app_navigator.dart';
+import '../../app/resources/resources.dart';
 import '../../l10n/generated/l10n.dart';
-import '../../presentation/common_widgets/dialog/custom_dialog.dart';
-import '../../presentation/common_widgets/dialog/error_dialog.dart';
-import '../../presentation/common_widgets/dialog/info_dialog.dart';
-import '../resources/resources.dart';
+import '../../presentation/widgets/base/dialog/custom_dialog.dart';
+import '../../presentation/widgets/base/dialog/error_dialog.dart';
+import '../../presentation/widgets/base/dialog/info_dialog.dart';
 
 class DialogUtils {
   DialogUtils._();
@@ -26,7 +26,7 @@ class DialogUtils {
 
     if (dialogNumberShown > 0) {
       dialogNumberShown--;
-      AppNavigator.popIfPossible();
+      AppNavigator.pop();
     }
 
     dialogNumberShown++;
@@ -59,7 +59,7 @@ class DialogUtils {
 
     if (dialogNumberShown > 0) {
       dialogNumberShown--;
-      AppNavigator.popIfPossible();
+      AppNavigator.pop();
     }
 
     dialogNumberShown++;
@@ -96,7 +96,7 @@ class DialogUtils {
 
     if (dialogNumberShown > 0) {
       dialogNumberShown--;
-      AppNavigator.popIfPossible();
+      AppNavigator.pop();
     }
 
     dialogNumberShown++;
@@ -132,7 +132,7 @@ class DialogUtils {
 
     if (dialogNumberShown > 0) {
       dialogNumberShown--;
-      AppNavigator.popIfPossible();
+      AppNavigator.pop();
     }
 
     dialogNumberShown++;
