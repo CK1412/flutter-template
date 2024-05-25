@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class BlocMessage extends Equatable {
+class BlocMessage {
   final String? message;
   final int timestamp;
 
@@ -9,7 +7,4 @@ class BlocMessage extends Equatable {
   const BlocMessage.pure()
       : message = null,
         timestamp = 0;
-
-  @override
-  List<Object?> get props => [message, timestamp];
 }

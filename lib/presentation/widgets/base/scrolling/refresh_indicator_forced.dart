@@ -13,7 +13,7 @@ class RefreshIndicatorForced extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator.adaptive(
+    return RefreshIndicator(
       onRefresh: onRefresh,
       child: CustomScrollView(
         physics: const ClampingScrollPhysics(

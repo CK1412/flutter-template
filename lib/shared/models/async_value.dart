@@ -1,57 +1,28 @@
-import 'package:flutter/widgets.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'data_fetch_status.dart';
+part 'async_value.freezed.dart';
 
-class AsyncValue<T> {
-  final DataFetchStatus status;
-  final T? data;
-  final Object? error;
+@Freezed(genericArgumentFactories: true)
+sealed class AsyncValue<T> with _$AsyncValue<T> {
+  const AsyncValue._();
 
-  const AsyncValue._(this.status, this.data, this.error);
+  const factory AsyncValue.pure() = AsyncValuePure;
 
-  const AsyncValue.nothing() : this._(DataFetchStatus.none, null, null);
+  const factory AsyncValue(T data) = AsyncValueData;
 
-  const AsyncValue.inProgress([T? data])
-      : this._(DataFetchStatus.inProgress, data, null);
+  const factory AsyncValue.inProgress([T? data]) = AsyncValueInProgress;
 
-  const AsyncValue.refreshing([T? data])
-      : this._(DataFetchStatus.refresh, data, null);
+  const factory AsyncValue.success(T data) = AsyncValueSuccess;
 
-  const AsyncValue.success(T data)
-      : this._(DataFetchStatus.success, data, null);
+  const factory AsyncValue.error(Object error, T? data) = AsyncValueError;
 
-  const AsyncValue.withData(DataFetchStatus callStatus, T data)
-      : this._(callStatus, data, null);
-
-  const AsyncValue.withError(Object error, T? data)
-      : this._(DataFetchStatus.failure, data, error);
-
-  bool get hasData => data != null;
-
-  bool get hasError => error != null;
-
-  bool get loadingData => status.isInProgress || status.isRefresh;
-
-  bool get needRefreshData => !hasData || hasError;
-
-  Widget when({
-    required Widget Function(T data) onData,
-    required Widget Function(Object error) onError,
-    Widget Function()? onLoading,
-    Widget Function()? orDefault,
-  }) {
-    if (onLoading != null && loadingData) {
-      return onLoading.call();
-    } else if (hasData) {
-      return onData.call(data as T);
-    } else if (hasError) {
-      return onError.call(error!);
-    }
-    return orDefault?.call() ?? const SizedBox.shrink();
-  }
-
-  @override
-  String toString() {
-    return 'AsyncValue{callStatus: $status, data: $data, error: $error}';
+  T? getData() {
+    return whenOrNull(
+      (data) => data,
+      pure: () => null,
+      inProgress: (data) => data,
+      error: (error, data) => data,
+      success: (data) => data,
+    );
   }
 }

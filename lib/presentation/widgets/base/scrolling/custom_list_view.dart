@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'refresh_indicator_forced.dart';
 
@@ -6,13 +7,11 @@ class CustomListView<T> extends StatefulWidget {
   const CustomListView({
     super.key,
     this.controller,
-    required this.itemsData,
-    required this.showShimmerLoadingMore,
-    required this.showShimmerRefreshing,
+    required this.data,
+    required this.isLoadingMore,
+    required this.noDataBuilder,
     required this.itemBuilder,
-    required this.shimmerItemBuilder,
-    required this.emptyDataWidget,
-    this.shimmerItemCount = 10,
+    required this.itemLoadingBuilder,
     this.padding,
     this.shrinkWrap = false,
     this.scrollDirection = Axis.vertical,
@@ -21,19 +20,17 @@ class CustomListView<T> extends StatefulWidget {
     this.clipBehavior = Clip.hardEdge,
   });
 
-  final List<T>? itemsData;
+  final List<T>? data;
+  final WidgetBuilder noDataBuilder;
+  final VoidCallback? onRefresh;
   final ScrollController? controller;
+  final bool isLoadingMore;
+  final VoidCallback? onLoadMore;
   final Widget? Function(BuildContext context, int index, T value) itemBuilder;
-  final bool showShimmerLoadingMore;
-  final bool showShimmerRefreshing;
-  final int shimmerItemCount;
-  final NullableIndexedWidgetBuilder shimmerItemBuilder;
+  final WidgetBuilder itemLoadingBuilder;
   final EdgeInsetsGeometry? padding;
   final bool shrinkWrap;
   final Axis scrollDirection;
-  final VoidCallback? onLoadMore;
-  final Widget emptyDataWidget;
-  final VoidCallback? onRefresh;
   final Clip clipBehavior;
 
   @override
@@ -51,73 +48,62 @@ class _CustomListViewState<T> extends State<CustomListView<T>> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    if (widget.controller == null) {
+      _scrollController.dispose();
+    }
     super.dispose();
+  }
+
+  void _checkLoadMore() {
+    if (!_scrollController.hasClients || widget.isLoadingMore) {
+      return;
+    }
+
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        return widget.onLoadMore?.call();
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.showShimmerRefreshing) {
-      return ListView.builder(
-        itemBuilder: widget.shimmerItemBuilder,
-        itemCount: widget.shimmerItemCount,
-        padding: widget.padding,
-        shrinkWrap: widget.shrinkWrap,
-        scrollDirection: widget.scrollDirection,
-        clipBehavior: widget.clipBehavior,
-      );
-    }
+    final List<T>? items = widget.data;
 
-    final List<T>? items = widget.itemsData;
     if (items == null || items.isEmpty) {
       return RefreshIndicatorForced(
         onRefresh: () {
-          widget.onRefresh?.call();
-          return Future(() => false);
+          return Future(() => widget.onRefresh?.call());
         },
-        child: widget.emptyDataWidget,
+        child: widget.noDataBuilder.call(context),
       );
     }
 
-    return NotificationListener(
-      onNotification: (notification) {
-        if (notification is ScrollEndNotification) {
-          if (!widget.showShimmerLoadingMore &&
-              !widget.showShimmerRefreshing &&
-              _scrollController.position.extentAfter == 0) {
-            widget.onLoadMore?.call();
-          }
-        }
-        return false;
+    final int itemCount = items.length + (widget.isLoadingMore ? 1 : 0);
+
+    return RefreshIndicator(
+      onRefresh: () {
+        return Future(() => widget.onRefresh?.call());
       },
-      child: RefreshIndicator(
-        onRefresh: () {
-          widget.onRefresh?.call();
-          return Future(() => false);
+      child: ListView.builder(
+        clipBehavior: widget.clipBehavior,
+        physics: const AlwaysScrollableScrollPhysics(),
+        controller: _scrollController,
+        itemBuilder: (context, index) {
+          if (widget.isLoadingMore && index == itemCount - 1) {
+            return widget.itemLoadingBuilder.call(context);
+          }
+
+          if (index == itemCount - 1) {
+            _checkLoadMore();
+          }
+
+          return widget.itemBuilder.call(context, index, items[index]);
         },
-        child: ListView.builder(
-          clipBehavior: widget.clipBehavior,
-          physics: const AlwaysScrollableScrollPhysics(),
-          controller: _scrollController,
-          itemBuilder: (context, index) {
-            final int childCount = widget.showShimmerLoadingMore
-                ? items.length + widget.shimmerItemCount
-                : items.length;
-
-            if (widget.showShimmerLoadingMore &&
-                index >= childCount - widget.shimmerItemCount) {
-              return widget.shimmerItemBuilder.call(context, index);
-            }
-
-            return widget.itemBuilder.call(context, index, items[index]);
-          },
-          itemCount: widget.showShimmerLoadingMore
-              ? items.length + widget.shimmerItemCount
-              : items.length,
-          padding: widget.padding,
-          shrinkWrap: widget.shrinkWrap,
-          scrollDirection: widget.scrollDirection,
-        ),
+        itemCount: itemCount,
+        padding: widget.padding,
+        shrinkWrap: widget.shrinkWrap,
+        scrollDirection: widget.scrollDirection,
       ),
     );
   }
