@@ -2,12 +2,12 @@ import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/user_entity.dart';
 import '../../base/base_data_mapper.dart';
-import '../model/data/api_user_data.dart';
+import '../model/data/user_api_data.dart';
 
 @injectable
-class ApiUserDataMapper extends BaseDataMapper<ApiUserData, UserEntity> {
+class ApiUserDataMapper extends BaseDataMapper<UserApiData, UserEntity> {
   @override
-  UserEntity mapToEntity(ApiUserData? data) {
+  UserEntity mapToEntity(UserApiData? data) {
     return UserEntity(
       id: data?.id ?? UserEntity.defaultId,
       email: data?.email ?? UserEntity.defaultEmail,

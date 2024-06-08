@@ -8,7 +8,7 @@ import '../api/model/request/login_request.dart';
 import '../api/model/request/register_request.dart';
 import '../api/model/response/login_response.dart';
 import '../api/model/response/register_response.dart';
-import '../data_storage/models/local_user_data.dart';
+import '../data_storage/models/user_local_data.dart';
 import '../session/session_manager.dart';
 import 'base/repository_impl.dart';
 
@@ -30,7 +30,7 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
       final LoginResponse response = await restApiDataSource.login(request);
 
       await SessionManager.instance.saveAccessToken(response.token);
-      await SessionManager.instance.saveUserData(const LocalUserData());
+      await SessionManager.instance.saveUserData(const UserLocalData());
 
       return true;
     } on Exception catch (e) {
@@ -70,7 +70,7 @@ class AuthRepositoryImpl extends RepositoryImpl implements AuthRepository {
 
       await SessionManager.instance.saveAccessToken(response.token);
       await SessionManager.instance.saveUserData(
-        LocalUserData(id: response.id),
+        UserLocalData(id: response.id),
       );
 
       return true;

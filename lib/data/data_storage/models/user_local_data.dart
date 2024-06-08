@@ -1,21 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'local_user_data.freezed.dart';
+part 'user_local_data.freezed.dart';
 
-part 'local_user_data.g.dart';
+part 'user_local_data.g.dart';
 
 @freezed
-class LocalUserData with _$LocalUserData {
-  const factory LocalUserData({
+class UserLocalData with _$UserLocalData {
+  const factory UserLocalData({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'email') String? email,
     @JsonKey(name: 'first_name') String? firstName,
     @JsonKey(name: 'last_name') String? lastName,
     @JsonKey(name: 'avatar') String? avatar,
-  }) = _LocalUserData;
+  }) = _UserLocalData;
 
-  const LocalUserData._();
+  const UserLocalData._();
 
-  factory LocalUserData.fromJson(Map<String, Object?> json) =>
-      _$LocalUserDataFromJson(json);
+  factory UserLocalData.fromJson(Map<String, Object?> json) =>
+      _$UserLocalDataFromJson(json);
 }
