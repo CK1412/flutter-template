@@ -7,7 +7,7 @@ import '../../data/data_storage/secure_storage/secure_storage_client.dart';
 import '../../injection/injector.dart';
 import '../../shared/mixin/log_mixin.dart';
 import '../../shared/utils/toast_utils.dart';
-import '../data_storage/models/local_user_data.dart';
+import '../data_storage/models/user_local_data.dart';
 import '../data_storage/secure_storage/secure_storage_key.dart';
 import '../data_storage/shared_preferences/shared_preferences_client.dart';
 import '../data_storage/shared_preferences/shared_preferences_key.dart';
@@ -27,7 +27,7 @@ base class SessionManager extends ChangeNotifier with LogMixin {
 
   String? accessToken;
   String? refreshToken;
-  LocalUserData? userData;
+  UserLocalData? userData;
 
   bool get isLoggedIn => accessToken != null;
 
@@ -70,7 +70,7 @@ base class SessionManager extends ChangeNotifier with LogMixin {
       key: SecureStorageKey.userData,
       listener: (value) {
         userData =
-            value != null ? LocalUserData.fromJson(jsonDecode(value)) : null;
+            value != null ? UserLocalData.fromJson(jsonDecode(value)) : null;
         notifyListeners();
       },
     );
@@ -120,12 +120,12 @@ base class SessionManager extends ChangeNotifier with LogMixin {
   }
 
   @protected
-  Future<LocalUserData?> readUserData() async {
+  Future<UserLocalData?> readUserData() async {
     final String? jsonData =
         await _secureStorageClient.read(SecureStorageKey.userData);
 
     if (jsonData != null) {
-      return LocalUserData.fromJson(jsonDecode(jsonData));
+      return UserLocalData.fromJson(jsonDecode(jsonData));
     }
     return null;
   }
@@ -138,7 +138,7 @@ base class SessionManager extends ChangeNotifier with LogMixin {
     await _secureStorageClient.write(SecureStorageKey.refreshToken, value);
   }
 
-  Future<void> saveUserData(LocalUserData value) async {
+  Future<void> saveUserData(UserLocalData value) async {
     final String jsonData = jsonEncode(value.toJson());
     await _secureStorageClient.write(SecureStorageKey.userData, jsonData);
   }
