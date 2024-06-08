@@ -47,10 +47,10 @@ title: Diagram of dependencies between layers
 ---
 graph BT
 ;
-    data --> domain --> presentation;
-    presentation --> app;
-    domain --> app;
-    data --> app;
+    data <-- domain <-- presentation;
+    presentation <--> app;
+    domain <--> app;
+    data <--> app;
 ```
 
 ## Troubleshooting
@@ -67,11 +67,6 @@ git commit -m 'git cache cleared'
 
 > [!CAUTION]
 > Note: Only use when the project has no changes waiting to be committed.
-
-### Markdown bash/shell scripts run in reverse order on Windows
-
-- How to
-  fix: https://youtrack.jetbrains.com/issue/IDEA-294997/Markdown-shell-scripts-run-in-reverse-order
 
 ## Tools
 
