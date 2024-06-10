@@ -2,7 +2,7 @@
 
 ## Project description
 
-Flutter template project for android, ios and web. You can generate a new repository by clicking
+Flutter template project for Android and Ios. You can generate a new repository by clicking
 "**Use this template**" above.
 
 ## Version
@@ -45,12 +45,12 @@ dart run build_runner watch
 ---
 title: Diagram of dependencies between layers
 ---
-graph BT
-;
-    data <-- domain <-- presentation;
-    presentation <--> app;
-    domain <--> app;
-    data <--> app;
+graph BT;
+    app <--> presentation
+    app <--> domain
+    app <--> data
+    data --> domain
+    domain --> presentation
 ```
 
 ## Troubleshooting
