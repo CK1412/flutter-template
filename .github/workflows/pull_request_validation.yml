@@ -11,8 +11,8 @@ on:
       - develop
 
 env:
-  JAVA_VERSION: '11'
-  FLUTTER_VERSION: '3.19.x'
+  JAVA_VERSION: '17'
+  FLUTTER_VERSION: '3.27.x'
   FLUTTER_CHANNEL: 'stable'
 
 jobs:
