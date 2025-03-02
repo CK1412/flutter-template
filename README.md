@@ -7,9 +7,9 @@ Flutter template project for Android and Ios. You can generate a new repository 
 
 ## Version
 
-- Flutter 3.19.3
-- Dart 3.3.1
-- Java JDK 11
+- Flutter 3.27.1
+- Dart 3.6.0
+- Java JDK 17
 
 ## Setup and Installation
 

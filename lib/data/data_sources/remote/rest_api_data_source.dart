@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 
 import '../../api/model/request/login_request.dart';
 import '../../api/model/request/register_request.dart';
